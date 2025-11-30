@@ -668,11 +668,11 @@ const App = () => {
                     Download Blueprint Now
                     </NeoButton>
                 </div>
-                <div className="flex justify-center items-center gap-2 md:gap-3 text-xs md:text-sm text-gray-500 font-medium">
-                  <span className="flex items-center gap-1"><Download className="w-3.5 h-3.5 md:w-4 md:h-4"/> Instant PDF</span>
+                <div className="flex justify-center items-center gap-3 text-sm text-gray-500 font-medium">
+                  <span className="flex items-center gap-1.5"><Download className="w-4 h-4"/> Instant PDF</span>
                   <span className="w-1 h-1 rounded-full bg-gray-300"></span>
-                  <span className="flex items-center gap-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 34" className="h-3 md:h-4 fill-gray-500">
+                  <span className="flex items-center gap-1.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 34" className="h-4 fill-gray-500">
                       <title>Powered by Stripe</title>
                       <path d="M17.07,11.24h-4.3V22h1.92V17.84h2.38c2.4,0,3.9-1.16,3.9-3.3S19.47,11.24,17.07,11.24Zm-.1,5H14.69v-3.3H17c1.38,0,2.11.59,2.11,1.65S18.35,16.19,17,16.19Z"/>
                       <path d="M25.1,14a3.77,3.77,0,0,0-3.8,4.09,3.81,3.81,0,1,0,7.59,0A3.76,3.76,0,0,0,25.1,14Zm0,6.67c-1.22,0-2-1-2-2.58s.76-2.58,2-2.58,2,1,2,2.58S26.31,20.66,25.1,20.66Z"/>
