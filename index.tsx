@@ -347,6 +347,114 @@ const FAQItem = ({ question, answer }: any) => {
   );
 };
 
+// Legal Modal Component
+const LegalModal = ({ isOpen, onClose, title, children }: any) => {
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => { document.body.style.overflow = 'unset'; };
+  }, [isOpen]);
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" onClick={onClose}>
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+      <div 
+        className="relative bg-white rounded-2xl w-full max-w-2xl max-h-[85vh] overflow-hidden shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="sticky top-0 bg-white border-b border-gray-100 px-6 py-4 flex items-center justify-between">
+          <h2 className="text-xl font-bold font-display text-neo-black">{title}</h2>
+          <button 
+            onClick={onClose}
+            className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 transition-colors"
+          >
+            ✕
+          </button>
+        </div>
+        <div className="px-6 py-6 overflow-y-auto max-h-[calc(85vh-80px)] text-sm text-neo-muted leading-relaxed space-y-4">
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const TermsContent = () => (
+  <>
+    <p className="text-xs text-gray-400">Last updated: November 30, 2025</p>
+    
+    <h3 className="font-bold text-neo-black text-base mt-4">1. Agreement to Terms</h3>
+    <p>By purchasing and downloading the "Interview Success Blueprint" from pushupmode, you agree to be bound by these Terms and Conditions. If you do not agree to these terms, please do not purchase or use the product.</p>
+    
+    <h3 className="font-bold text-neo-black text-base mt-4">2. Digital Product</h3>
+    <p>The Interview Success Blueprint is a digital product (PDF eBook) delivered electronically. Upon successful payment, you will receive immediate access to download the product via email.</p>
+    
+    <h3 className="font-bold text-neo-black text-base mt-4">3. No Refund Policy</h3>
+    <p>Due to the digital nature of this product, <strong>all sales are final and non-refundable</strong>. Once the product has been delivered/downloaded, no refunds will be issued. Please ensure you understand this policy before making a purchase.</p>
+    
+    <h3 className="font-bold text-neo-black text-base mt-4">4. Intellectual Property</h3>
+    <p>All content within the Interview Success Blueprint, including text, graphics, and design, is the intellectual property of pushupmode and is protected by copyright laws. Unauthorized reproduction, distribution, or resale of this product is strictly prohibited.</p>
+    
+    <h3 className="font-bold text-neo-black text-base mt-4">5. Personal Use License</h3>
+    <p>Your purchase grants you a personal, non-transferable, non-exclusive license to use the Interview Success Blueprint for your own personal and professional development. You may not share, distribute, or resell the product.</p>
+    
+    <h3 className="font-bold text-neo-black text-base mt-4">6. Disclaimer</h3>
+    <p>The information provided in this product is for educational purposes only. Results may vary based on individual effort and circumstances. We do not guarantee specific outcomes such as job offers or salary increases.</p>
+    
+    <h3 className="font-bold text-neo-black text-base mt-4">7. Contact</h3>
+    <p>For questions regarding these terms, please contact us at <a href="mailto:hello@pushupmode.com" className="text-neo-orange hover:underline">hello@pushupmode.com</a>.</p>
+  </>
+);
+
+const PrivacyContent = () => (
+  <>
+    <p className="text-xs text-gray-400">Last updated: November 30, 2025</p>
+    
+    <h3 className="font-bold text-neo-black text-base mt-4">1. Information We Collect</h3>
+    <p>When you purchase the Interview Success Blueprint, we collect:</p>
+    <ul className="list-disc list-inside ml-2 space-y-1">
+      <li>Email address (for product delivery)</li>
+      <li>Payment information (processed securely by Stripe)</li>
+      <li>Name (if provided during checkout)</li>
+    </ul>
+    
+    <h3 className="font-bold text-neo-black text-base mt-4">2. How We Use Your Information</h3>
+    <p>We use your information to:</p>
+    <ul className="list-disc list-inside ml-2 space-y-1">
+      <li>Deliver your purchased product</li>
+      <li>Send purchase confirmation and receipt</li>
+      <li>Provide customer support</li>
+      <li>Send product updates (if applicable)</li>
+    </ul>
+    
+    <h3 className="font-bold text-neo-black text-base mt-4">3. Payment Processing</h3>
+    <p>All payments are processed securely through Stripe. We do not store your credit card information on our servers. Stripe's privacy policy governs the handling of your payment data.</p>
+    
+    <h3 className="font-bold text-neo-black text-base mt-4">4. Data Sharing</h3>
+    <p>We do not sell, trade, or share your personal information with third parties except as necessary to process your order (e.g., payment processor) or as required by law.</p>
+    
+    <h3 className="font-bold text-neo-black text-base mt-4">5. Data Security</h3>
+    <p>We implement appropriate security measures to protect your personal information. However, no method of transmission over the internet is 100% secure.</p>
+    
+    <h3 className="font-bold text-neo-black text-base mt-4">6. Your Rights</h3>
+    <p>You have the right to:</p>
+    <ul className="list-disc list-inside ml-2 space-y-1">
+      <li>Request access to your personal data</li>
+      <li>Request correction of inaccurate data</li>
+      <li>Request deletion of your data</li>
+      <li>Opt-out of marketing communications</li>
+    </ul>
+    
+    <h3 className="font-bold text-neo-black text-base mt-4">7. Contact</h3>
+    <p>For privacy-related inquiries, please contact us at <a href="mailto:hello@pushupmode.com" className="text-neo-orange hover:underline">hello@pushupmode.com</a>.</p>
+  </>
+);
+
 const FAQSection = () => {
   const faqs = [
     {
@@ -402,6 +510,9 @@ const FAQSection = () => {
 };
 
 const App = () => {
+  const [showTerms, setShowTerms] = useState(false);
+  const [showPrivacy, setShowPrivacy] = useState(false);
+
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -709,16 +820,32 @@ const App = () => {
 
       {/* Footer */}
       <footer className="bg-white py-10 md:py-16 px-4 border-t border-gray-100">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 md:gap-8">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 md:gap-8">
           <div className="font-bold font-display text-lg md:text-xl flex items-center gap-2 text-neo-black">
             pushupmode <span className="text-xl md:text-2xl">🇲🇾</span>
           </div>
+          <div className="flex items-center gap-4 text-xs md:text-sm text-neo-muted">
+            <button onClick={() => setShowTerms(true)} className="hover:text-neo-orange active:text-neo-orange transition-colors">
+              Terms & Conditions
+            </button>
+            <span className="w-1 h-1 rounded-full bg-gray-300"></span>
+            <button onClick={() => setShowPrivacy(true)} className="hover:text-neo-orange active:text-neo-orange transition-colors">
+              Privacy Policy
+            </button>
+          </div>
           <div className="text-center md:text-right">
-              <p className="text-xs md:text-sm text-neo-muted mb-1 md:mb-2">© 2024 pushupmode. All rights reserved.</p>
-              <p className="text-[10px] md:text-xs text-gray-400">Designed for Malaysian Job Seekers.</p>
+            <p className="text-xs md:text-sm text-neo-muted">© 2025 pushupmode. All rights reserved.</p>
           </div>
         </div>
       </footer>
+
+      {/* Legal Modals */}
+      <LegalModal isOpen={showTerms} onClose={() => setShowTerms(false)} title="Terms & Conditions">
+        <TermsContent />
+      </LegalModal>
+      <LegalModal isOpen={showPrivacy} onClose={() => setShowPrivacy(false)} title="Privacy Policy">
+        <PrivacyContent />
+      </LegalModal>
 
     </div>
   );
