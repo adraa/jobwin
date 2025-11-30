@@ -81,30 +81,13 @@ const Section = ({ children, className = "", id = "" }: any) => (
 
 // Shine Border Component
 interface ShineBorderProps extends React.HTMLAttributes<HTMLDivElement> {
-  /**
-   * Width of the border in pixels
-   * @default 1
-   */
   borderWidth?: number;
-  /**
-   * Duration of the animation in seconds
-   * @default 14
-   */
   duration?: number;
-  /**
-   * Color of the border, can be a single color or an array of colors
-   * @default "#000000"
-   */
   shineColor?: string | string[];
   className?: string;
   style?: React.CSSProperties;
 }
 
-/**
- * Shine Border
- *
- * An animated background border effect component with configurable properties.
- */
 const ShineBorder = ({
   borderWidth = 1,
   duration = 14,
@@ -772,7 +755,7 @@ const App = () => {
                   <span className="flex items-center gap-1.5"><Download className="w-4 h-4"/> Instant PDF</span>
                   <span className="w-1 h-1 rounded-full bg-gray-300"></span>
                   <span className="flex items-center gap-1.5">
-                    {/* Stripe Logo */}
+                    {/* Stripe Logo - Sized to match text height */}
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 34" className="h-3 md:h-4 fill-gray-500">
                       <title>Powered by Stripe</title>
                       <path d="M17.07,11.24h-4.3V22h1.92V17.84h2.38c2.4,0,3.9-1.16,3.9-3.3S19.47,11.24,17.07,11.24Zm-.1,5H14.69v-3.3H17c1.38,0,2.11.59,2.11,1.65S18.35,16.19,17,16.19Z"/>
