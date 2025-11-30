@@ -473,11 +473,9 @@ const App = () => {
       {/* HERO SECTION */}
       <Section className="pt-[5.5rem] md:pt-28 pb-8 md:pb-32 flex flex-col items-center text-center relative z-10 mt-0">
         <div className="max-w-4xl mx-auto mb-6 md:mb-16 flex flex-col items-center">
-          <div className="reveal inline-flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-1.5 mb-5 md:mb-8 bg-white border border-gray-200 rounded-full shadow-sm text-[10px] md:text-sm font-bold text-neo-muted uppercase tracking-wide font-display">
-             <ShieldCheck className="w-3.5 h-3.5 md:w-4 md:h-4 text-neo-green shrink-0" />
-             <span className="hidden sm:inline">Go-To Blueprint for Malaysian Job Seekers (100+ Users)</span>
-             <span className="sm:hidden">100+ Malaysian Job Seekers</span>
-             <span>🇲🇾</span>
+          <div className="reveal inline-flex items-center gap-1 md:gap-2 px-2 md:px-4 py-1 md:py-1.5 mb-5 md:mb-8 bg-white border border-gray-200 rounded-full shadow-sm text-[8px] md:text-sm font-bold text-neo-muted uppercase tracking-wide font-display whitespace-nowrap">
+             <ShieldCheck className="w-3 h-3 md:w-4 md:h-4 text-neo-green shrink-0" />
+             Go-To Blueprint for Malaysian Job Seekers (100+ Users) 🇲🇾
           </div>
           <h1 className="reveal text-[1.75rem] sm:text-3xl md:text-7xl font-bold font-display leading-tight tracking-tight mb-4 md:mb-6 text-neo-black">
             DOES THIS SOUND <br className="md:hidden" />
@@ -514,7 +512,7 @@ const App = () => {
           <div className="absolute top-0 right-0 w-full h-full opacity-20 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-blue-500 via-transparent to-transparent"></div>
 
           <div className="relative z-10 grid md:grid-cols-2 gap-6 md:gap-16 items-center">
-            <div className="order-2 md:order-1">
+            <div>
               <div className="inline-block px-3 md:px-4 py-1 rounded-full bg-white/10 border border-white/20 text-xs md:text-sm font-bold mb-4 md:mb-6 text-blue-300 font-display">THE SOLUTION</div>
               <h2 className="text-2xl md:text-6xl font-bold font-display mb-4 md:mb-6 leading-tight tracking-tight">
                 Interview Success <span className="text-blue-400">Blueprint</span>
@@ -550,7 +548,7 @@ const App = () => {
               </div>
             </div>
             
-            <div className="reveal flex flex-col justify-center items-center gap-4 md:gap-8 order-1 md:order-2" style={{ transitionDelay: '300ms' }}>
+            <div className="reveal flex flex-col justify-center items-center gap-4 md:gap-8" style={{ transitionDelay: '300ms' }}>
               <div className="relative w-48 md:w-80 aspect-[3/4] rounded-lg shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)] md:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.5)] group">
                 <img 
                   src="https://i.imgur.com/uvNoPCg.jpeg" 
@@ -611,8 +609,8 @@ const App = () => {
             </Marquee>
         </div>
         
-        <div className="reveal hidden md:block" style={{ transitionDelay: '300ms' }}>
-            <Marquee reverse repeat={3} className="[--duration:50s] mt-4 py-4">
+        <div className="reveal" style={{ transitionDelay: '300ms' }}>
+            <Marquee reverse repeat={3} className="[--duration:40s] md:[--duration:50s] mt-2 md:mt-4 py-2 md:py-4">
             {reviews.map((review, i) => (
                 <TestimonialCard key={i} {...review} />
             ))}
