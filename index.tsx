@@ -781,12 +781,12 @@ const App = () => {
               </div>
 
               <div className="w-full flex flex-col gap-4 md:gap-6 reveal" style={{ transitionDelay: '400ms' }}>
-                <div className="relative rounded-xl group overflow-hidden">
+                <a href="https://buy.stripe.com/cNi4gtbTjafu7Mwf8LafS02" target="_blank" rel="noopener noreferrer" className="relative rounded-xl group overflow-hidden block">
                     <ShineBorder shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]} duration={8} borderWidth={2} />
-                    <NeoButton variant="primary" className="relative z-20 w-full justify-center py-4 md:py-5 text-base md:text-xl rounded-xl bg-neutral-900 text-white active:bg-black md:hover:bg-black border-none !shadow-none">
-                    Download Blueprint Now
-                    </NeoButton>
-                </div>
+                    <div className="relative z-20 w-full justify-center py-4 md:py-5 text-base md:text-xl rounded-xl bg-neutral-900 text-white active:bg-black md:hover:bg-black border-none shadow-none flex items-center gap-2 font-display font-bold tracking-wide">
+                      Download Blueprint Now
+                    </div>
+                </a>
                 <div className="flex justify-center items-center gap-4 text-sm text-gray-500 font-medium">
                   <span className="flex items-center gap-1.5"><Download className="w-4 h-4"/> Instant PDF</span>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 34" className="h-5 fill-gray-600">
