@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment Failed | Interview Success Blueprint</title>
+  <meta name="robots" content="noindex, nofollow">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Inter Tight', 'sans-serif'],
+          },
+          colors: {
+            'neo-bg': '#F4F5FB',
+            'neo-black': '#0F172A',
+            'neo-orange': '#2563EB',
+            'neo-red': '#EF4444',
+            'neo-muted': '#64748B',
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #F4F5FB;
+      font-family: 'Inter', sans-serif;
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+      20%, 40%, 60%, 80% { transform: translateX(5px); }
+    }
+    .shake {
+      animation: shake 0.6s ease-in-out;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+  <div class="max-w-lg w-full text-center">
+    <!-- Error Icon -->
+    <div class="relative inline-flex items-center justify-center mb-8">
+      <div class="w-20 h-20 bg-neo-red rounded-full flex items-center justify-center shadow-lg shadow-neo-red/30 shake">
+        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Error Message -->
+    <h1 class="text-3xl md:text-4xl font-bold font-display text-neo-black mb-4">
+      Payment Failed
+    </h1>
+    <p class="text-neo-muted text-lg mb-8 leading-relaxed">
+      We couldn't process your payment. Don't worry – no charges were made to your account. Please try again.
+    </p>
+
+    <!-- Try Again Button -->
+    <a 
+      href="https://buy.stripe.com/cNi4gtbTjafu7Mwf8LafS02" 
+      class="inline-flex items-center gap-3 bg-neo-orange text-white font-bold font-display text-lg px-8 py-4 rounded-xl shadow-lg shadow-neo-orange/30 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 mb-6"
+    >
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+      </svg>
+      Try Again
+    </a>
+
+    <!-- Common Issues -->
+    <div class="bg-white rounded-xl border border-gray-200 p-6 mb-8 text-left">
+      <h3 class="font-bold text-neo-black mb-3 flex items-center gap-2">
+        <span>💡</span> Common Issues
+      </h3>
+      <ul class="text-sm text-neo-muted space-y-2">
+        <li>• Insufficient funds in your account</li>
+        <li>• Card expired or incorrect details</li>
+        <li>• Transaction blocked by your bank</li>
+        <li>• Try a different payment method</li>
+      </ul>
+    </div>
+
+    <!-- Support -->
+    <p class="text-sm text-neo-muted mb-4">
+      Still having issues? Contact us at 
+      <a href="mailto:hello@pushupmode.com" class="text-neo-orange hover:underline font-medium">hello@pushupmode.com</a>
+    </p>
+
+    <!-- Back to Home -->
+    <a href="/" class="text-sm text-neo-muted hover:text-neo-orange transition-colors">
+      ← Back to Home
+    </a>
+  </div>
+</body>
+</html>
+
