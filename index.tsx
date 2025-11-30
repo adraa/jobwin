@@ -374,7 +374,7 @@ const FAQSection = () => {
   ];
 
   return (
-    <Section className="py-10 md:py-24 max-w-4xl pb-24 md:pb-24">
+    <Section className="py-10 md:py-24 max-w-4xl">
       <div className="text-center mb-8 md:mb-16 reveal">
           <span className="bg-blue-50 text-neo-orange px-2 md:px-3 py-1 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider mb-3 md:mb-4 inline-block font-display">Support</span>
           <h2 className="text-2xl md:text-4xl font-bold font-display text-neo-black mb-2 md:mb-4">
@@ -461,9 +461,9 @@ const App = () => {
           <div className="font-bold font-display text-base md:text-xl tracking-tight flex items-center gap-1.5 md:gap-2 text-neo-black">
             pushupmode <span className="text-base md:text-xl">🇲🇾</span>
           </div>
-          <NeoButton onClick={scrollToPricing} variant="primary" className="text-[10px] md:text-xs px-2.5 md:px-5 py-1.5 md:py-2 shadow-md min-h-[32px] md:min-h-[40px]">
+          <NeoButton onClick={scrollToPricing} variant="primary" className="text-[9px] md:text-xs px-2 md:px-5 py-1 md:py-2 shadow-sm md:shadow-md min-h-[28px] md:min-h-[40px] rounded-lg md:rounded-full">
             <span className="hidden sm:inline">Get the Blueprint</span>
-            <span className="sm:hidden">Get the Blueprint Now</span>
+            <span className="sm:hidden">Get Blueprint Now</span>
           </NeoButton>
         </div>
       </nav>
@@ -471,7 +471,7 @@ const App = () => {
       <PromoBar onClick={scrollToPricing} />
 
       {/* HERO SECTION */}
-      <Section className="pt-[4.5rem] md:pt-28 pb-8 md:pb-32 flex flex-col items-center text-center relative z-10 mt-0">
+      <Section className="pt-[6rem] md:pt-28 pb-8 md:pb-32 flex flex-col items-center text-center relative z-10 mt-0">
         <div className="max-w-4xl mx-auto mb-4 md:mb-16 flex flex-col items-center">
           <div className="reveal inline-flex items-center gap-1 md:gap-2 px-2 md:px-4 py-1 md:py-1.5 mb-3 md:mb-8 bg-white border border-gray-200 rounded-full shadow-sm text-[8px] md:text-sm font-bold text-neo-muted uppercase tracking-wide font-display whitespace-nowrap">
              <ShieldCheck className="w-3 h-3 md:w-4 md:h-4 text-neo-green shrink-0" />
@@ -702,7 +702,7 @@ const App = () => {
       <FAQSection />
 
       {/* Footer */}
-      <footer className="bg-white py-10 md:py-16 px-4 border-t border-gray-100 pb-24 md:pb-16">
+      <footer className="bg-white py-10 md:py-16 px-4 border-t border-gray-100">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 md:gap-8">
           <div className="font-bold font-display text-lg md:text-xl flex items-center gap-2 text-neo-black">
             pushupmode <span className="text-xl md:text-2xl">🇲🇾</span>
@@ -713,16 +713,6 @@ const App = () => {
           </div>
         </div>
       </footer>
-
-      {/* Sticky Mobile CTA */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-white/95 backdrop-blur-md border-t border-gray-200 p-3 shadow-[0_-4px_20px_rgba(0,0,0,0.1)]">
-        <button 
-          onClick={scrollToPricing}
-          className="w-full bg-neo-orange text-white font-bold font-display py-3.5 rounded-xl text-sm flex items-center justify-center gap-2 active:scale-[0.98] transition-transform shadow-lg shadow-neo-orange/30"
-        >
-          Get Blueprint — RM79
-        </button>
-      </div>
 
     </div>
   );
