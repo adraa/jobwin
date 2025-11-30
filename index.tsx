@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { createRoot } from 'react-dom/client';
 import { 
   Download,
@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 
 // --- Utilities ---
-const cn = (...classes: (string | undefined | null | false)[]) => classes.filter(Boolean).join(' ');
+const cn = (...classes: any[]) => classes.filter(Boolean).join(' ');
 
 // --- Data ---
 const PAIN_POINTS = [
@@ -57,17 +57,16 @@ const PAIN_POINTS = [
 // --- Components ---
 
 const NeoButton = ({ children, onClick, variant = 'primary', className = '', style = {} }: any) => {
-  // Modern Corporate Style: Rounded-full, soft shadows, no thick borders
   const baseStyle = "px-8 py-3 font-display font-bold transition-all duration-300 flex items-center gap-2 tracking-wide text-sm md:text-base rounded-full transform active:scale-95";
   
-  const variants = {
+  const variants: any = {
     primary: "bg-neo-orange text-white shadow-lg shadow-neo-orange/30 hover:shadow-xl hover:shadow-neo-orange/40 hover:-translate-y-0.5",
     secondary: "bg-white text-neo-black border border-gray-200 shadow-sm hover:border-neo-orange hover:text-neo-orange",
     outline: "bg-transparent text-neo-orange border border-neo-orange hover:bg-neo-orange/5"
   };
 
   return (
-    <button onClick={onClick} className={`${baseStyle} ${variants[variant as keyof typeof variants]} ${className}`} style={style}>
+    <button onClick={onClick} className={`${baseStyle} ${variants[variant] || ''} ${className}`} style={style}>
       {children}
     </button>
   );
@@ -79,15 +78,6 @@ const Section = ({ children, className = "", id = "" }: any) => (
   </section>
 );
 
-// Shine Border Component
-interface ShineBorderProps extends React.HTMLAttributes<HTMLDivElement> {
-  borderWidth?: number;
-  duration?: number;
-  shineColor?: string | string[];
-  className?: string;
-  style?: React.CSSProperties;
-}
-
 const ShineBorder = ({
   borderWidth = 1,
   duration = 14,
@@ -95,11 +85,10 @@ const ShineBorder = ({
   className,
   style,
   ...props
-}: ShineBorderProps) => {
+}: any) => {
   return (
     <div
-      style={
-        {
+      style={{
           "--border-width": `${borderWidth}px`,
           "--duration": `${duration}s`,
           backgroundImage: `radial-gradient(transparent,transparent, ${
@@ -112,8 +101,7 @@ const ShineBorder = ({
           maskComposite: "exclude",
           padding: "var(--border-width)",
           ...style,
-        } as React.CSSProperties
-      }
+        } as any}
       className={cn(
         "motion-safe:animate-shine pointer-events-none absolute inset-0 size-full rounded-[inherit] will-change-[background-position] z-30",
         className
@@ -123,17 +111,6 @@ const ShineBorder = ({
   );
 };
 
-// Reusable Marquee Component
-interface MarqueeProps extends React.ComponentPropsWithoutRef<"div"> {
-    className?: string;
-    reverse?: boolean;
-    pauseOnHover?: boolean;
-    vertical?: boolean;
-    repeat?: number;
-    children?: React.ReactNode;
-    style?: React.CSSProperties;
-}
-
 const Marquee = ({
   className,
   reverse = false,
@@ -141,9 +118,9 @@ const Marquee = ({
   children,
   vertical = false,
   repeat = 4,
-  style,
+  style = {},
   ...props
-}: MarqueeProps) => {
+}: any) => {
   return (
     <div
       {...props}
@@ -157,7 +134,7 @@ const Marquee = ({
         '--gap': '1rem',
         '--duration': '40s',
         ...style,
-      } as React.CSSProperties}
+      } as any}
     >
       {Array(repeat)
         .fill(0)
@@ -178,7 +155,7 @@ const Marquee = ({
   )
 }
 
-const PromoBar = ({ onClick }: { onClick: () => void }) => (
+const PromoBar = ({ onClick }: any) => (
   <div 
     onClick={onClick}
     className="fixed top-16 left-0 w-full h-8 bg-lime-400 z-40 flex items-center overflow-hidden cursor-pointer hover:bg-lime-400 transition-colors shadow-sm"
@@ -192,12 +169,11 @@ const PromoBar = ({ onClick }: { onClick: () => void }) => (
   </div>
 );
 
-// Clean Ticker for Corporate Look
 const TextTicker = ({ items }: any) => {
   return (
     <div className="w-full py-2 my-4 overflow-hidden bg-neo-black text-white select-none relative shadow-md">
-        <Marquee repeat={4} className="py-0" style={{ '--duration': '30s', '--gap': '3rem' } as React.CSSProperties}>
-            {items.map((item: string, i: number) => (
+        <Marquee repeat={4} className="py-0" style={{ '--duration': '30s', '--gap': '3rem' }}>
+            {items.map((item: any, i: number) => (
                 <span key={i} className="flex items-center gap-8 font-display font-bold text-lg tracking-wider opacity-90">
                 {item} <span className="w-2 h-2 bg-neo-yellow rounded-full flex-shrink-0 shadow-[0_0_8px_#FACC15]"></span>
                 </span>
@@ -212,29 +188,21 @@ const PainCard = ({ image, thought, stressLevel, stressLabel, delay, className =
     className={`relative w-full aspect-[3/4] bg-white shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2 overflow-hidden rounded-2xl border border-gray-100 ${className}`}
     style={delay ? { transitionDelay: `${delay}ms` } : {}}
   >
-    {/* Image Background */}
     <img 
       src={image || "https://placehold.co/600x800/png?text=Add+Image"} 
       alt="Interview Pain Point" 
       className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105" 
     />
-    
-    {/* Professional Gradient Overlay */}
     <div className="absolute inset-0 bg-gradient-to-t from-slate-900/95 via-slate-900/40 to-transparent opacity-95"></div>
-
-    {/* Glassmorphism Box */}
     <div className="absolute bottom-4 left-4 right-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-5 text-white shadow-lg">
         <div className="flex items-center gap-2 mb-3 text-red-300">
             <Quote size={14} className="fill-current rotate-180" />
             <span className="text-[10px] font-bold font-display uppercase tracking-wider opacity-80">Internal Monologue</span>
         </div>
-        
         <p className="font-medium text-lg leading-snug mb-4 font-sans text-white">
           "{thought}"
         </p>
-        
         <div className="w-full h-px bg-white/10 mb-3"></div>
-        
         <div className="flex items-center justify-between text-[11px] font-medium tracking-wide">
             <span className="text-gray-300 font-display">STRESS INDICATOR</span>
             <div className="flex items-center gap-1.5">
@@ -248,18 +216,15 @@ const PainCard = ({ image, thought, stressLevel, stressLabel, delay, className =
   </div>
 );
 
-const AutoSlider = ({ items }: { items: any[] }) => {
+const AutoSlider = ({ items }: any) => {
   const [index, setIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(true);
   const [itemsPerView, setItemsPerView] = useState(1);
-  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-  
-  // Configuration
-  const PAUSE_DURATION = 3500; // Time to read (ms)
-  const TRANSITION_DURATION = 700; // Animation time (ms)
+  const timeoutRef = useRef(null);
+  const containerRef = useRef(null);
+  const PAUSE_DURATION = 3500;
+  const TRANSITION_DURATION = 700;
 
-  // Handle responsiveness
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 1024) {
@@ -270,46 +235,34 @@ const AutoSlider = ({ items }: { items: any[] }) => {
         setItemsPerView(1);
       }
     };
-    
-    handleResize(); // Init
+    handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Extended list for looping
   const extendedItems = [...items, ...items];
 
-  // Auto-play Logic
   useEffect(() => {
     const nextSlide = () => {
-      setIndex((prev) => prev + 1);
+      setIndex((prev: any) => prev + 1);
     };
-
     timeoutRef.current = setTimeout(nextSlide, PAUSE_DURATION);
-
     return () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
   }, [index]);
 
-  // Infinite Loop Snap-back Logic
   useEffect(() => {
-    // When we've scrolled past the real items to the clones
     if (index === items.length) {
       const resetTimeout = setTimeout(() => {
-        // 1. Disable transition
         setIsTransitioning(false);
-        // 2. Snap back to index 0 (which looks identical)
         setIndex(0);
-        
-        // 3. Re-enable transition for next move
         requestAnimationFrame(() => {
             requestAnimationFrame(() => {
                 setIsTransitioning(true);
             });
         });
-      }, TRANSITION_DURATION); // Wait for the slide animation to finish before snapping
-
+      }, TRANSITION_DURATION);
       return () => clearTimeout(resetTimeout);
     }
   }, [index, items.length]);
@@ -319,13 +272,12 @@ const AutoSlider = ({ items }: { items: any[] }) => {
       <div 
         className="flex"
         style={{
-          // Correctly calculate translation based on the full extended list width
           transform: `translateX(-${index * (100 / extendedItems.length)}%)`,
           transition: isTransitioning ? `transform ${TRANSITION_DURATION}ms cubic-bezier(0.2, 0.8, 0.2, 1)` : 'none',
-          width: `${(extendedItems.length / itemsPerView) * 100}%` // Container needs to be wide enough
+          width: `${(extendedItems.length / itemsPerView) * 100}%`
         }}
       >
-        {extendedItems.map((item, i) => (
+        {extendedItems.map((item: any, i: number) => (
           <div 
             key={i} 
             className="px-3 md:px-4"
@@ -346,30 +298,25 @@ const TestimonialCard = ({ name, quote, result, className = "" }: any) => (
       className
     )}
   >
-    {/* Result Badge - Pill Shape */}
     <div className="absolute top-6 right-6 bg-neo-bg text-neo-black border border-gray-200 px-3 py-1 rounded-full font-bold font-display text-[10px] uppercase tracking-wide flex items-center gap-1">
         <Trophy className="w-3 h-3 text-neo-yellow fill-neo-yellow" />
         {result}
     </div>
-    
-    {/* Stars */}
     <div className="flex items-center gap-1 mb-6 text-neo-yellow">
       {[...Array(5)].map((_, i) => (
         <Star key={i} className="w-4 h-4 fill-current" />
       ))}
     </div>
-    
     <p className="font-medium text-base md:text-lg leading-relaxed mb-6 text-neo-black/80">
       "{quote}"
     </p>
-
     <div className="mt-auto pt-5 border-t border-gray-50">
         <p className="font-bold text-sm text-neo-black font-display">{name}</p>
     </div>
   </div>
 );
 
-const FAQItem: React.FC<{ question: string, answer: React.ReactNode }> = ({ question, answer }) => {
+const FAQItem = ({ question, answer }: any) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -448,10 +395,7 @@ const FAQSection = () => {
   );
 };
 
-// --- Main App ---
-
 const App = () => {
-  // Scroll Reveal Hook
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -470,10 +414,6 @@ const App = () => {
 
   const scrollToPricing = () => {
     document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const scrollToSolution = () => {
-    document.getElementById('solution')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const reviews = [
@@ -512,7 +452,6 @@ const App = () => {
   return (
     <div className="min-h-screen bg-neo-bg text-neo-black font-sans selection:bg-neo-orange selection:text-white">
       
-      {/* Header / Nav */}
       <nav className="fixed top-0 left-0 w-full h-16 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200 shadow-sm transition-all duration-300">
         <div className="max-w-7xl mx-auto px-4 py-3 h-full flex justify-between items-center">
           <div className="font-bold font-display text-xl tracking-tight flex items-center gap-2 text-neo-black">
@@ -524,14 +463,10 @@ const App = () => {
         </div>
       </nav>
 
-      {/* PROMO BAR */}
       <PromoBar onClick={scrollToPricing} />
 
-      {/* HERO SECTION (PAIN) - VERTICAL LAYOUT */}
-      {/* pt-28 aligns perfectly with 96px header stack on mobile with 16px breathing room (112px total) */}
+      {/* HERO SECTION */}
       <Section className="pt-28 pb-12 md:pb-32 flex flex-col items-center text-center relative z-10 mt-0">
-        
-        {/* TOP: Headline & Badge */}
         <div className="max-w-4xl mx-auto mb-8 md:mb-16 flex flex-col items-center">
           <div className="reveal inline-flex items-center gap-2 px-4 py-1.5 mb-8 bg-white border border-gray-200 rounded-full shadow-sm text-xs md:text-sm font-bold text-neo-muted uppercase tracking-wide font-display">
              <ShieldCheck className="w-4 h-4 text-neo-green" />
@@ -541,7 +476,6 @@ const App = () => {
             DOES THIS SOUND <br className="md:hidden" />
             LIKE&nbsp;<span className="text-neo-orange relative inline-block px-2">
                 YOU?
-                {/* Stylized underline */}
                 <svg className="absolute w-full h-3 -bottom-1 left-0 text-neo-yellow opacity-80" viewBox="0 0 100 10" preserveAspectRatio="none">
                     <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="8" fill="none" />
                 </svg>
@@ -549,22 +483,17 @@ const App = () => {
           </h1>
         </div>
 
-        {/* MIDDLE: Auto-Sliding Pain Points */}
         <div className="w-full max-w-7xl">
           <AutoSlider items={PAIN_POINTS} />
         </div>
 
-        {/* MOUSE SCROLL INDICATOR */}
-        {/* Reduced top margin for tighter flow on mobile */}
         <div className="mt-6 md:mt-12 flex flex-col items-center animate-reveal opacity-60" style={{ animationDelay: '1s' }}>
             <div className="w-6 h-10 border-2 border-neo-muted rounded-full flex justify-center pt-2">
                 <div className="w-1.5 h-1.5 bg-neo-muted rounded-full animate-scroll"></div>
             </div>
         </div>
-
       </Section>
 
-      {/* MARQUEE (EMOTION) */}
       <TextTicker items={[
         "Why didn't they call back?", 
         "Am I not good enough?", 
@@ -575,7 +504,6 @@ const App = () => {
       {/* SOLUTION SECTION */}
       <Section id="solution" className="py-12 md:py-24">
         <div className="reveal bg-neo-black text-white rounded-3xl p-6 md:p-20 shadow-2xl relative overflow-hidden">
-          {/* Soft Glow BG */}
           <div className="absolute top-0 right-0 w-full h-full opacity-20 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-blue-500 via-transparent to-transparent"></div>
 
           <div className="relative z-10 grid md:grid-cols-2 gap-8 md:gap-16 items-center">
@@ -606,7 +534,6 @@ const App = () => {
                 ))}
               </ul>
 
-              {/* Desktop Button with Rainbow Shine Border - FORCED BLACK TEXT */}
               <div className="hidden md:inline-block relative rounded-xl group overflow-hidden">
                 <ShineBorder shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]} duration={8} borderWidth={2} />
                 <NeoButton onClick={scrollToPricing} style={{ color: '#000000', backgroundColor: '#ffffff' }} className="relative z-20 w-auto justify-center !bg-white !text-black hover:bg-gray-50 border-none !shadow-none hover:!shadow-none hover:shadow-none rounded-xl">
@@ -615,7 +542,6 @@ const App = () => {
               </div>
             </div>
             
-            {/* Book Image - Clean floating style */}
             <div className="reveal flex flex-col justify-center items-center gap-8" style={{ transitionDelay: '300ms' }}>
               <div className="relative w-64 md:w-80 aspect-[3/4] rounded-lg shadow-[0_35px_60px_-15px_rgba(0,0,0,0.5)] group">
                 <img 
@@ -623,11 +549,9 @@ const App = () => {
                   alt="Interview Success Blueprint Book Cover" 
                   className="w-full h-full object-cover rounded-lg border border-white/10"
                 />
-                {/* Soft shine effect */}
                 <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none rounded-lg"></div>
               </div>
 
-              {/* Mobile Button placed BELOW book and matches book width - FORCED BLACK TEXT */}
               <div className="flex md:hidden relative rounded-xl group justify-center overflow-hidden w-64 mt-3">
                 <ShineBorder shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]} duration={8} borderWidth={2} />
                 <NeoButton onClick={scrollToPricing} style={{ color: '#000000', backgroundColor: '#ffffff' }} className="relative z-20 w-full justify-center !bg-white !text-black hover:bg-gray-50 border-none !shadow-none hover:!shadow-none hover:shadow-none rounded-xl">
@@ -639,7 +563,6 @@ const App = () => {
         </div>
       </Section>
 
-      {/* WHAT'S INSIDE (The Arsenal) - CLEAN GRID */}
       <Section className="py-10 md:py-12">
          <div className="text-center mb-16">
             <h2 className="reveal text-3xl md:text-4xl font-bold font-display mb-4 text-neo-black">What's Inside The Blueprint?</h2>
@@ -664,7 +587,6 @@ const App = () => {
          </div>
       </Section>
 
-      {/* TESTIMONIALS SECTION (MARQUEE) */}
       <div className="bg-white py-16 md:py-24 overflow-hidden border-y border-gray-100">
         <div className="text-center mb-16 px-4">
             <h2 className="reveal text-4xl font-bold font-display mb-4 text-neo-black">Real Malaysians, Real Results</h2>
@@ -673,7 +595,6 @@ const App = () => {
             </p>
         </div>
         
-        {/* First Row */}
         <div className="reveal" style={{ transitionDelay: '200ms' }}>
             <Marquee repeat={3} className="[--duration:40s] py-4">
             {reviews.map((review, i) => (
@@ -682,7 +603,6 @@ const App = () => {
             </Marquee>
         </div>
         
-        {/* Second Row */}
         <div className="reveal" style={{ transitionDelay: '300ms' }}>
             <Marquee reverse repeat={3} className="[--duration:50s] mt-4 py-4">
             {reviews.map((review, i) => (
@@ -692,9 +612,7 @@ const App = () => {
         </div>
       </div>
 
-      {/* PRICING SECTION (ACTION) - CLEAN & TRUSTWORTHY */}
       <div id="pricing" className="relative bg-neo-orange py-16 md:py-32 overflow-hidden">
-         {/* Background Circles for soft depth */}
          <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
              <div className="absolute -top-24 -left-24 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
              <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-white/10 rounded-full blur-3xl"></div>
@@ -703,8 +621,6 @@ const App = () => {
          <div className="max-w-3xl mx-auto px-4 relative z-10">
             <div className="reveal bg-white rounded-3xl p-6 md:p-16 shadow-neo-xl text-center relative">
               
-              {/* Gold Seal Badge with Pulse Animation - CENTERED */}
-              {/* Wrapped to fix centering conflict with animation transform */}
               <div className="absolute -top-6 left-1/2 -translate-x-1/2 z-20">
                 <div className="animate-pulse-soft w-24 h-24 bg-neo-yellow text-neo-black rounded-full flex flex-col items-center justify-center font-bold font-display text-[10px] md:text-xs shadow-lg border-4 border-white">
                   <Star className="w-6 h-6 fill-current mb-1" />
@@ -712,18 +628,15 @@ const App = () => {
                 </div>
               </div>
 
-              {/* Headline - INCREASED MARGIN to avoid overlap */}
               <div className="mb-10 mt-20 md:mt-16">
                 <h2 className="text-4xl md:text-5xl font-bold font-display tracking-tight text-neo-black mb-3">Steal The Job</h2>
                 <p className="text-neo-orange font-bold uppercase tracking-widest text-sm">One-time investment for career success</p>
               </div>
 
-              {/* Price */}
               <div className="mb-12 flex justify-center items-baseline gap-2">
                 <span className="text-6xl md:text-8xl font-bold font-display text-neo-black tracking-tighter">RM 79</span>
               </div>
 
-              {/* Benefits - Clean Vertical List */}
               <div className="flex flex-col gap-5 mb-12 text-left max-w-md mx-auto">
                   {[
                     "Lifetime access & free updates",
@@ -742,9 +655,7 @@ const App = () => {
                   ))}
               </div>
 
-              {/* CTA */}
               <div className="w-full flex flex-col gap-6 reveal" style={{ transitionDelay: '400ms' }}>
-                {/* Rainbow Shine Border CTA */}
                 <div className="relative rounded-xl group overflow-hidden">
                     <ShineBorder shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]} duration={8} borderWidth={2} />
                     <NeoButton variant="primary" className="relative z-20 w-full justify-center py-5 text-xl rounded-xl bg-neutral-900 text-white hover:bg-black border-none !shadow-none hover:!shadow-none hover:shadow-none">
@@ -755,8 +666,7 @@ const App = () => {
                   <span className="flex items-center gap-1.5"><Download className="w-4 h-4"/> Instant PDF</span>
                   <span className="w-1 h-1 rounded-full bg-gray-300"></span>
                   <span className="flex items-center gap-1.5">
-                    {/* Stripe Logo - Sized to match text height */}
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 34" className="h-3 md:h-4 fill-gray-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 34" className="h-4 fill-gray-500">
                       <title>Powered by Stripe</title>
                       <path d="M17.07,11.24h-4.3V22h1.92V17.84h2.38c2.4,0,3.9-1.16,3.9-3.3S19.47,11.24,17.07,11.24Zm-.1,5H14.69v-3.3H17c1.38,0,2.11.59,2.11,1.65S18.35,16.19,17,16.19Z"/>
                       <path d="M25.1,14a3.77,3.77,0,0,0-3.8,4.09,3.81,3.81,0,1,0,7.59,0A3.76,3.76,0,0,0,25.1,14Zm0,6.67c-1.22,0-2-1-2-2.58s.76-2.58,2-2.58,2,1,2,2.58S26.31,20.66,25.1,20.66Z"/>
@@ -803,5 +713,5 @@ const App = () => {
 };
 
 const container = document.getElementById('root');
-const root = createRoot(container!);
+const root = createRoot(container);
 root.render(<App />);
