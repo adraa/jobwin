@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thank You! | Interview Success Blueprint</title>
+  <meta name="robots" content="noindex, nofollow">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Inter Tight', 'sans-serif'],
+          },
+          colors: {
+            'neo-bg': '#F4F5FB',
+            'neo-black': '#0F172A',
+            'neo-orange': '#2563EB',
+            'neo-green': '#10B981',
+            'neo-yellow': '#FACC15',
+            'neo-muted': '#64748B',
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #F4F5FB;
+      font-family: 'Inter', sans-serif;
+    }
+    @keyframes confetti {
+      0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+    }
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      top: -10px;
+      animation: confetti 3s ease-in-out forwards;
+    }
+    @keyframes pulse-ring {
+      0% { transform: scale(0.8); opacity: 1; }
+      100% { transform: scale(1.5); opacity: 0; }
+    }
+    .pulse-ring {
+      animation: pulse-ring 1.5s ease-out infinite;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+  <!-- Confetti Animation -->
+  <div id="confetti-container"></div>
+  
+  <div class="max-w-lg w-full text-center">
+    <!-- Success Icon -->
+    <div class="relative inline-flex items-center justify-center mb-8">
+      <div class="absolute w-24 h-24 bg-neo-green/20 rounded-full pulse-ring"></div>
+      <div class="w-20 h-20 bg-neo-green rounded-full flex items-center justify-center shadow-lg shadow-neo-green/30">
+        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Thank You Message -->
+    <h1 class="text-3xl md:text-4xl font-bold font-display text-neo-black mb-4">
+      Thank You for Your Purchase! 🎉
+    </h1>
+    <p class="text-neo-muted text-lg mb-8 leading-relaxed">
+      Your payment was successful. Click the button below to download your <strong class="text-neo-black">Interview Success Blueprint</strong>.
+    </p>
+
+    <!-- Download Button -->
+    <a 
+      href="https://www.dropbox.com/scl/fi/jrrllpgbi3wlx08qr6ou8/Interview-Success-Blueprint-Ebook.pdf?rlkey=e4wx7alm81jngf0ms9ai1dc7u&st=0r7tjw4x&dl=1" 
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center gap-3 bg-neo-orange text-white font-bold font-display text-lg px-8 py-4 rounded-xl shadow-lg shadow-neo-orange/30 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 mb-6"
+    >
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+      </svg>
+      Download Your Blueprint (PDF)
+    </a>
+
+    <!-- Info Box -->
+    <div class="bg-white rounded-xl border border-gray-200 p-6 mb-8 text-left">
+      <h3 class="font-bold text-neo-black mb-3 flex items-center gap-2">
+        <span class="text-neo-yellow">💡</span> Quick Tips
+      </h3>
+      <ul class="text-sm text-neo-muted space-y-2">
+        <li>• Save the PDF to your device for offline access</li>
+        <li>• A receipt has been sent to your email</li>
+        <li>• Bookmark this page to download again if needed</li>
+      </ul>
+    </div>
+
+    <!-- Support -->
+    <p class="text-sm text-neo-muted mb-4">
+      Having trouble downloading? Contact us at 
+      <a href="mailto:hello@pushupmode.com" class="text-neo-orange hover:underline font-medium">hello@pushupmode.com</a>
+    </p>
+
+    <!-- Back to Home -->
+    <a href="/" class="text-sm text-neo-muted hover:text-neo-orange transition-colors">
+      ← Back to Home
+    </a>
+  </div>
+
+  <script>
+    // Confetti animation
+    const colors = ['#2563EB', '#10B981', '#FACC15', '#F472B6', '#A78BFA'];
+    const container = document.getElementById('confetti-container');
+    
+    for (let i = 0; i < 50; i++) {
+      setTimeout(() => {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+        confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+        confetti.style.animationDelay = Math.random() * 0.5 + 's';
+        container.appendChild(confetti);
+        
+        setTimeout(() => confetti.remove(), 4000);
+      }, i * 50);
+    }
+  </script>
+</body>
+</html>
+
