@@ -785,15 +785,27 @@ const App = () => {
         </div>
       </div>
 
-      <div id="pricing" className="relative bg-neo-orange py-12 md:py-32 overflow-hidden">
+      <div id="pricing" className="relative bg-gradient-to-br from-neo-orange via-blue-600 to-indigo-700 py-12 md:py-32 overflow-hidden">
          <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
-             <div className="absolute -top-24 -left-24 w-64 md:w-96 h-64 md:h-96 bg-white/5 rounded-full blur-3xl"></div>
+             <div className="absolute -top-24 -left-24 w-64 md:w-96 h-64 md:h-96 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
              <div className="absolute bottom-0 right-0 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-white/10 rounded-full blur-3xl"></div>
+             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-neo-yellow/5 rounded-full blur-3xl"></div>
          </div>
 
          <div className="max-w-3xl mx-auto px-4 relative z-10">
-            <div className="reveal bg-white rounded-2xl md:rounded-3xl p-5 md:p-16 shadow-neo-xl text-center relative">
+            {/* Glowing card wrapper */}
+            <div className="relative">
+              <div className="absolute -inset-1 bg-gradient-to-r from-neo-yellow via-pink-500 to-neo-yellow rounded-3xl blur-lg opacity-75 animate-pulse"></div>
               
+              <div className="reveal relative bg-white rounded-2xl md:rounded-3xl p-5 md:p-16 shadow-2xl text-center">
+              
+              {/* Best Value Badge */}
+              <div className="absolute -top-3 -right-3 md:-top-4 md:-right-4 z-30">
+                <div className="bg-gradient-to-r from-red-500 to-pink-500 text-white px-3 py-1 md:px-4 md:py-1.5 rounded-full font-bold font-display text-[10px] md:text-xs uppercase tracking-wider shadow-lg transform rotate-12">
+                  🔥 Best Value
+                </div>
+              </div>
+
               <div className="absolute -top-5 md:-top-6 left-1/2 -translate-x-1/2 z-20">
                 <div className="w-20 h-20 md:w-24 md:h-24 bg-neo-yellow text-neo-black rounded-full flex flex-col items-center justify-center font-bold font-display text-[9px] md:text-xs shadow-lg border-4 border-white">
                   <Star className="w-5 h-5 md:w-6 md:h-6 fill-current mb-0.5 md:mb-1" />
@@ -806,8 +818,12 @@ const App = () => {
                 <p className="text-neo-orange font-bold uppercase tracking-widest text-xs md:text-sm">One-time investment for career success</p>
               </div>
 
-              <div className="mb-6 md:mb-8 flex justify-center items-baseline gap-2">
-                <span className="text-5xl md:text-8xl font-bold font-display text-neo-black tracking-tighter">RM 79</span>
+              <div className="mb-6 md:mb-8 flex flex-col items-center gap-1">
+                <span className="text-lg md:text-2xl text-gray-400 line-through font-display">RM 112</span>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-5xl md:text-8xl font-bold font-display text-neo-black tracking-tighter">RM 79</span>
+                </div>
+                <span className="inline-block bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs md:text-sm font-bold mt-2">You Save RM33 (30% OFF)</span>
               </div>
 
               <CountdownTimer />
@@ -861,6 +877,7 @@ const App = () => {
                   </svg>
                 </div>
               </div>
+            </div>
             </div>
          </div>
       </div>
