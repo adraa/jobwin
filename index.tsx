@@ -5,7 +5,6 @@ import {
   Quote,
   Star,
   Plus,
-  Minus,
   Mail,
   ShieldCheck,
   Trophy
