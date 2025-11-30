@@ -191,7 +191,9 @@ const PainCard = ({ image, thought, stressLevel, stressLabel, delay, className =
     <img 
       src={image || "https://placehold.co/600x800/png?text=Add+Image"} 
       alt="Interview Pain Point" 
-      loading="lazy"
+      width={600}
+      height={800}
+      decoding="async"
       className="absolute inset-0 w-full h-full object-cover" 
     />
     <div className="absolute inset-0 bg-gradient-to-t from-slate-900/95 via-slate-900/40 to-transparent opacity-95"></div>
@@ -532,7 +534,10 @@ const App = () => {
                     <img
                         src="https://img.icons8.com/3d-fluency/94/verified-account.png"
                         alt="verified"
+                        width={94}
+                        height={94}
                         loading="lazy"
+                        decoding="async"
                         className="w-6 h-6 md:w-7 md:h-7 shrink-0"
                     />
                     {item}
@@ -553,7 +558,10 @@ const App = () => {
                 <img 
                   src="https://i.imgur.com/uvNoPCg.jpeg" 
                   alt="Interview Success Blueprint Book Cover" 
+                  width={600}
+                  height={800}
                   loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover rounded-lg border border-white/10"
                 />
               </div>
@@ -655,7 +663,7 @@ const App = () => {
                     "Tough interview formats"
                   ].map((benefit, i) => (
                       <div key={i} className="reveal flex items-center gap-3 md:gap-4 text-neo-black" style={{ transitionDelay: `${i * 50}ms` }}>
-                          <img width="32" height="32" src="https://img.icons8.com/liquid-glass-color/32/checked.png" alt="checked" loading="lazy" className="w-6 h-6 md:w-8 md:h-8 shrink-0"/>
+                          <img width={32} height={32} src="https://img.icons8.com/liquid-glass-color/32/checked.png" alt="checked" loading="lazy" decoding="async" className="w-6 h-6 md:w-8 md:h-8 shrink-0"/>
                           <span className="font-medium text-sm md:text-lg">{benefit}</span>
                       </div>
                   ))}
