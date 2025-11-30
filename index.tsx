@@ -461,9 +461,9 @@ const App = () => {
           <div className="font-bold font-display text-base md:text-xl tracking-tight flex items-center gap-1.5 md:gap-2 text-neo-black">
             pushupmode <span className="text-base md:text-xl">🇲🇾</span>
           </div>
-          <NeoButton onClick={scrollToPricing} variant="primary" className="text-[11px] md:text-xs px-3 md:px-5 py-2 shadow-md min-h-[36px] md:min-h-[40px]">
+          <NeoButton onClick={scrollToPricing} variant="primary" className="text-[10px] md:text-xs px-2.5 md:px-5 py-1.5 md:py-2 shadow-md min-h-[32px] md:min-h-[40px]">
             <span className="hidden sm:inline">Get the Blueprint</span>
-            <span className="sm:hidden">Get It Now</span>
+            <span className="sm:hidden">Get the Blueprint Now</span>
           </NeoButton>
         </div>
       </nav>
@@ -471,9 +471,9 @@ const App = () => {
       <PromoBar onClick={scrollToPricing} />
 
       {/* HERO SECTION */}
-      <Section className="pt-[5.5rem] md:pt-28 pb-8 md:pb-32 flex flex-col items-center text-center relative z-10 mt-0">
-        <div className="max-w-4xl mx-auto mb-6 md:mb-16 flex flex-col items-center">
-          <div className="reveal inline-flex items-center gap-1 md:gap-2 px-2 md:px-4 py-1 md:py-1.5 mb-5 md:mb-8 bg-white border border-gray-200 rounded-full shadow-sm text-[8px] md:text-sm font-bold text-neo-muted uppercase tracking-wide font-display whitespace-nowrap">
+      <Section className="pt-[4.5rem] md:pt-28 pb-8 md:pb-32 flex flex-col items-center text-center relative z-10 mt-0">
+        <div className="max-w-4xl mx-auto mb-4 md:mb-16 flex flex-col items-center">
+          <div className="reveal inline-flex items-center gap-1 md:gap-2 px-2 md:px-4 py-1 md:py-1.5 mb-3 md:mb-8 bg-white border border-gray-200 rounded-full shadow-sm text-[8px] md:text-sm font-bold text-neo-muted uppercase tracking-wide font-display whitespace-nowrap">
              <ShieldCheck className="w-3 h-3 md:w-4 md:h-4 text-neo-green shrink-0" />
              Go-To Blueprint for Malaysian Job Seekers (100+ Users) 🇲🇾
           </div>
