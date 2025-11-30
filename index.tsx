@@ -57,12 +57,12 @@ const PAIN_POINTS = [
 // --- Components ---
 
 const NeoButton = ({ children, onClick, variant = 'primary', className = '', style = {} }: any) => {
-  const baseStyle = "px-8 py-3 font-display font-bold transition-all duration-300 flex items-center gap-2 tracking-wide text-sm md:text-base rounded-full transform active:scale-95";
+  const baseStyle = "px-6 py-3 md:px-8 font-display font-bold transition-all duration-300 flex items-center justify-center gap-2 tracking-wide text-sm md:text-base rounded-full transform active:scale-95 min-h-[48px]";
   
   const variants: any = {
-    primary: "bg-neo-orange text-white shadow-lg shadow-neo-orange/30 hover:shadow-xl hover:shadow-neo-orange/40 hover:-translate-y-0.5",
-    secondary: "bg-white text-neo-black border border-gray-200 shadow-sm hover:border-neo-orange hover:text-neo-orange",
-    outline: "bg-transparent text-neo-orange border border-neo-orange hover:bg-neo-orange/5"
+    primary: "bg-neo-orange text-white shadow-lg shadow-neo-orange/30 md:hover:shadow-xl md:hover:shadow-neo-orange/40 md:hover:-translate-y-0.5",
+    secondary: "bg-white text-neo-black border border-gray-200 shadow-sm md:hover:border-neo-orange md:hover:text-neo-orange",
+    outline: "bg-transparent text-neo-orange border border-neo-orange md:hover:bg-neo-orange/5"
   };
 
   return (
@@ -73,7 +73,7 @@ const NeoButton = ({ children, onClick, variant = 'primary', className = '', sty
 };
 
 const Section = ({ children, className = "", id = "" }: any) => (
-  <section id={id} className={`px-4 py-16 md:py-32 max-w-7xl mx-auto relative ${className}`}>
+  <section id={id} className={`px-4 py-12 md:py-32 max-w-7xl mx-auto relative ${className}`}>
     {children}
   </section>
 );
@@ -158,11 +158,11 @@ const Marquee = ({
 const PromoBar = ({ onClick }: any) => (
   <div 
     onClick={onClick}
-    className="fixed top-16 left-0 w-full h-8 bg-lime-400 z-40 flex items-center overflow-hidden cursor-pointer hover:bg-lime-400 transition-colors shadow-sm"
+    className="fixed top-14 md:top-16 left-0 w-full h-7 md:h-8 bg-lime-400 z-40 flex items-center overflow-hidden cursor-pointer active:bg-lime-300 md:hover:bg-lime-300 transition-colors shadow-sm"
   >
-    <Marquee className="py-0 [--duration:10s] [--gap:3rem]" repeat={20}>
-      <div className="flex items-center gap-3 font-bold font-display text-xs md:text-sm text-black tracking-widest uppercase">
-        <span className="animate-pulse text-sm">✦</span>
+    <Marquee className="py-0 [--duration:8s] md:[--duration:10s] [--gap:2rem] md:[--gap:3rem]" repeat={20}>
+      <div className="flex items-center gap-2 md:gap-3 font-bold font-display text-[10px] md:text-sm text-black tracking-widest uppercase">
+        <span className="animate-pulse text-xs md:text-sm">✦</span>
         <span>BUY NOW & SAVE RM33</span>
       </div>
     </Marquee>
@@ -171,11 +171,11 @@ const PromoBar = ({ onClick }: any) => (
 
 const TextTicker = ({ items }: any) => {
   return (
-    <div className="w-full py-2 my-4 overflow-hidden bg-neo-black text-white select-none relative shadow-md">
-        <Marquee repeat={4} className="py-0" style={{ '--duration': '30s', '--gap': '3rem' }}>
+    <div className="w-full py-1.5 md:py-2 my-2 md:my-4 overflow-hidden bg-neo-black text-white select-none relative shadow-md">
+        <Marquee repeat={4} className="py-0" style={{ '--duration': '25s', '--gap': '2rem' }}>
             {items.map((item: any, i: number) => (
-                <span key={i} className="flex items-center gap-8 font-display font-bold text-lg tracking-wider opacity-90">
-                {item} <span className="w-2 h-2 bg-neo-yellow rounded-full flex-shrink-0 shadow-[0_0_8px_#FACC15]"></span>
+                <span key={i} className="flex items-center gap-4 md:gap-8 font-display font-bold text-sm md:text-lg tracking-wider opacity-90">
+                {item} <span className="w-1.5 h-1.5 md:w-2 md:h-2 bg-neo-yellow rounded-full flex-shrink-0 shadow-[0_0_8px_#FACC15]"></span>
                 </span>
             ))}
         </Marquee>
@@ -185,30 +185,33 @@ const TextTicker = ({ items }: any) => {
 
 const PainCard = ({ image, thought, stressLevel, stressLabel, delay, className = "" }: any) => (
   <div 
-    className={`relative w-full aspect-[3/4] bg-white shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2 overflow-hidden rounded-2xl border border-gray-100 ${className}`}
+    className={`relative w-full aspect-[3/4] bg-white shadow-lg md:hover:shadow-xl transition-all duration-500 md:hover:-translate-y-2 overflow-hidden rounded-2xl border border-gray-100 ${className}`}
     style={delay ? { transitionDelay: `${delay}ms` } : {}}
   >
     <img 
       src={image || "https://placehold.co/600x800/png?text=Add+Image"} 
       alt="Interview Pain Point" 
-      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105" 
+      loading="lazy"
+      className="absolute inset-0 w-full h-full object-cover" 
     />
     <div className="absolute inset-0 bg-gradient-to-t from-slate-900/95 via-slate-900/40 to-transparent opacity-95"></div>
-    <div className="absolute bottom-4 left-4 right-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-5 text-white shadow-lg">
-        <div className="flex items-center gap-2 mb-3 text-red-300">
-            <Quote size={14} className="fill-current rotate-180" />
-            <span className="text-[10px] font-bold font-display uppercase tracking-wider opacity-80">Internal Monologue</span>
+    <div className="absolute bottom-3 left-3 right-3 md:bottom-4 md:left-4 md:right-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-4 md:p-5 text-white shadow-lg">
+        <div className="flex items-center gap-2 mb-2 md:mb-3 text-red-300">
+            <Quote size={12} className="fill-current rotate-180 md:w-[14px] md:h-[14px]" />
+            <span className="text-[9px] md:text-[10px] font-bold font-display uppercase tracking-wider opacity-80">Internal Monologue</span>
         </div>
-        <p className="font-medium text-lg leading-snug mb-4 font-sans text-white">
+        <p className="font-medium text-base md:text-lg leading-snug mb-3 md:mb-4 font-sans text-white">
           "{thought}"
         </p>
-        <div className="w-full h-px bg-white/10 mb-3"></div>
-        <div className="flex items-center justify-between text-[11px] font-medium tracking-wide">
-            <span className="text-gray-300 font-display">STRESS INDICATOR</span>
-            <div className="flex items-center gap-1.5">
-                {[...Array(5)].map((_, i) => (
-                    <div key={i} className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${i < stressLevel ? 'bg-red-400 shadow-[0_0_5px_rgba(248,113,113,0.8)]' : 'bg-white/10'}`}></div>
-                ))}
+        <div className="w-full h-px bg-white/10 mb-2 md:mb-3"></div>
+        <div className="flex items-center justify-between text-[10px] md:text-[11px] font-medium tracking-wide">
+            <span className="text-gray-300 font-display hidden sm:inline">STRESS INDICATOR</span>
+            <div className="flex items-center gap-1.5 w-full sm:w-auto justify-between sm:justify-end">
+                <div className="flex items-center gap-1">
+                  {[...Array(5)].map((_, i) => (
+                      <div key={i} className={`w-1.5 h-1.5 rounded-full ${i < stressLevel ? 'bg-red-400 shadow-[0_0_5px_rgba(248,113,113,0.8)]' : 'bg-white/10'}`}></div>
+                  ))}
+                </div>
                 <span className="ml-2 text-red-300 font-bold font-display">{stressLabel}</span>
             </div>
         </div>
@@ -294,23 +297,24 @@ const AutoSlider = ({ items }: any) => {
 const TestimonialCard = ({ name, quote, result, className = "" }: any) => (
   <div 
     className={cn(
-      "bg-white p-8 shadow-sm hover:shadow-md border border-gray-100 rounded-2xl transition-all duration-300 relative flex flex-col w-[320px] md:w-[420px] shrink-0 mx-4",
+      "bg-white p-5 md:p-8 shadow-sm md:hover:shadow-md border border-gray-100 rounded-2xl transition-all duration-300 relative flex flex-col w-[280px] md:w-[380px] shrink-0 mx-2 md:mx-4",
       className
     )}
   >
-    <div className="absolute top-6 right-6 bg-neo-bg text-neo-black border border-gray-200 px-3 py-1 rounded-full font-bold font-display text-[10px] uppercase tracking-wide flex items-center gap-1">
-        <Trophy className="w-3 h-3 text-neo-yellow fill-neo-yellow" />
-        {result}
+    <div className="absolute top-4 right-4 md:top-6 md:right-6 bg-neo-bg text-neo-black border border-gray-200 px-2 py-0.5 md:px-3 md:py-1 rounded-full font-bold font-display text-[9px] md:text-[10px] uppercase tracking-wide flex items-center gap-1">
+        <Trophy className="w-2.5 h-2.5 md:w-3 md:h-3 text-neo-yellow fill-neo-yellow" />
+        <span className="hidden xs:inline">{result}</span>
+        <span className="xs:hidden">{result.split(' ')[0]}</span>
     </div>
-    <div className="flex items-center gap-1 mb-6 text-neo-yellow">
+    <div className="flex items-center gap-0.5 md:gap-1 mb-4 md:mb-6 text-neo-yellow">
       {[...Array(5)].map((_, i) => (
-        <Star key={i} className="w-4 h-4 fill-current" />
+        <Star key={i} className="w-3.5 h-3.5 md:w-4 md:h-4 fill-current" />
       ))}
     </div>
-    <p className="font-medium text-base md:text-lg leading-relaxed mb-6 text-neo-black/80">
+    <p className="font-medium text-sm md:text-lg leading-relaxed mb-4 md:mb-6 text-neo-black/80 line-clamp-4 md:line-clamp-none">
       "{quote}"
     </p>
-    <div className="mt-auto pt-5 border-t border-gray-50">
+    <div className="mt-auto pt-4 md:pt-5 border-t border-gray-50">
         <p className="font-bold text-sm text-neo-black font-display">{name}</p>
     </div>
   </div>
@@ -320,20 +324,20 @@ const FAQItem = ({ question, answer }: any) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className={`bg-white mb-4 rounded-xl border border-gray-200 shadow-sm overflow-hidden transition-all duration-300 ${isOpen ? 'ring-2 ring-neo-orange/20 shadow-md' : ''}`}>
+    <div className={`bg-white mb-3 md:mb-4 rounded-xl border border-gray-200 shadow-sm overflow-hidden transition-all duration-300 ${isOpen ? 'ring-2 ring-neo-orange/20 shadow-md' : ''}`}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between p-6 text-left font-bold text-neo-black text-base md:text-lg hover:bg-gray-50 transition-colors"
+        className="w-full flex items-center justify-between p-4 md:p-6 text-left font-bold text-neo-black text-sm md:text-lg active:bg-gray-50 md:hover:bg-gray-50 transition-colors min-h-[56px]"
       >
-        <span className="mr-4 font-display">{question}</span>
-        <div className={`w-8 h-8 rounded-full flex items-center justify-center bg-gray-100 text-gray-500 transition-all duration-300 ${isOpen ? 'bg-neo-orange text-white rotate-45' : ''}`}>
-             <Plus className="w-5 h-5" />
+        <span className="mr-3 md:mr-4 font-display leading-tight">{question}</span>
+        <div className={`w-8 h-8 md:w-8 md:h-8 rounded-full flex items-center justify-center bg-gray-100 text-gray-500 transition-all duration-300 shrink-0 ${isOpen ? 'bg-neo-orange text-white rotate-45' : ''}`}>
+             <Plus className="w-4 h-4 md:w-5 md:h-5" />
         </div>
       </button>
       <div
         className={`overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}
       >
-        <div className="px-6 pb-6 pt-0 text-neo-muted leading-relaxed text-sm md:text-base">
+        <div className="px-4 md:px-6 pb-4 md:pb-6 pt-0 text-neo-muted leading-relaxed text-sm">
           {answer}
         </div>
       </div>
@@ -345,15 +349,15 @@ const FAQSection = () => {
   const faqs = [
     {
       question: "Is this a physical book?",
-      answer: "No, this is a digital eBook (PDF). You will receive an instant download link via email immediately after purchase, allowing you to start preparing right away."
+      answer: "No, this is a digital eBook (PDF). You will receive an instant download link via email immediately after purchase."
     },
     {
       question: "Is this suitable for fresh graduates?",
-      answer: "Absolutely. We cover foundational skills, mindset shifts, and anxiety management techniques specifically designed to help first-time job seekers navigate the Malaysian market."
+      answer: "Absolutely. We cover foundational skills, mindset shifts, and anxiety management techniques designed for first-time job seekers."
     },
     {
        question: "I have 5+ years experience. Is this for me?",
-       answer: "Yes. Chapters like 'Personal Branding', 'Advanced Response Optimization', and 'Strategic Salary Negotiation' are tailored for experienced professionals looking to level up or pivot careers."
+       answer: "Yes. Chapters like 'Personal Branding' and 'Strategic Salary Negotiation' are tailored for experienced professionals."
     },
     {
       question: "Can I read this on my phone?",
@@ -363,20 +367,20 @@ const FAQSection = () => {
       question: "Do you offer refunds?",
       answer: (
         <span>
-          Due to the digital nature of this product, <strong>all sales are final</strong> and we do not offer money-back guarantees. If you have specific questions or concerns before buying, please email us at <a href="mailto:hello@pushupmode.com" className="text-neo-orange hover:underline font-bold">hello@pushupmode.com</a>.
+          Due to the digital nature of this product, <strong>all sales are final</strong>. Questions? Email <a href="mailto:hello@pushupmode.com" className="text-neo-orange active:underline md:hover:underline font-bold">hello@pushupmode.com</a>.
         </span>
       )
     }
   ];
 
   return (
-    <Section className="py-16 md:py-24 max-w-4xl">
-      <div className="text-center mb-16 reveal">
-          <span className="bg-blue-50 text-neo-orange px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-4 inline-block font-display">Support</span>
-          <h2 className="text-3xl md:text-4xl font-bold font-display text-neo-black mb-4">
+    <Section className="py-10 md:py-24 max-w-4xl pb-24 md:pb-24">
+      <div className="text-center mb-8 md:mb-16 reveal">
+          <span className="bg-blue-50 text-neo-orange px-2 md:px-3 py-1 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider mb-3 md:mb-4 inline-block font-display">Support</span>
+          <h2 className="text-2xl md:text-4xl font-bold font-display text-neo-black mb-2 md:mb-4">
             Frequently Asked Questions
           </h2>
-          <p className="text-neo-muted">Everything you need to know about the blueprint.</p>
+          <p className="text-neo-muted text-sm md:text-base">Everything you need to know about the blueprint.</p>
       </div>
 
       <div className="reveal flex flex-col">
@@ -385,10 +389,10 @@ const FAQSection = () => {
         ))}
       </div>
       
-      <div className="mt-16 text-center reveal bg-white p-8 rounded-2xl border border-gray-100 shadow-sm inline-block w-full">
-        <p className="text-neo-muted mb-4">Still have questions?</p>
-        <a href="mailto:hello@pushupmode.com" className="inline-flex items-center gap-2 font-bold text-neo-black hover:text-neo-orange transition-colors text-lg font-display">
-            <Mail className="w-5 h-5" /> hello@pushupmode.com
+      <div className="mt-8 md:mt-16 text-center reveal bg-white p-5 md:p-8 rounded-xl md:rounded-2xl border border-gray-100 shadow-sm inline-block w-full">
+        <p className="text-neo-muted mb-3 md:mb-4 text-sm md:text-base">Still have questions?</p>
+        <a href="mailto:hello@pushupmode.com" className="inline-flex items-center gap-2 font-bold text-neo-black active:text-neo-orange md:hover:text-neo-orange transition-colors text-sm md:text-lg font-display">
+            <Mail className="w-4 h-4 md:w-5 md:h-5" /> hello@pushupmode.com
         </a>
       </div>
     </Section>
@@ -452,13 +456,14 @@ const App = () => {
   return (
     <div className="min-h-screen bg-neo-bg text-neo-black font-sans selection:bg-neo-orange selection:text-white">
       
-      <nav className="fixed top-0 left-0 w-full h-16 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200 shadow-sm transition-all duration-300">
-        <div className="max-w-7xl mx-auto px-4 py-3 h-full flex justify-between items-center">
-          <div className="font-bold font-display text-xl tracking-tight flex items-center gap-2 text-neo-black">
-            pushupmode <span className="text-xl">🇲🇾</span>
+      <nav className="fixed top-0 left-0 w-full h-14 md:h-16 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200 shadow-sm transition-all duration-300">
+        <div className="max-w-7xl mx-auto px-3 md:px-4 h-full flex justify-between items-center">
+          <div className="font-bold font-display text-base md:text-xl tracking-tight flex items-center gap-1.5 md:gap-2 text-neo-black">
+            pushupmode <span className="text-base md:text-xl">🇲🇾</span>
           </div>
-          <NeoButton onClick={scrollToPricing} variant="primary" className="text-xs px-5 py-2 shadow-md">
-            Get the Blueprint
+          <NeoButton onClick={scrollToPricing} variant="primary" className="text-[11px] md:text-xs px-3 md:px-5 py-2 shadow-md min-h-[36px] md:min-h-[40px]">
+            <span className="hidden sm:inline">Get the Blueprint</span>
+            <span className="sm:hidden">Get It Now</span>
           </NeoButton>
         </div>
       </nav>
@@ -466,28 +471,30 @@ const App = () => {
       <PromoBar onClick={scrollToPricing} />
 
       {/* HERO SECTION */}
-      <Section className="pt-28 pb-12 md:pb-32 flex flex-col items-center text-center relative z-10 mt-0">
-        <div className="max-w-4xl mx-auto mb-8 md:mb-16 flex flex-col items-center">
-          <div className="reveal inline-flex items-center gap-2 px-4 py-1.5 mb-8 bg-white border border-gray-200 rounded-full shadow-sm text-xs md:text-sm font-bold text-neo-muted uppercase tracking-wide font-display">
-             <ShieldCheck className="w-4 h-4 text-neo-green" />
-             Go-To Blueprint for Malaysian Job Seekers (100+ Users) 🇲🇾
+      <Section className="pt-[5.5rem] md:pt-28 pb-8 md:pb-32 flex flex-col items-center text-center relative z-10 mt-0">
+        <div className="max-w-4xl mx-auto mb-6 md:mb-16 flex flex-col items-center">
+          <div className="reveal inline-flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-1.5 mb-5 md:mb-8 bg-white border border-gray-200 rounded-full shadow-sm text-[10px] md:text-sm font-bold text-neo-muted uppercase tracking-wide font-display">
+             <ShieldCheck className="w-3.5 h-3.5 md:w-4 md:h-4 text-neo-green shrink-0" />
+             <span className="hidden sm:inline">Go-To Blueprint for Malaysian Job Seekers (100+ Users)</span>
+             <span className="sm:hidden">100+ Malaysian Job Seekers</span>
+             <span>🇲🇾</span>
           </div>
-          <h1 className="reveal text-3xl md:text-7xl font-bold font-display leading-tight tracking-tight mb-6 text-neo-black">
+          <h1 className="reveal text-[1.75rem] sm:text-3xl md:text-7xl font-bold font-display leading-tight tracking-tight mb-4 md:mb-6 text-neo-black">
             DOES THIS SOUND <br className="md:hidden" />
-            LIKE&nbsp;<span className="text-neo-orange relative inline-block px-2">
+            LIKE&nbsp;<span className="text-neo-orange relative inline-block px-1 md:px-2">
                 YOU?
-                <svg className="absolute w-full h-3 -bottom-1 left-0 text-neo-yellow opacity-80" viewBox="0 0 100 10" preserveAspectRatio="none">
+                <svg className="absolute w-full h-2 md:h-3 -bottom-0.5 md:-bottom-1 left-0 text-neo-yellow opacity-80" viewBox="0 0 100 10" preserveAspectRatio="none">
                     <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="8" fill="none" />
                 </svg>
             </span>
           </h1>
         </div>
 
-        <div className="w-full max-w-7xl">
+        <div className="w-full max-w-7xl -mx-4 md:mx-0">
           <AutoSlider items={PAIN_POINTS} />
         </div>
 
-        <div className="mt-6 md:mt-12 flex flex-col items-center animate-reveal opacity-60" style={{ animationDelay: '1s' }}>
+        <div className="mt-4 md:mt-12 flex-col items-center animate-reveal opacity-60 hidden md:flex" style={{ animationDelay: '1s' }}>
             <div className="w-6 h-10 border-2 border-neo-muted rounded-full flex justify-center pt-2">
                 <div className="w-1.5 h-1.5 bg-neo-muted rounded-full animate-scroll"></div>
             </div>
@@ -502,32 +509,33 @@ const App = () => {
       ]} />
 
       {/* SOLUTION SECTION */}
-      <Section id="solution" className="py-12 md:py-24">
-        <div className="reveal bg-neo-black text-white rounded-3xl p-6 md:p-20 shadow-2xl relative overflow-hidden">
+      <Section id="solution" className="py-8 md:py-24">
+        <div className="reveal bg-neo-black text-white rounded-2xl md:rounded-3xl p-5 md:p-20 shadow-2xl relative overflow-hidden">
           <div className="absolute top-0 right-0 w-full h-full opacity-20 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-blue-500 via-transparent to-transparent"></div>
 
-          <div className="relative z-10 grid md:grid-cols-2 gap-8 md:gap-16 items-center">
-            <div>
-              <div className="inline-block px-4 py-1 rounded-full bg-white/10 border border-white/20 text-sm font-bold mb-6 text-blue-300 font-display">THE SOLUTION</div>
-              <h2 className="text-3xl md:text-6xl font-bold font-display mb-6 leading-tight tracking-tight">
+          <div className="relative z-10 grid md:grid-cols-2 gap-6 md:gap-16 items-center">
+            <div className="order-2 md:order-1">
+              <div className="inline-block px-3 md:px-4 py-1 rounded-full bg-white/10 border border-white/20 text-xs md:text-sm font-bold mb-4 md:mb-6 text-blue-300 font-display">THE SOLUTION</div>
+              <h2 className="text-2xl md:text-6xl font-bold font-display mb-4 md:mb-6 leading-tight tracking-tight">
                 Interview Success <span className="text-blue-400">Blueprint</span>
               </h2>
-              <p className="text-lg text-gray-300 mb-10 leading-relaxed">
+              <p className="text-base md:text-lg text-gray-300 mb-6 md:mb-10 leading-relaxed">
                 This isn't generic advice. It's a 50+ page tactical war manual for your career, designed to turn you into the candidate they <i>must</i> hire.
               </p>
               
-              <ul className="space-y-5 mb-10">
+              <ul className="space-y-3 md:space-y-5 mb-6 md:mb-10">
                 {[
                   "Psychology of Hiring Managers",
                   "STAR Method Deconstructed",
                   "Salary Negotiation Scripts",
                   "Body Language Mastery"
                 ].map((item, i) => (
-                  <li key={i} className="reveal flex items-center gap-4 font-medium text-lg" style={{ transitionDelay: `${i * 100 + 200}ms` }}>
+                  <li key={i} className="reveal flex items-center gap-3 md:gap-4 font-medium text-sm md:text-lg" style={{ transitionDelay: `${i * 100 + 200}ms` }}>
                     <img
                         src="https://img.icons8.com/3d-fluency/94/verified-account.png"
                         alt="verified"
-                        className="w-7 h-7 shrink-0"
+                        loading="lazy"
+                        className="w-6 h-6 md:w-7 md:h-7 shrink-0"
                     />
                     {item}
                   </li>
@@ -542,19 +550,19 @@ const App = () => {
               </div>
             </div>
             
-            <div className="reveal flex flex-col justify-center items-center gap-8" style={{ transitionDelay: '300ms' }}>
-              <div className="relative w-64 md:w-80 aspect-[3/4] rounded-lg shadow-[0_35px_60px_-15px_rgba(0,0,0,0.5)] group">
+            <div className="reveal flex flex-col justify-center items-center gap-4 md:gap-8 order-1 md:order-2" style={{ transitionDelay: '300ms' }}>
+              <div className="relative w-48 md:w-80 aspect-[3/4] rounded-lg shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)] md:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.5)] group">
                 <img 
                   src="https://i.imgur.com/uvNoPCg.jpeg" 
                   alt="Interview Success Blueprint Book Cover" 
+                  loading="lazy"
                   className="w-full h-full object-cover rounded-lg border border-white/10"
                 />
-                <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none rounded-lg"></div>
               </div>
 
-              <div className="flex md:hidden relative rounded-xl group justify-center overflow-hidden w-64 mt-3">
+              <div className="flex md:hidden relative rounded-xl group justify-center overflow-hidden w-full max-w-[200px]">
                 <ShineBorder shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]} duration={8} borderWidth={2} />
-                <NeoButton onClick={scrollToPricing} style={{ color: '#000000', backgroundColor: '#ffffff' }} className="relative z-20 w-full justify-center !bg-white !text-black hover:bg-gray-50 border-none !shadow-none hover:!shadow-none hover:shadow-none rounded-xl">
+                <NeoButton onClick={scrollToPricing} style={{ color: '#000000', backgroundColor: '#ffffff' }} className="relative z-20 w-full justify-center !bg-white !text-black active:bg-gray-100 border-none !shadow-none rounded-xl text-sm">
                   Buy Now
                 </NeoButton>
               </div>
@@ -563,47 +571,47 @@ const App = () => {
         </div>
       </Section>
 
-      <Section className="py-10 md:py-12">
-         <div className="text-center mb-16">
-            <h2 className="reveal text-3xl md:text-4xl font-bold font-display mb-4 text-neo-black">What's Inside The Blueprint?</h2>
-            <p className="text-neo-muted">Six comprehensive chapters covering every aspect of the interview process.</p>
+      <Section className="py-8 md:py-12">
+         <div className="text-center mb-8 md:mb-16">
+            <h2 className="reveal text-2xl md:text-4xl font-bold font-display mb-3 md:mb-4 text-neo-black">What's Inside The Blueprint?</h2>
+            <p className="text-neo-muted text-sm md:text-base">Six comprehensive chapters covering every aspect of the interview process.</p>
          </div>
          
-         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+         <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
             {[
-                { id: "01", title: "The Mindset", desc: "Unlock the psychology of interview success. Transform anxiety into fuel and build unshakeable confidence." },
-                { id: "02", title: "Winning Responses", desc: "Stop rambling. Master the STAR method and build a 'Response Library' for every possible question." },
-                { id: "03", title: "Personal Branding", desc: "Define your 'Impact Style'. Differentiate yourself from generic candidates and articulate your value." },
-                { id: "04", title: "Non-Verbal Mastery", desc: "93% of communication is non-verbal. Master body language and vocal presence to project authority." },
-                { id: "05", title: "Tough Tactics", desc: "Navigate panel interviews, handle curveballs with the 'PAUSE' method, and salary negotiation scripts." },
-                { id: "06", title: "Long-Term Mastery", desc: "Build an 'Interview Excellence Framework'. Turn every interview into a stepping stone for career growth." }
+                { id: "01", title: "The Mindset", desc: "Transform anxiety into fuel and build unshakeable confidence." },
+                { id: "02", title: "Winning Responses", desc: "Master the STAR method and build a 'Response Library'." },
+                { id: "03", title: "Personal Branding", desc: "Define your 'Impact Style' and articulate your value." },
+                { id: "04", title: "Non-Verbal Mastery", desc: "Master body language and vocal presence to project authority." },
+                { id: "05", title: "Tough Tactics", desc: "Handle curveballs with the 'PAUSE' method and negotiation scripts." },
+                { id: "06", title: "Long-Term Mastery", desc: "Turn every interview into a stepping stone for career growth." }
             ].map((item, i) => (
-                <div key={i} className="reveal bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-blue-100 hover:bg-[#FFF9C4] hover:-translate-y-1 transition-all duration-300 group" style={{ transitionDelay: `${i * 100}ms` }}>
-                    <div className="font-mono text-sm font-bold text-blue-500 mb-4 bg-blue-50 w-fit px-2 py-1 rounded-md">{item.id}</div>
-                    <h3 className="font-bold font-display text-xl mb-3 text-neo-black group-hover:text-neo-orange transition-colors">{item.title}</h3>
-                    <p className="text-neo-muted leading-relaxed text-sm">{item.desc}</p>
+                <div key={i} className="reveal bg-white p-4 md:p-8 rounded-xl md:rounded-2xl border border-gray-100 shadow-sm md:hover:shadow-xl md:hover:border-blue-100 md:hover:bg-[#FFF9C4] md:hover:-translate-y-1 transition-all duration-300 group" style={{ transitionDelay: `${i * 50}ms` }}>
+                    <div className="font-mono text-xs md:text-sm font-bold text-blue-500 mb-2 md:mb-4 bg-blue-50 w-fit px-1.5 md:px-2 py-0.5 md:py-1 rounded-md">{item.id}</div>
+                    <h3 className="font-bold font-display text-sm md:text-xl mb-2 md:mb-3 text-neo-black md:group-hover:text-neo-orange transition-colors leading-tight">{item.title}</h3>
+                    <p className="text-neo-muted leading-relaxed text-xs md:text-sm line-clamp-3 md:line-clamp-none">{item.desc}</p>
                 </div>
             ))}
          </div>
       </Section>
 
-      <div className="bg-white py-16 md:py-24 overflow-hidden border-y border-gray-100">
-        <div className="text-center mb-16 px-4">
-            <h2 className="reveal text-4xl font-bold font-display mb-4 text-neo-black">Real Malaysians, Real Results</h2>
-            <p className="reveal text-neo-muted max-w-2xl mx-auto text-lg" style={{ transitionDelay: '100ms' }}>
+      <div className="bg-white py-10 md:py-24 overflow-hidden border-y border-gray-100">
+        <div className="text-center mb-8 md:mb-16 px-4">
+            <h2 className="reveal text-2xl md:text-4xl font-bold font-display mb-2 md:mb-4 text-neo-black">Real Malaysians, Real Results</h2>
+            <p className="reveal text-neo-muted max-w-2xl mx-auto text-sm md:text-lg" style={{ transitionDelay: '100ms' }}>
                 See how the blueprint helped candidates secure their dream roles.
             </p>
         </div>
         
         <div className="reveal" style={{ transitionDelay: '200ms' }}>
-            <Marquee repeat={3} className="[--duration:40s] py-4">
+            <Marquee repeat={3} className="[--duration:30s] md:[--duration:40s] py-2 md:py-4">
             {reviews.map((review, i) => (
                 <TestimonialCard key={i} {...review} />
             ))}
             </Marquee>
         </div>
         
-        <div className="reveal" style={{ transitionDelay: '300ms' }}>
+        <div className="reveal hidden md:block" style={{ transitionDelay: '300ms' }}>
             <Marquee reverse repeat={3} className="[--duration:50s] mt-4 py-4">
             {reviews.map((review, i) => (
                 <TestimonialCard key={i} {...review} />
@@ -612,32 +620,32 @@ const App = () => {
         </div>
       </div>
 
-      <div id="pricing" className="relative bg-neo-orange py-16 md:py-32 overflow-hidden">
+      <div id="pricing" className="relative bg-neo-orange py-12 md:py-32 overflow-hidden">
          <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
-             <div className="absolute -top-24 -left-24 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
-             <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-white/10 rounded-full blur-3xl"></div>
+             <div className="absolute -top-24 -left-24 w-64 md:w-96 h-64 md:h-96 bg-white/5 rounded-full blur-3xl"></div>
+             <div className="absolute bottom-0 right-0 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-white/10 rounded-full blur-3xl"></div>
          </div>
 
          <div className="max-w-3xl mx-auto px-4 relative z-10">
-            <div className="reveal bg-white rounded-3xl p-6 md:p-16 shadow-neo-xl text-center relative">
+            <div className="reveal bg-white rounded-2xl md:rounded-3xl p-5 md:p-16 shadow-neo-xl text-center relative">
               
-              <div className="absolute -top-6 left-1/2 -translate-x-1/2 z-20">
-                <div className="animate-pulse-soft w-24 h-24 bg-neo-yellow text-neo-black rounded-full flex flex-col items-center justify-center font-bold font-display text-[10px] md:text-xs shadow-lg border-4 border-white">
-                  <Star className="w-6 h-6 fill-current mb-1" />
+              <div className="absolute -top-5 md:-top-6 left-1/2 -translate-x-1/2 z-20">
+                <div className="w-20 h-20 md:w-24 md:h-24 bg-neo-yellow text-neo-black rounded-full flex flex-col items-center justify-center font-bold font-display text-[9px] md:text-xs shadow-lg border-4 border-white">
+                  <Star className="w-5 h-5 md:w-6 md:h-6 fill-current mb-0.5 md:mb-1" />
                   LIFETIME<br/>ACCESS
                 </div>
               </div>
 
-              <div className="mb-10 mt-20 md:mt-16">
-                <h2 className="text-4xl md:text-5xl font-bold font-display tracking-tight text-neo-black mb-3">Steal The Job</h2>
-                <p className="text-neo-orange font-bold uppercase tracking-widest text-sm">One-time investment for career success</p>
+              <div className="mb-6 md:mb-10 mt-14 md:mt-16">
+                <h2 className="text-3xl md:text-5xl font-bold font-display tracking-tight text-neo-black mb-2 md:mb-3">Steal The Job</h2>
+                <p className="text-neo-orange font-bold uppercase tracking-widest text-xs md:text-sm">One-time investment for career success</p>
               </div>
 
-              <div className="mb-12 flex justify-center items-baseline gap-2">
-                <span className="text-6xl md:text-8xl font-bold font-display text-neo-black tracking-tighter">RM 79</span>
+              <div className="mb-8 md:mb-12 flex justify-center items-baseline gap-2">
+                <span className="text-5xl md:text-8xl font-bold font-display text-neo-black tracking-tighter">RM 79</span>
               </div>
 
-              <div className="flex flex-col gap-5 mb-12 text-left max-w-md mx-auto">
+              <div className="flex flex-col gap-3 md:gap-5 mb-8 md:mb-12 text-left max-w-md mx-auto">
                   {[
                     "Lifetime access & free updates",
                     "50+ page Step-by-step System",
@@ -648,25 +656,25 @@ const App = () => {
                     "Personal branding toolkit",
                     "Tough interview formats"
                   ].map((benefit, i) => (
-                      <div key={i} className="reveal flex items-center gap-4 text-neo-black" style={{ transitionDelay: `${i * 50}ms` }}>
-                          <img width="32" height="32" src="https://img.icons8.com/liquid-glass-color/32/checked.png" alt="checked" className="w-8 h-8 shrink-0"/>
-                          <span className="font-medium text-lg">{benefit}</span>
+                      <div key={i} className="reveal flex items-center gap-3 md:gap-4 text-neo-black" style={{ transitionDelay: `${i * 50}ms` }}>
+                          <img width="32" height="32" src="https://img.icons8.com/liquid-glass-color/32/checked.png" alt="checked" loading="lazy" className="w-6 h-6 md:w-8 md:h-8 shrink-0"/>
+                          <span className="font-medium text-sm md:text-lg">{benefit}</span>
                       </div>
                   ))}
               </div>
 
-              <div className="w-full flex flex-col gap-6 reveal" style={{ transitionDelay: '400ms' }}>
+              <div className="w-full flex flex-col gap-4 md:gap-6 reveal" style={{ transitionDelay: '400ms' }}>
                 <div className="relative rounded-xl group overflow-hidden">
                     <ShineBorder shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]} duration={8} borderWidth={2} />
-                    <NeoButton variant="primary" className="relative z-20 w-full justify-center py-5 text-xl rounded-xl bg-neutral-900 text-white hover:bg-black border-none !shadow-none hover:!shadow-none hover:shadow-none">
+                    <NeoButton variant="primary" className="relative z-20 w-full justify-center py-4 md:py-5 text-base md:text-xl rounded-xl bg-neutral-900 text-white active:bg-black md:hover:bg-black border-none !shadow-none">
                     Download Blueprint Now
                     </NeoButton>
                 </div>
-                <div className="flex justify-center items-center gap-3 text-sm text-gray-500 font-medium">
-                  <span className="flex items-center gap-1.5"><Download className="w-4 h-4"/> Instant PDF</span>
+                <div className="flex justify-center items-center gap-2 md:gap-3 text-xs md:text-sm text-gray-500 font-medium">
+                  <span className="flex items-center gap-1"><Download className="w-3.5 h-3.5 md:w-4 md:h-4"/> Instant PDF</span>
                   <span className="w-1 h-1 rounded-full bg-gray-300"></span>
-                  <span className="flex items-center gap-1.5">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 34" className="h-4 fill-gray-500">
+                  <span className="flex items-center gap-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 34" className="h-3 md:h-4 fill-gray-500">
                       <title>Powered by Stripe</title>
                       <path d="M17.07,11.24h-4.3V22h1.92V17.84h2.38c2.4,0,3.9-1.16,3.9-3.3S19.47,11.24,17.07,11.24Zm-.1,5H14.69v-3.3H17c1.38,0,2.11.59,2.11,1.65S18.35,16.19,17,16.19Z"/>
                       <path d="M25.1,14a3.77,3.77,0,0,0-3.8,4.09,3.81,3.81,0,1,0,7.59,0A3.76,3.76,0,0,0,25.1,14Zm0,6.67c-1.22,0-2-1-2-2.58s.76-2.58,2-2.58,2,1,2,2.58S26.31,20.66,25.1,20.66Z"/>
@@ -696,17 +704,27 @@ const App = () => {
       <FAQSection />
 
       {/* Footer */}
-      <footer className="bg-white py-16 px-4 border-t border-gray-100">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-          <div className="font-bold font-display text-xl flex items-center gap-2 text-neo-black">
-            pushupmode <span className="text-2xl">🇲🇾</span>
+      <footer className="bg-white py-10 md:py-16 px-4 border-t border-gray-100 pb-24 md:pb-16">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 md:gap-8">
+          <div className="font-bold font-display text-lg md:text-xl flex items-center gap-2 text-neo-black">
+            pushupmode <span className="text-xl md:text-2xl">🇲🇾</span>
           </div>
           <div className="text-center md:text-right">
-              <p className="text-sm text-neo-muted mb-2">© 2024 pushupmode. All rights reserved.</p>
-              <p className="text-xs text-gray-400">Designed for Malaysian Job Seekers.</p>
+              <p className="text-xs md:text-sm text-neo-muted mb-1 md:mb-2">© 2024 pushupmode. All rights reserved.</p>
+              <p className="text-[10px] md:text-xs text-gray-400">Designed for Malaysian Job Seekers.</p>
           </div>
         </div>
       </footer>
+
+      {/* Sticky Mobile CTA */}
+      <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-white/95 backdrop-blur-md border-t border-gray-200 p-3 shadow-[0_-4px_20px_rgba(0,0,0,0.1)]">
+        <button 
+          onClick={scrollToPricing}
+          className="w-full bg-neo-orange text-white font-bold font-display py-3.5 rounded-xl text-sm flex items-center justify-center gap-2 active:scale-[0.98] transition-transform shadow-lg shadow-neo-orange/30"
+        >
+          Get Blueprint — RM79
+        </button>
+      </div>
 
     </div>
   );
