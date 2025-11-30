@@ -169,6 +169,54 @@ const PromoBar = ({ onClick }: any) => (
   </div>
 );
 
+// Evergreen Countdown Timer - resets at midnight daily
+const CountdownTimer = () => {
+  const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 });
+
+  useEffect(() => {
+    const calculateTimeLeft = () => {
+      const now = new Date();
+      const midnight = new Date();
+      midnight.setHours(23, 59, 59, 999);
+      
+      const diff = midnight.getTime() - now.getTime();
+      
+      if (diff > 0) {
+        const hours = Math.floor(diff / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        setTimeLeft({ hours, minutes, seconds });
+      }
+    };
+
+    calculateTimeLeft();
+    const timer = setInterval(calculateTimeLeft, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const TimeBox = ({ value, label }: { value: number; label: string }) => (
+    <div className="flex flex-col items-center">
+      <div className="bg-neo-black text-white font-bold font-display text-xl md:text-3xl w-12 h-12 md:w-16 md:h-16 rounded-lg flex items-center justify-center shadow-lg">
+        {String(value).padStart(2, '0')}
+      </div>
+      <span className="text-[10px] md:text-xs text-neo-muted mt-1 uppercase tracking-wide">{label}</span>
+    </div>
+  );
+
+  return (
+    <div className="flex flex-col items-center mb-8">
+      <p className="text-sm md:text-base text-neo-muted mb-3 font-medium">⏰ Offer ends in:</p>
+      <div className="flex items-center gap-2 md:gap-3">
+        <TimeBox value={timeLeft.hours} label="Hours" />
+        <span className="text-2xl md:text-3xl font-bold text-neo-black -mt-5">:</span>
+        <TimeBox value={timeLeft.minutes} label="Mins" />
+        <span className="text-2xl md:text-3xl font-bold text-neo-black -mt-5">:</span>
+        <TimeBox value={timeLeft.seconds} label="Secs" />
+      </div>
+    </div>
+  );
+};
+
 const TextTicker = ({ items }: any) => {
   return (
     <div className="w-full py-1.5 md:py-2 my-2 md:my-4 overflow-hidden bg-neo-black text-white select-none relative shadow-md">
@@ -758,9 +806,11 @@ const App = () => {
                 <p className="text-neo-orange font-bold uppercase tracking-widest text-xs md:text-sm">One-time investment for career success</p>
               </div>
 
-              <div className="mb-8 md:mb-12 flex justify-center items-baseline gap-2">
+              <div className="mb-6 md:mb-8 flex justify-center items-baseline gap-2">
                 <span className="text-5xl md:text-8xl font-bold font-display text-neo-black tracking-tighter">RM 79</span>
               </div>
+
+              <CountdownTimer />
 
               <div className="flex flex-col gap-3 md:gap-5 mb-8 md:mb-12 text-left max-w-md mx-auto">
                   {[
