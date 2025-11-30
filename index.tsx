@@ -846,7 +846,26 @@ const App = () => {
               </div>
 
               <div className="w-full flex flex-col gap-4 md:gap-6 reveal" style={{ transitionDelay: '400ms' }}>
-                <a href="https://buy.stripe.com/cNi4gtbTjafu7Mwf8LafS02" target="_blank" rel="noopener noreferrer" className="relative rounded-xl group overflow-hidden block">
+                <a 
+                  href="https://buy.stripe.com/cNi4gtbTjafu7Mwf8LafS02" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="relative rounded-xl group overflow-hidden block"
+                  onClick={() => {
+                    // GA4 Event
+                    if (typeof gtag !== 'undefined') {
+                      gtag('event', 'begin_checkout', {
+                        currency: 'MYR',
+                        value: 79,
+                        items: [{ item_name: 'Interview Success Blueprint', price: 79 }]
+                      });
+                    }
+                    // Meta Pixel Event
+                    if (typeof fbq !== 'undefined') {
+                      fbq('track', 'InitiateCheckout', { currency: 'MYR', value: 79 });
+                    }
+                  }}
+                >
                     <ShineBorder shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]} duration={8} borderWidth={2} />
                     <div className="relative z-20 w-full justify-center py-4 md:py-5 text-base md:text-xl rounded-xl bg-neutral-900 text-white active:bg-black md:hover:bg-black border-none shadow-none flex items-center gap-2 font-display font-bold tracking-wide">
                       Download Blueprint Now

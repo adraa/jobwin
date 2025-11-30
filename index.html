@@ -5,6 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="referrer" content="strict-origin-when-cross-origin">
+    
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8KSYWX9CPE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-8KSYWX9CPE');
+      
+      // Scroll Depth Tracking
+      let scrollMarks = { 25: false, 50: false, 75: false, 100: false };
+      window.addEventListener('scroll', function() {
+        const scrollPercent = Math.round((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
+        [25, 50, 75, 100].forEach(mark => {
+          if (scrollPercent >= mark && !scrollMarks[mark]) {
+            scrollMarks[mark] = true;
+            gtag('event', 'scroll_depth', { percent: mark });
+            if (typeof fbq !== 'undefined') fbq('trackCustom', 'ScrollDepth', { percent: mark });
+          }
+        });
+      });
+    </script>
+    
+    <!-- Meta Pixel (Facebook) - Replace YOUR_PIXEL_ID with your actual Pixel ID -->
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      // TODO: Replace YOUR_PIXEL_ID with your Meta Pixel ID
+      // fbq('init', 'YOUR_PIXEL_ID');
+      // fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"/></noscript>
     <title>Interview Success Blueprint | Land Your Dream Job in Malaysia</title>
     <meta name="description" content="The ultimate 50+ page guide for Malaysian job seekers. Master interview psychology, STAR method, salary negotiation scripts, and body language to land your dream job. Used by 100+ successful candidates.">
     <meta name="keywords" content="interview tips, job interview Malaysia, STAR method, salary negotiation, job seeker guide, career success">
