@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interview Success Blueprint</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              display: ['Inter Tight', 'sans-serif'],
+            },
+            colors: {
+              'neo-bg': '#F4F5FB', // Professional Light Greyish Blue
+              'neo-black': '#0F172A', // Text Main (Deep Slate)
+              'neo-orange': '#2563EB', // Primary Blue (Trust)
+              'neo-orange-hover': '#1D4ED8', // Primary Hover
+              'neo-blue': '#3B82F6', // Secondary Trust Blue
+              'neo-green': '#10B981', // Success
+              'neo-yellow': '#FACC15', // Accent Gold
+              'neo-muted': '#64748B', // Text Muted (Slate-500)
+              'neo-border-soft': '#E2E8F0', // Soft Border (Slate-200)
+            },
+            boxShadow: {
+              'neo': '0 4px 6px -1px rgba(15, 23, 42, 0.05), 0 2px 4px -1px rgba(15, 23, 42, 0.03)', // Soft subtle shadow
+              'neo-hover': '0 20px 25px -5px rgba(15, 23, 42, 0.1), 0 8px 10px -6px rgba(15, 23, 42, 0.05)', // Floating lift
+              'neo-sm': '0 1px 2px 0 rgba(15, 23, 42, 0.05)',
+              'neo-xl': '0 25px 50px -12px rgba(15, 23, 42, 0.25)', // Deep shadow for pricing
+            },
+            animation: {
+              marquee: 'marquee var(--duration) linear infinite',
+              'marquee-vertical': 'marquee-vertical var(--duration) linear infinite',
+              'pulse-soft': 'pulse-soft 3s infinite',
+              scroll: 'scroll 2s ease-in-out infinite',
+              shine: 'shine var(--duration) infinite linear',
+            },
+            keyframes: {
+              marquee: {
+                'from': { transform: 'translateX(0)' },
+                'to': { transform: 'translateX(calc(-100% - var(--gap)))' },
+              },
+              'marquee-vertical': {
+                'from': { transform: 'translateY(0)' },
+                'to': { transform: 'translateY(calc(-100% - var(--gap)))' },
+              },
+              'pulse-soft': {
+                '0%, 100%': { transform: 'scale(1)', boxShadow: '0 0 0 0 rgba(250, 204, 21, 0.4)' },
+                '50%': { transform: 'scale(1.05)', boxShadow: '0 0 0 10px rgba(250, 204, 21, 0)' },
+              },
+              scroll: {
+                '0%': { transform: 'translateY(0)', opacity: '1' },
+                '100%': { transform: 'translateY(10px)', opacity: '0' },
+              },
+              shine: {
+                '0%': { backgroundPosition: '0% 0%' },
+                '50%': { backgroundPosition: '100% 100%' },
+                'to': { backgroundPosition: '0% 0%' },
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background-color: #F4F5FB;
+        color: #0F172A;
+        overflow-x: hidden;
+      }
+      .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .hide-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      /* Ultra Smooth Reveal Animation */
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px) scale(0.98);
+        transition: opacity 1.0s cubic-bezier(0.16, 1, 0.3, 1), transform 1.0s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: opacity, transform;
+      }
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
