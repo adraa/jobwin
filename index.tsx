@@ -801,8 +801,8 @@ const App = () => {
               
               {/* Best Value Badge */}
               <div className="absolute -top-3 -right-3 md:-top-4 md:-right-4 z-30">
-                <div className="bg-gradient-to-r from-red-500 to-pink-500 text-white px-3 py-1 md:px-4 md:py-1.5 rounded-full font-bold font-display text-[10px] md:text-xs uppercase tracking-wider shadow-lg transform rotate-12">
-                  🔥 Best Value
+                <div className="bg-neo-yellow text-neo-black px-3 py-1 md:px-4 md:py-1.5 rounded-full font-bold font-display text-[10px] md:text-xs uppercase tracking-wider shadow-lg transform rotate-12 border-2 border-white">
+                  ⭐ Best Value
                 </div>
               </div>
 
