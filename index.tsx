@@ -405,6 +405,162 @@ const FAQItem = ({ question, answer }: any) => {
   );
 };
 
+// Final CTA Component
+const FinalCTA = ({ onCtaClick }: { onCtaClick?: () => void }) => {
+  const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 });
+
+  useEffect(() => {
+    const calculateTimeLeft = () => {
+      const now = new Date();
+      const midnight = new Date();
+      midnight.setHours(23, 59, 59, 999);
+      const diff = midnight.getTime() - now.getTime();
+      if (diff > 0) {
+        setTimeLeft({
+          hours: Math.floor(diff / (1000 * 60 * 60)),
+          minutes: Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)),
+          seconds: Math.floor((diff % (1000 * 60)) / 1000),
+        });
+      }
+    };
+    calculateTimeLeft();
+    const timer = setInterval(calculateTimeLeft, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const benefits = [
+    { icon: "📚", text: "50+ Page System" },
+    { icon: "🔄", text: "Lifetime Updates" },
+    { icon: "⭐", text: "STAR Method" },
+    { icon: "💰", text: "Salary Scripts" },
+  ];
+
+  const stats = [
+    { value: "100+", label: "Malaysians" },
+    { value: "4.7", label: "Rating" },
+    { value: "Instant", label: "Download" },
+  ];
+
+  return (
+    <section className="relative bg-neo-black py-16 md:py-24 overflow-hidden">
+      {/* Radial gradient overlay - same as solution section */}
+      <div className="absolute top-0 right-0 w-full h-full opacity-20 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-blue-500 via-transparent to-transparent"></div>
+
+      <div className="max-w-4xl mx-auto px-4 relative z-10">
+        {/* FOMO Headline */}
+        <div className="text-center mb-8 md:mb-12">
+          <h2 className="text-2xl md:text-5xl font-bold font-display text-white mb-3 md:mb-4 leading-tight">
+            Join 100+ Malaysians Who<br className="hidden md:block" /> Stopped Failing Interviews
+          </h2>
+          <p className="text-white/80 text-sm md:text-lg max-w-xl mx-auto">
+            Your next interview could be the one that changes everything.
+          </p>
+        </div>
+
+        {/* Quick Benefits Row */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-8 md:mb-10">
+          {benefits.map((benefit, i) => (
+            <div key={i} className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-3 md:p-4 text-center">
+              <span className="text-2xl md:text-3xl mb-1 block">{benefit.icon}</span>
+              <span className="text-white font-medium text-xs md:text-sm">{benefit.text}</span>
+            </div>
+          ))}
+        </div>
+
+        {/* Social Proof Stats Bar */}
+        <div className="flex justify-center items-center gap-4 md:gap-8 mb-8 md:mb-10">
+          {stats.map((stat, i) => (
+            <div key={i} className="text-center">
+              <div className="text-white font-bold font-display text-xl md:text-3xl">{stat.value}</div>
+              <div className="text-white/60 text-xs md:text-sm uppercase tracking-wide">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* Mini Testimonial - styled like TestimonialCard */}
+        <div className="bg-white p-5 md:p-8 shadow-md border border-gray-100 rounded-2xl relative flex flex-col max-w-md mx-auto mb-8 md:mb-10">
+          <div className="absolute top-4 right-4 md:top-6 md:right-6 bg-neo-bg text-neo-black border border-gray-200 px-2 py-0.5 md:px-3 md:py-1 rounded-full font-bold font-display text-[9px] md:text-[10px] uppercase tracking-wide flex items-center gap-1">
+            <Trophy className="w-2.5 h-2.5 md:w-3 md:h-3 text-neo-yellow fill-neo-yellow" />
+            <span>Beat 50 Applicants</span>
+          </div>
+          <div className="flex items-center gap-0.5 md:gap-1 mb-4 md:mb-6 text-neo-yellow">
+            {[...Array(5)].map((_, i) => (
+              <Star key={i} className="w-3.5 h-3.5 md:w-4 md:h-4 fill-current" />
+            ))}
+          </div>
+          <p className="font-medium text-sm md:text-lg leading-relaxed mb-4 md:mb-6 text-neo-black/80">
+            "I didn't know what I was doing wrong until I read the 'Psychology of Hiring Managers' section. Total game changer."
+          </p>
+          <div className="mt-auto pt-4 md:pt-5 border-t border-gray-50">
+            <p className="font-bold text-sm text-neo-black font-display">Nurul Ain Samsudin</p>
+          </div>
+        </div>
+
+        {/* Compact Pricing Card */}
+        <div className="bg-white rounded-2xl md:rounded-3xl p-5 md:p-8 shadow-2xl text-center max-w-lg mx-auto mb-6 md:mb-8">
+          {/* Price */}
+          <div className="mb-4 md:mb-6">
+            <span className="text-gray-400 line-through text-sm md:text-lg font-display">RM 112</span>
+            <div className="text-4xl md:text-6xl font-bold font-display text-neo-black tracking-tight">
+              RM 79
+            </div>
+            <span className="inline-flex items-center gap-1 bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold mt-2">
+              💸 SAVE 30%
+            </span>
+          </div>
+
+          {/* Countdown */}
+          <div className="mb-5 md:mb-6">
+            <p className="text-xs md:text-sm text-neo-muted mb-2">
+              <span className="inline-block animate-shake">⏰</span> Offer ends in:
+            </p>
+            <div className="flex justify-center items-center gap-2">
+              <div className="bg-neo-black text-white font-bold font-display text-lg md:text-2xl w-10 h-10 md:w-12 md:h-12 rounded-lg flex items-center justify-center">
+                {String(timeLeft.hours).padStart(2, '0')}
+              </div>
+              <span className="text-neo-black font-bold">:</span>
+              <div className="bg-neo-black text-white font-bold font-display text-lg md:text-2xl w-10 h-10 md:w-12 md:h-12 rounded-lg flex items-center justify-center">
+                {String(timeLeft.minutes).padStart(2, '0')}
+              </div>
+              <span className="text-neo-black font-bold">:</span>
+              <div className="bg-neo-black text-white font-bold font-display text-lg md:text-2xl w-10 h-10 md:w-12 md:h-12 rounded-lg flex items-center justify-center">
+                {String(timeLeft.seconds).padStart(2, '0')}
+              </div>
+            </div>
+          </div>
+
+          {/* CTA Button */}
+          <a
+            href="https://buy.stripe.com/cNi4gtbTjafu7Mwf8LafS02"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={onCtaClick}
+            className="block w-full bg-gradient-to-r from-neo-orange via-pink-500 to-purple-600 bg-[length:300%_300%] animate-gradient-flow text-white font-bold text-base md:text-xl py-4 md:py-5 px-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 active:scale-95"
+          >
+            Get Instant Access →
+          </a>
+        </div>
+
+        {/* Trust Signals */}
+        <div className="flex flex-wrap justify-center items-center gap-4 md:gap-8 text-white/70 text-xs md:text-sm">
+          <div className="flex items-center gap-2">
+            <ShieldCheck className="w-4 h-4 md:w-5 md:h-5" />
+            <span>Secure Stripe Payment</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Download className="w-4 h-4 md:w-5 md:h-5" />
+            <span>Instant Download</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Star className="w-4 h-4 md:w-5 md:h-5 fill-current text-neo-yellow" />
+            <span>100% Satisfaction</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 // Legal Modal Component
 const LegalModal = ({ isOpen, onClose, title, children }: any) => {
   useEffect(() => {
@@ -555,13 +711,6 @@ const FAQSection = () => {
         {faqs.map((faq, i) => (
           <FAQItem key={i} question={faq.question} answer={faq.answer} />
         ))}
-      </div>
-      
-      <div className="mt-8 md:mt-16 text-center reveal bg-white p-5 md:p-8 rounded-xl md:rounded-2xl border border-gray-100 shadow-sm inline-block w-full">
-        <p className="text-neo-muted mb-3 md:mb-4 text-sm md:text-base">Still have questions?</p>
-        <a href="mailto:hello@pushupmode.com" className="inline-flex items-center gap-2 font-bold text-neo-black active:text-neo-orange md:hover:text-neo-orange transition-colors text-sm md:text-lg font-display">
-            <Mail className="w-4 h-4 md:w-5 md:h-5" /> hello@pushupmode.com
-        </a>
       </div>
     </Section>
   );
@@ -841,8 +990,36 @@ const App = () => {
       {/* FAQ SECTION */}
       <FAQSection />
 
+      {/* Final CTA Section */}
+      <FinalCTA 
+        onCtaClick={() => {
+          // GA4 Event
+          if (typeof gtag !== 'undefined') {
+            gtag('event', 'begin_checkout', {
+              currency: 'MYR',
+              value: 79,
+              items: [{ item_name: 'Interview Success Blueprint', price: 79 }]
+            });
+          }
+          // Meta Pixel Event
+          if (typeof fbq !== 'undefined') {
+            fbq('track', 'InitiateCheckout', { currency: 'MYR', value: 79 });
+          }
+        }}
+      />
+
+      {/* Still Have Questions */}
+      <div className="bg-neo-bg py-10 md:py-16 px-4">
+        <div className="max-w-xl mx-auto text-center bg-white p-5 md:p-8 rounded-xl md:rounded-2xl border border-gray-100 shadow-sm">
+          <p className="text-neo-muted mb-3 md:mb-4 text-sm md:text-base">Still have questions?</p>
+          <a href="mailto:hello@pushupmode.com" className="inline-flex items-center gap-2 font-bold text-neo-black active:text-neo-orange md:hover:text-neo-orange transition-colors text-sm md:text-lg font-display">
+            <Mail className="w-4 h-4 md:w-5 md:h-5" /> hello@pushupmode.com
+          </a>
+        </div>
+      </div>
+
       {/* Footer */}
-      <footer className="bg-white py-10 md:py-16 px-4 border-t border-gray-100">
+      <footer className="bg-white py-10 pb-24 md:pb-16 md:py-16 px-4 border-t border-gray-100">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 md:gap-8">
           <div className="font-bold font-display text-lg md:text-xl flex items-center gap-2 text-neo-black">
             pushupmode <span className="text-xl md:text-2xl">🇲🇾</span>
@@ -869,6 +1046,26 @@ const App = () => {
       <LegalModal isOpen={showPrivacy} onClose={() => setShowPrivacy(false)} title="Privacy Policy">
         <PrivacyContent />
       </LegalModal>
+
+      {/* Sticky Mobile CTA */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-white/95 backdrop-blur-md border-t border-gray-200 p-3 shadow-[0_-4px_20px_rgba(0,0,0,0.1)]">
+        <a
+          href="https://buy.stripe.com/cNi4gtbTjafu7Mwf8LafS02"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => {
+            if (typeof gtag !== 'undefined') {
+              gtag('event', 'begin_checkout', { currency: 'MYR', value: 79, items: [{ item_name: 'Interview Success Blueprint', price: 79 }] });
+            }
+            if (typeof fbq !== 'undefined') {
+              fbq('track', 'InitiateCheckout', { currency: 'MYR', value: 79 });
+            }
+          }}
+          className="block w-full bg-gradient-to-r from-neo-orange via-pink-500 to-purple-600 bg-[length:300%_300%] animate-gradient-flow text-white font-bold text-sm py-3.5 px-4 rounded-xl shadow-lg text-center"
+        >
+          Get Instant Access — RM79 →
+        </a>
+      </div>
 
     </div>
   );

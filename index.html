@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     
@@ -41,8 +41,8 @@
       fbq('init', '25133233512969868');
       fbq('track', 'PageView');
     </script>
-    <title>Interview Success Blueprint | Land Your Dream Job in Malaysia</title>
-    <meta name="description" content="The ultimate 50+ page guide for Malaysian job seekers. Master interview psychology, STAR method, salary negotiation scripts, and body language to land your dream job. Used by 100+ successful candidates.">
+    <title>Interview Success Blueprint 🇲🇾</title>
+    <meta name="description" content="Stop failing interviews. Start getting hired. The proven 50+ page blueprint that transforms nervous candidates into confident professionals who ace interviews and negotiate like pros. Made for Malaysians.">
     <meta name="keywords" content="interview tips, job interview Malaysia, STAR method, salary negotiation, job seeker guide, career success">
     <meta name="author" content="pushupmode">
     <link rel="canonical" href="https://jobwin.pages.dev/">
@@ -55,7 +55,7 @@
     <meta property="og:type" content="product">
     <meta property="og:url" content="https://jobwin.pages.dev/">
     <meta property="og:title" content="Interview Success Blueprint | Land Your Dream Job">
-    <meta property="og:description" content="The ultimate 50+ page guide for Malaysian job seekers. Master interviews, negotiate salary, and land your dream job.">
+    <meta property="og:description" content="Stop failing interviews. Start getting hired. The proven 50+ page blueprint that transforms nervous candidates into confident professionals who ace interviews and negotiate like pros. Made for Malaysians.">
     <meta property="og:image" content="https://i.imgur.com/uvNoPCg.jpeg">
     <meta property="og:site_name" content="pushupmode">
     
@@ -63,7 +63,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://jobwin.pages.dev/">
     <meta name="twitter:title" content="Interview Success Blueprint | Land Your Dream Job">
-    <meta name="twitter:description" content="The ultimate 50+ page guide for Malaysian job seekers. Master interviews, negotiate salary, and land your dream job.">
+    <meta name="twitter:description" content="Stop failing interviews. Start getting hired. The proven 50+ page blueprint that transforms nervous candidates into confident professionals who ace interviews and negotiate like pros. Made for Malaysians.">
     <meta name="twitter:image" content="https://i.imgur.com/uvNoPCg.jpeg">
     
     <!-- Structured Data -->
@@ -72,7 +72,7 @@
       "@context": "https://schema.org",
       "@type": "Product",
       "name": "Interview Success Blueprint",
-      "description": "50+ page tactical guide for Malaysian job seekers to master interviews, salary negotiation, and land their dream job.",
+      "description": "Stop failing interviews. Start getting hired. The proven 50+ page blueprint that transforms nervous candidates into confident professionals who ace interviews and negotiate like pros. Made for Malaysians.",
       "image": "https://i.imgur.com/uvNoPCg.jpeg",
       "brand": {
         "@type": "Brand",
@@ -186,11 +186,40 @@
     <style>
       html {
         scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
       }
       body {
         background-color: #F4F5FB;
         color: #0F172A;
         overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      /* Mobile touch optimization */
+      @media (max-width: 768px) {
+        button, a, [role="button"] {
+          -webkit-tap-highlight-color: transparent;
+        }
+        /* Ensure minimum touch targets */
+        .touch-target {
+          min-height: 44px;
+          min-width: 44px;
+        }
+        /* Reduce motion for users who prefer it */
+        @media (prefers-reduced-motion: reduce) {
+          *, *::before, *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+          }
+        }
+      }
+      /* Safe area padding for notched phones */
+      @supports (padding: max(0px)) {
+        body {
+          padding-left: max(0px, env(safe-area-inset-left));
+          padding-right: max(0px, env(safe-area-inset-right));
+        }
       }
       .hide-scrollbar::-webkit-scrollbar {
         display: none;
