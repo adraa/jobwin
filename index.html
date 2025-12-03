@@ -136,6 +136,8 @@
               'pulse-soft': 'pulse-soft 3s infinite',
               scroll: 'scroll 2s ease-in-out infinite',
               shine: 'shine var(--duration) infinite linear',
+              shake: 'shake 0.5s ease-in-out infinite',
+              'gradient-flow': 'gradient-flow 4s ease-in-out infinite',
             },
             keyframes: {
               marquee: {
@@ -158,6 +160,16 @@
                 '0%': { backgroundPosition: '0% 0%' },
                 '50%': { backgroundPosition: '100% 100%' },
                 'to': { backgroundPosition: '0% 0%' },
+              },
+              shake: {
+                '0%, 100%': { transform: 'rotate(0deg)' },
+                '25%': { transform: 'rotate(-10deg)' },
+                '75%': { transform: 'rotate(10deg)' }
+              },
+              'gradient-flow': {
+                '0%': { backgroundPosition: '0% 50%' },
+                '50%': { backgroundPosition: '100% 50%' },
+                '100%': { backgroundPosition: '0% 50%' }
               }
             }
           }
