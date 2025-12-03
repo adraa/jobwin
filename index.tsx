@@ -1019,7 +1019,7 @@ const App = () => {
       </div>
 
       {/* Footer */}
-      <footer className="bg-white py-10 pb-24 md:pb-16 md:py-16 px-4 border-t border-gray-100">
+      <footer className="bg-white py-10 md:py-16 px-4 border-t border-gray-100">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 md:gap-8">
           <div className="font-bold font-display text-lg md:text-xl flex items-center gap-2 text-neo-black">
             pushupmode <span className="text-xl md:text-2xl">🇲🇾</span>
@@ -1046,26 +1046,6 @@ const App = () => {
       <LegalModal isOpen={showPrivacy} onClose={() => setShowPrivacy(false)} title="Privacy Policy">
         <PrivacyContent />
       </LegalModal>
-
-      {/* Sticky Mobile CTA */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-white/95 backdrop-blur-md border-t border-gray-200 p-3 shadow-[0_-4px_20px_rgba(0,0,0,0.1)]">
-        <a
-          href="https://buy.stripe.com/cNi4gtbTjafu7Mwf8LafS02"
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={() => {
-            if (typeof gtag !== 'undefined') {
-              gtag('event', 'begin_checkout', { currency: 'MYR', value: 79, items: [{ item_name: 'Interview Success Blueprint', price: 79 }] });
-            }
-            if (typeof fbq !== 'undefined') {
-              fbq('track', 'InitiateCheckout', { currency: 'MYR', value: 79 });
-            }
-          }}
-          className="block w-full bg-gradient-to-r from-neo-orange via-pink-500 to-purple-600 bg-[length:300%_300%] animate-gradient-flow text-white font-bold text-sm py-3.5 px-4 rounded-xl shadow-lg text-center"
-        >
-          Get Instant Access — RM79 →
-        </a>
-      </div>
 
     </div>
   );
