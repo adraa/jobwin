@@ -136,7 +136,7 @@
               'pulse-soft': 'pulse-soft 3s infinite',
               scroll: 'scroll 2s ease-in-out infinite',
               shine: 'shine var(--duration) infinite linear',
-              shake: 'shake 0.5s ease-in-out infinite',
+              shake: 'shake 2.5s ease-in-out infinite',
               'gradient-flow': 'gradient-flow 4s ease-in-out infinite',
             },
             keyframes: {
@@ -162,9 +162,16 @@
                 'to': { backgroundPosition: '0% 0%' },
               },
               shake: {
-                '0%, 100%': { transform: 'rotate(0deg)' },
-                '25%': { transform: 'rotate(-10deg)' },
-                '75%': { transform: 'rotate(10deg)' }
+                '0%, 20%, 100%': { transform: 'rotate(0deg) scale(1)' },
+                '2%': { transform: 'rotate(-15deg) scale(1.1)' },
+                '4%': { transform: 'rotate(15deg) scale(1.15)' },
+                '6%': { transform: 'rotate(-15deg) scale(1.1)' },
+                '8%': { transform: 'rotate(15deg) scale(1.15)' },
+                '10%': { transform: 'rotate(-10deg) scale(1.05)' },
+                '12%': { transform: 'rotate(10deg) scale(1.05)' },
+                '14%': { transform: 'rotate(-5deg) scale(1.02)' },
+                '16%': { transform: 'rotate(5deg) scale(1.02)' },
+                '18%': { transform: 'rotate(0deg) scale(1)' }
               },
               'gradient-flow': {
                 '0%': { backgroundPosition: '0% 50%' },

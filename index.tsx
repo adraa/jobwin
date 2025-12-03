@@ -57,17 +57,25 @@ const PAIN_POINTS = [
 // --- Components ---
 
 const NeoButton = ({ children, onClick, variant = 'primary', className = '', style = {} }: any) => {
-  const baseStyle = "px-6 py-3 md:px-8 font-display font-bold transition-all duration-300 flex items-center justify-center gap-2 tracking-wide text-sm md:text-base rounded-full transform active:scale-95 min-h-[48px]";
+  const baseStyle = "relative overflow-hidden group px-4 py-2 md:px-6 md:py-3 lg:px-8 font-display font-bold transition-all duration-300 flex items-center justify-center tracking-wide text-xs md:text-sm lg:text-base rounded-full transform active:scale-95 min-h-[40px] md:min-h-[48px]";
   
   const variants: any = {
-    primary: "bg-neo-orange text-white shadow-lg shadow-neo-orange/30 md:hover:shadow-xl md:hover:shadow-neo-orange/40 md:hover:-translate-y-0.5",
+    primary: "bg-neo-black text-white shadow-lg shadow-blue-900/30 md:hover:shadow-2xl md:hover:shadow-blue-900/40 md:hover:-translate-y-0.5 border border-white/5",
     secondary: "bg-white text-neo-black border border-gray-200 shadow-sm md:hover:border-neo-orange md:hover:text-neo-orange",
     outline: "bg-transparent text-neo-orange border border-neo-orange md:hover:bg-neo-orange/5"
   };
 
   return (
     <button onClick={onClick} className={`${baseStyle} ${variants[variant] || ''} ${className}`} style={style}>
-      {children}
+      {variant === 'primary' && (
+        <span
+          aria-hidden="true"
+          className="absolute inset-0 opacity-60 group-hover:opacity-80 transition-opacity duration-500 pointer-events-none bg-[radial-gradient(circle_at_top_right,_rgba(59,130,246,0.6),_rgba(59,130,246,0.1),_transparent)]"
+        />
+      )}
+      <span className="relative z-10 flex items-center justify-center gap-2 w-full">
+        {children}
+      </span>
     </button>
   );
 };
@@ -654,9 +662,12 @@ const App = () => {
           <AutoSlider items={PAIN_POINTS} />
         </div>
 
-        <div className="mt-4 md:mt-12 flex-col items-center animate-reveal opacity-60 hidden md:flex" style={{ animationDelay: '1s' }}>
-            <div className="w-6 h-10 border-2 border-neo-muted rounded-full flex justify-center pt-2">
-                <div className="w-1.5 h-1.5 bg-neo-muted rounded-full animate-scroll"></div>
+        <div className="mt-4 md:mt-12 flex-col items-center animate-reveal hidden md:flex" style={{ animationDelay: '1s' }}>
+            <div className="flex flex-col items-center gap-1 animate-bounce">
+                <span className="text-neo-muted text-xs uppercase tracking-widest font-medium">Scroll</span>
+                <svg className="w-6 h-6 text-neo-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
             </div>
         </div>
       </Section>
@@ -786,12 +797,8 @@ const App = () => {
         </div>
       </div>
 
-      <div id="pricing" className="relative bg-gradient-to-br from-neo-orange via-blue-600 to-indigo-700 py-12 md:py-32 overflow-hidden">
-         <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
-             <div className="absolute -top-24 -left-24 w-64 md:w-96 h-64 md:h-96 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
-             <div className="absolute bottom-0 right-0 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-white/10 rounded-full blur-3xl"></div>
-             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-neo-yellow/5 rounded-full blur-3xl"></div>
-         </div>
+      <div id="pricing" className="relative bg-neo-black py-12 md:py-32 overflow-hidden">
+         <div className="absolute top-0 right-0 w-full h-full opacity-20 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-blue-500 via-transparent to-transparent"></div>
 
          <Pricing
            title="Steal The Job"
