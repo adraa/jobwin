@@ -45,7 +45,7 @@ A proven 50+ page blueprint that transforms nervous candidates into confident pr
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) (v18 or higher recommended)
+- [Node.js](https://nodejs.org/) (v24.8.0 or higher recommended)
 - npm or yarn
 
 ### Installation
