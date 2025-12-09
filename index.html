@@ -1,73 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="referrer" content="strict-origin-when-cross-origin">
-    
-    <!-- Google Analytics 4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8KSYWX9CPE"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-8KSYWX9CPE');
-      
-      // Scroll Depth Tracking
-      let scrollMarks = { 25: false, 50: false, 75: false, 100: false };
-      window.addEventListener('scroll', function() {
-        const scrollPercent = Math.round((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
-        [25, 50, 75, 100].forEach(mark => {
-          if (scrollPercent >= mark && !scrollMarks[mark]) {
-            scrollMarks[mark] = true;
-            gtag('event', 'scroll_depth', { percent: mark });
-            if (typeof fbq !== 'undefined') fbq('trackCustom', 'ScrollDepth', { percent: mark });
-          }
-        });
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8KSYWX9CPE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-8KSYWX9CPE');
+
+    // Scroll Depth Tracking
+    let scrollMarks = { 25: false, 50: false, 75: false, 100: false };
+    window.addEventListener('scroll', function () {
+      const scrollPercent = Math.round((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
+      [25, 50, 75, 100].forEach(mark => {
+        if (scrollPercent >= mark && !scrollMarks[mark]) {
+          scrollMarks[mark] = true;
+          gtag('event', 'scroll_depth', { percent: mark });
+          if (typeof fbq !== 'undefined') fbq('trackCustom', 'ScrollDepth', { percent: mark });
+        }
       });
-    </script>
-    
-    <!-- Meta Pixel (Facebook) -->
-    <script>
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
+    });
+  </script>
+
+  <!-- Meta Pixel (Facebook) -->
+  <script>
+    !function (f, b, e, v, n, t, s) {
+      if (f.fbq) return; n = f.fbq = function () {
+        n.callMethod ?
+          n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+      };
+      if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+      n.queue = []; t = b.createElement(e); t.async = !0;
+      t.src = v; s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s)
+    }(window, document, 'script',
       'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '25133233512969868');
-      fbq('track', 'PageView');
-    </script>
-    <title>Interview Success Blueprint 🇲🇾</title>
-    <meta name="description" content="Stop failing interviews. Start getting hired. The proven 50+ page blueprint that transforms nervous candidates into confident professionals who ace interviews and negotiate like pros. Made for Malaysians.">
-    <meta name="keywords" content="interview tips, job interview Malaysia, STAR method, salary negotiation, job seeker guide, career success">
-    <meta name="author" content="pushupmode">
-    <link rel="canonical" href="https://jobwin.pages.dev/">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/jpeg" href="https://i.imgur.com/uvNoPCg.jpeg">
-    <link rel="apple-touch-icon" href="https://i.imgur.com/uvNoPCg.jpeg">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="product">
-    <meta property="og:url" content="https://jobwin.pages.dev/">
-    <meta property="og:title" content="Interview Success Blueprint | Land Your Dream Job">
-    <meta property="og:description" content="Stop failing interviews. Start getting hired. The proven 50+ page blueprint that transforms nervous candidates into confident professionals who ace interviews and negotiate like pros. Made for Malaysians.">
-    <meta property="og:image" content="https://i.imgur.com/uvNoPCg.jpeg">
-    <meta property="og:site_name" content="pushupmode">
-    
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://jobwin.pages.dev/">
-    <meta name="twitter:title" content="Interview Success Blueprint | Land Your Dream Job">
-    <meta name="twitter:description" content="Stop failing interviews. Start getting hired. The proven 50+ page blueprint that transforms nervous candidates into confident professionals who ace interviews and negotiate like pros. Made for Malaysians.">
-    <meta name="twitter:image" content="https://i.imgur.com/uvNoPCg.jpeg">
-    
-    <!-- Structured Data -->
-    <script type="application/ld+json">
+    fbq('init', '25133233512969868');
+    fbq('track', 'PageView');
+  </script>
+  <title>Interview Success Blueprint 🇲🇾</title>
+  <meta name="description"
+    content="Stop failing interviews. Start getting hired. The proven 50+ page blueprint that transforms nervous candidates into confident professionals who ace interviews and negotiate like pros. Made for Malaysians.">
+  <meta name="keywords"
+    content="interview tips, job interview Malaysia, STAR method, salary negotiation, job seeker guide, career success">
+  <meta name="author" content="pushupmode">
+  <link rel="canonical" href="https://jobwin.pages.dev/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="https://i.imgur.com/uvNoPCg.jpeg">
+  <link rel="apple-touch-icon" href="https://i.imgur.com/uvNoPCg.jpeg">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="product">
+  <meta property="og:url" content="https://jobwin.pages.dev/">
+  <meta property="og:title" content="Interview Success Blueprint | Land Your Dream Job">
+  <meta property="og:description"
+    content="Stop failing interviews. Start getting hired. The proven 50+ page blueprint that transforms nervous candidates into confident professionals who ace interviews and negotiate like pros. Made for Malaysians.">
+  <meta property="og:image" content="https://i.imgur.com/uvNoPCg.jpeg">
+  <meta property="og:site_name" content="pushupmode">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://jobwin.pages.dev/">
+  <meta name="twitter:title" content="Interview Success Blueprint | Land Your Dream Job">
+  <meta name="twitter:description"
+    content="Stop failing interviews. Start getting hired. The proven 50+ page blueprint that transforms nervous candidates into confident professionals who ace interviews and negotiate like pros. Made for Malaysians.">
+  <meta name="twitter:image" content="https://i.imgur.com/uvNoPCg.jpeg">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Product",
@@ -91,160 +99,184 @@
       }
     }
     </script>
-    
-    <!-- Performance: DNS Prefetch -->
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
-    <link rel="dns-prefetch" href="https://i.imgur.com">
-    <link rel="dns-prefetch" href="https://img.icons8.com">
-    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://i.imgur.com">
-    <link rel="preconnect" href="https://img.icons8.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-    <link rel="preload" as="image" href="https://i.imgur.com/CIwGgT0.jpeg" fetchpriority="high">
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-              display: ['Inter Tight', 'sans-serif'],
+
+  <!-- Performance: DNS Prefetch -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://i.imgur.com">
+  <link rel="dns-prefetch" href="https://img.icons8.com">
+  <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://i.imgur.com">
+  <link rel="preconnect" href="https://img.icons8.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+    rel="stylesheet">
+  <link rel="preload" as="image" href="https://i.imgur.com/CIwGgT0.jpeg" fetchpriority="high">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Inter Tight', 'sans-serif'],
+          },
+          colors: {
+            'neo-bg': '#F5F5F7', // Apple Light Gray background
+            'neo-black': '#1D1D1F', // Apple Text Black
+            'neo-orange': '#0071E3', // Apple Classic Blue
+            'neo-orange-hover': '#0077ED', // Slightly Lighter Blue
+            'neo-blue': '#2997FF', // Apple Sky Blue
+            'neo-green': '#34C759', // Apple Success Green
+            'neo-yellow': '#FFCC00', // Apple Warning Yellow
+            'neo-muted': '#86868B', // Apple Gray Text
+            'neo-border-soft': '#D2D2D7', // Apple Border
+          },
+          boxShadow: {
+            'neo': '0 2px 12px rgba(0, 0, 0, 0.04)', // Apple subtle
+            'neo-hover': '0 12px 24px rgba(0, 0, 0, 0.08)', // Apple float
+            'neo-sm': '0 1px 2px rgba(0, 0, 0, 0.04)',
+            'neo-xl': '0 20px 40px rgba(0, 0, 0, 0.1)', // Deep soft shadow
+          },
+          borderRadius: {
+            '3xl': '24px',
+            '4xl': '32px',
+          },
+          animation: {
+            marquee: 'marquee var(--duration) linear infinite',
+            'marquee-vertical': 'marquee-vertical var(--duration) linear infinite',
+            'pulse-soft': 'pulse-soft 3s infinite',
+            scroll: 'scroll 2s ease-in-out infinite',
+            shine: 'shine var(--duration) infinite linear',
+            shake: 'shake 2.5s ease-in-out infinite',
+            'gradient-flow': 'gradient-flow 4s ease-in-out infinite',
+          },
+          keyframes: {
+            marquee: {
+              'from': { transform: 'translateX(0)' },
+              'to': { transform: 'translateX(calc(-100% - var(--gap)))' },
             },
-            colors: {
-              'neo-bg': '#F4F5FB', // Professional Light Greyish Blue
-              'neo-black': '#0F172A', // Text Main (Deep Slate)
-              'neo-orange': '#2563EB', // Primary Blue (Trust)
-              'neo-orange-hover': '#1D4ED8', // Primary Hover
-              'neo-blue': '#3B82F6', // Secondary Trust Blue
-              'neo-green': '#10B981', // Success
-              'neo-yellow': '#FACC15', // Accent Gold
-              'neo-muted': '#64748B', // Text Muted (Slate-500)
-              'neo-border-soft': '#E2E8F0', // Soft Border (Slate-200)
+            'marquee-vertical': {
+              'from': { transform: 'translateY(0)' },
+              'to': { transform: 'translateY(calc(-100% - var(--gap)))' },
             },
-            boxShadow: {
-              'neo': '0 4px 6px -1px rgba(15, 23, 42, 0.05), 0 2px 4px -1px rgba(15, 23, 42, 0.03)', // Soft subtle shadow
-              'neo-hover': '0 20px 25px -5px rgba(15, 23, 42, 0.1), 0 8px 10px -6px rgba(15, 23, 42, 0.05)', // Floating lift
-              'neo-sm': '0 1px 2px 0 rgba(15, 23, 42, 0.05)',
-              'neo-xl': '0 25px 50px -12px rgba(15, 23, 42, 0.25)', // Deep shadow for pricing
+            'pulse-soft': {
+              '0%, 100%': { transform: 'scale(1)', boxShadow: '0 0 0 0 rgba(0, 113, 227, 0.4)' },
+              '50%': { transform: 'scale(1.05)', boxShadow: '0 0 0 10px rgba(0, 113, 227, 0)' },
             },
-            animation: {
-              marquee: 'marquee var(--duration) linear infinite',
-              'marquee-vertical': 'marquee-vertical var(--duration) linear infinite',
-              'pulse-soft': 'pulse-soft 3s infinite',
-              scroll: 'scroll 2s ease-in-out infinite',
-              shine: 'shine var(--duration) infinite linear',
-              shake: 'shake 2.5s ease-in-out infinite',
-              'gradient-flow': 'gradient-flow 4s ease-in-out infinite',
+            scroll: {
+              '0%': { transform: 'translateY(0)', opacity: '1' },
+              '100%': { transform: 'translateY(10px)', opacity: '0' },
             },
-            keyframes: {
-              marquee: {
-                'from': { transform: 'translateX(0)' },
-                'to': { transform: 'translateX(calc(-100% - var(--gap)))' },
-              },
-              'marquee-vertical': {
-                'from': { transform: 'translateY(0)' },
-                'to': { transform: 'translateY(calc(-100% - var(--gap)))' },
-              },
-              'pulse-soft': {
-                '0%, 100%': { transform: 'scale(1)', boxShadow: '0 0 0 0 rgba(250, 204, 21, 0.4)' },
-                '50%': { transform: 'scale(1.05)', boxShadow: '0 0 0 10px rgba(250, 204, 21, 0)' },
-              },
-              scroll: {
-                '0%': { transform: 'translateY(0)', opacity: '1' },
-                '100%': { transform: 'translateY(10px)', opacity: '0' },
-              },
-              shine: {
-                '0%': { backgroundPosition: '0% 0%' },
-                '50%': { backgroundPosition: '100% 100%' },
-                'to': { backgroundPosition: '0% 0%' },
-              },
-              shake: {
-                '0%, 20%, 100%': { transform: 'rotate(0deg) scale(1)' },
-                '2%': { transform: 'rotate(-15deg) scale(1.1)' },
-                '4%': { transform: 'rotate(15deg) scale(1.15)' },
-                '6%': { transform: 'rotate(-15deg) scale(1.1)' },
-                '8%': { transform: 'rotate(15deg) scale(1.15)' },
-                '10%': { transform: 'rotate(-10deg) scale(1.05)' },
-                '12%': { transform: 'rotate(10deg) scale(1.05)' },
-                '14%': { transform: 'rotate(-5deg) scale(1.02)' },
-                '16%': { transform: 'rotate(5deg) scale(1.02)' },
-                '18%': { transform: 'rotate(0deg) scale(1)' }
-              },
-              'gradient-flow': {
-                '0%': { backgroundPosition: '0% 50%' },
-                '50%': { backgroundPosition: '100% 50%' },
-                '100%': { backgroundPosition: '0% 50%' }
-              }
+            shine: {
+              '0%': { backgroundPosition: '0% 0%' },
+              '50%': { backgroundPosition: '100% 100%' },
+              'to': { backgroundPosition: '0% 0%' },
+            },
+            shake: {
+              '0%, 20%, 100%': { transform: 'rotate(0deg) scale(1)' },
+              '2%': { transform: 'rotate(-15deg) scale(1.1)' },
+              '4%': { transform: 'rotate(15deg) scale(1.15)' },
+              '6%': { transform: 'rotate(-15deg) scale(1.1)' },
+              '8%': { transform: 'rotate(15deg) scale(1.15)' },
+              '10%': { transform: 'rotate(-10deg) scale(1.05)' },
+              '12%': { transform: 'rotate(10deg) scale(1.05)' },
+              '14%': { transform: 'rotate(-5deg) scale(1.02)' },
+              '16%': { transform: 'rotate(5deg) scale(1.02)' },
+              '18%': { transform: 'rotate(0deg) scale(1)' }
+            },
+            'gradient-flow': {
+              '0%': { backgroundPosition: '0% 50%' },
+              '50%': { backgroundPosition: '100% 50%' },
+              '100%': { backgroundPosition: '0% 50%' }
             }
           }
         }
       }
-    </script>
-    <style>
-      html {
-        scroll-behavior: smooth;
-        -webkit-text-size-adjust: 100%;
+    }
+  </script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      background-color: #F4F5FB;
+      color: #0F172A;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Mobile touch optimization */
+    @media (max-width: 768px) {
+
+      button,
+      a,
+      [role="button"] {
+        -webkit-tap-highlight-color: transparent;
       }
+
+      /* Ensure minimum touch targets */
+      .touch-target {
+        min-height: 44px;
+        min-width: 44px;
+      }
+
+      /* Reduce motion for users who prefer it */
+      @media (prefers-reduced-motion: reduce) {
+
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    }
+
+    /* Safe area padding for notched phones */
+    @supports (padding: max(0px)) {
       body {
-        background-color: #F4F5FB;
-        color: #0F172A;
-        overflow-x: hidden;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
+        padding-left: max(0px, env(safe-area-inset-left));
+        padding-right: max(0px, env(safe-area-inset-right));
       }
-      /* Mobile touch optimization */
-      @media (max-width: 768px) {
-        button, a, [role="button"] {
-          -webkit-tap-highlight-color: transparent;
-        }
-        /* Ensure minimum touch targets */
-        .touch-target {
-          min-height: 44px;
-          min-width: 44px;
-        }
-        /* Reduce motion for users who prefer it */
-        @media (prefers-reduced-motion: reduce) {
-          *, *::before, *::after {
-            animation-duration: 0.01ms !important;
-            animation-iteration-count: 1 !important;
-            transition-duration: 0.01ms !important;
-          }
-        }
-      }
-      /* Safe area padding for notched phones */
-      @supports (padding: max(0px)) {
-        body {
-          padding-left: max(0px, env(safe-area-inset-left));
-          padding-right: max(0px, env(safe-area-inset-right));
-        }
-      }
-      .hide-scrollbar::-webkit-scrollbar {
-        display: none;
-      }
-      .hide-scrollbar {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-      }
-      /* Ultra Smooth Reveal Animation */
-      .reveal {
-        opacity: 0;
-        transform: translateY(30px) scale(0.98);
-        transition: opacity 1.0s cubic-bezier(0.16, 1, 0.3, 1), transform 1.0s cubic-bezier(0.16, 1, 0.3, 1);
-        will-change: opacity, transform;
-      }
-      .reveal.active {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    </style>
-  </head>
-  <body>
-    <!-- Meta Pixel noscript fallback -->
-    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=25133233512969868&ev=PageView&noscript=1"/></noscript>
-    <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
-  </body>
+    }
+
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Ultra Smooth Reveal Animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px) scale(0.98);
+      transition: opacity 1.0s cubic-bezier(0.16, 1, 0.3, 1), transform 1.0s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Meta Pixel noscript fallback -->
+  <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=25133233512969868&ev=PageView&noscript=1" /></noscript>
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+
 </html>
