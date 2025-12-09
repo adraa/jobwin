@@ -5,6 +5,25 @@ import { Check, Star } from "lucide-react";
 import React, { useRef } from "react";
 import confetti from "canvas-confetti";
 
+const sendDebugLog = (payload: any) => {
+  // #region agent log
+  try {
+    fetch('http://127.0.0.1:7242/ingest/b61cb6a1-9617-4038-9f66-cb919d1c5b4e', {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        sessionId: 'debug-session',
+        timestamp: Date.now(),
+        ...payload,
+      })
+    }).catch(() => { });
+  } catch (err) {
+    console.warn('debug log failed', err);
+  }
+  // #endregion
+};
+
 interface PricingProps {
   title?: string;
   description?: string;
@@ -57,6 +76,18 @@ export function Pricing({
         shapes: ["circle"],
       });
     }
+
+    sendDebugLog({
+      runId: 'run2',
+      hypothesisId: 'H3',
+      location: 'components/pricing.tsx:handleClick',
+      message: 'Pricing CTA clicked',
+      data: {
+        hasOnButtonClick: Boolean(onButtonClick),
+        href,
+        badgeText
+      }
+    });
 
     if (onButtonClick) {
       onButtonClick();

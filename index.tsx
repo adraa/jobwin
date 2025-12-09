@@ -12,6 +12,25 @@ import {
 import { Pricing } from '@/components/pricing';
 
 // --- Utilities ---
+const sendDebugLog = (payload: any) => {
+  // #region agent log
+  try {
+    fetch('http://127.0.0.1:7242/ingest/b61cb6a1-9617-4038-9f66-cb919d1c5b4e', {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        sessionId: 'debug-session',
+        timestamp: Date.now(),
+        ...payload,
+      })
+    }).catch(() => { });
+  } catch (err) {
+    console.warn('debug log failed', err);
+  }
+  // #endregion
+};
+
 const cn = (...classes: any[]) => classes.filter(Boolean).join(' ');
 
 // --- Data ---
@@ -65,8 +84,26 @@ const NeoButton = ({ children, onClick, variant = 'primary', className = '', sty
     outline: "bg-transparent text-[#0071E3] border border-[#0071E3] hover:bg-[#0071E3]/5"
   };
 
+  const handleClick = (event: any) => {
+    sendDebugLog({
+      runId: 'run2',
+      hypothesisId: 'H1',
+      location: 'index.tsx:NeoButton',
+      message: 'NeoButton click',
+      data: {
+        variant,
+        className,
+        hasOnClick: Boolean(onClick)
+      }
+    });
+
+    if (onClick) {
+      onClick(event);
+    }
+  };
+
   return (
-    <button onClick={onClick} className={`${baseStyle} ${variants[variant] || ''} ${className}`} style={style}>
+    <button onClick={handleClick} className={`${baseStyle} ${variants[variant] || ''} ${className}`} style={style}>
       <span className="relative z-10 flex items-center justify-center gap-2 w-full">
         {children}
       </span>
@@ -729,8 +766,36 @@ const App = () => {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    sendDebugLog({
+      runId: 'run2',
+      hypothesisId: 'H0',
+      location: 'index.tsx:AppMount',
+      message: 'App mounted',
+      data: {
+        href: window.location.href,
+        protocol: window.location.protocol
+      }
+    });
+  }, []);
+
   const scrollToPricing = () => {
-    document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
+    const target = document.getElementById('pricing');
+
+    sendDebugLog({
+      runId: 'run2',
+      hypothesisId: 'H2',
+      location: 'index.tsx:scrollToPricing',
+      message: 'Scroll to pricing invoked',
+      data: {
+        found: Boolean(target),
+        targetTop: target ? target.getBoundingClientRect().top : null,
+        scrollY: window.scrollY,
+        viewportHeight: window.innerHeight
+      }
+    });
+
+    target?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const reviews = [
@@ -858,7 +923,7 @@ const App = () => {
                 ))}
               </ul>
 
-              <div className="hidden md:inline-block relative rounded-xl group overflow-hidden">
+              <div className="hidden md:inline-block relative rounded-full group overflow-hidden">
                 <ShineBorder shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]} duration={8} borderWidth={2} />
                 <NeoButton onClick={scrollToPricing} className="relative z-20 w-auto justify-center !bg-white !text-black hover:!bg-gray-50 border-none !shadow-none hover:!shadow-none rounded-full">
                   Get Instant Access
@@ -879,7 +944,7 @@ const App = () => {
                 />
               </div>
 
-              <div className="flex md:hidden relative rounded-xl group justify-center overflow-hidden w-full max-w-[200px]">
+              <div className="flex md:hidden relative rounded-full group justify-center overflow-hidden w-full max-w-[200px]">
                 <ShineBorder shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]} duration={8} borderWidth={2} />
                 <NeoButton onClick={scrollToPricing} className="relative z-20 w-full justify-center !bg-white !text-black active:!bg-gray-100 border-none !shadow-none rounded-full text-sm">
                   Buy Now
