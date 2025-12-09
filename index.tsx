@@ -39,7 +39,8 @@ const PAIN_POINTS = [
     image: "https://i.imgur.com/CIwGgT0.jpeg",
     thought: "I thought the interview went well... why haven't they replied for 2 weeks?",
     stressLevel: 5,
-    stressLabel: "CRITICAL"
+    stressLabel: "CRITICAL",
+    priority: true
   },
   {
     image: "https://i.imgur.com/0KWA3bV.jpeg",
@@ -116,6 +117,22 @@ const Section = ({ children, className = "", id = "" }: any) => (
     {children}
   </section>
 );
+
+const useIsMobile = () => {
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return window.innerWidth < 768;
+  });
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize();
+    window.addEventListener('resize', handleResize, { passive: true });
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return isMobile;
+};
 
 const ShineBorder = ({
   borderWidth = 1,
@@ -257,10 +274,10 @@ const CountdownTimer = () => {
   );
 };
 
-const TextTicker = ({ items }: any) => {
+const TextTicker = ({ items, repeat = 4 }: any) => {
   return (
     <div className="w-full py-1.5 md:py-2 my-2 md:my-4 overflow-hidden bg-neo-black text-white select-none relative shadow-md">
-      <Marquee repeat={4} className="py-0" style={{ '--duration': '25s', '--gap': '2rem' }}>
+      <Marquee repeat={repeat} className="py-0" style={{ '--duration': '25s', '--gap': '2rem' }}>
         {items.map((item: any, i: number) => (
           <span key={i} className="flex items-center gap-4 md:gap-8 font-display font-bold text-sm md:text-lg tracking-wider opacity-90 uppercase">
             {item} <span className="w-1.5 h-1.5 md:w-2 md:h-2 bg-neo-yellow rounded-full flex-shrink-0 shadow-[0_0_8px_#FACC15]"></span>
@@ -271,7 +288,7 @@ const TextTicker = ({ items }: any) => {
   );
 };
 
-const PainCard = ({ image, thought, stressLevel, stressLabel, delay, className = "" }: any) => (
+const PainCard = ({ image, thought, stressLevel, stressLabel, delay, priority, className = "" }: any) => (
   <div
     className={`relative w-full aspect-[3/4] bg-white shadow-neo hover:shadow-neo-hover transition-all duration-500 hover:-translate-y-1 overflow-hidden rounded-3xl border border-[#D2D2D7]/30 ${className}`}
     style={delay ? { transitionDelay: `${delay}ms` } : {}}
@@ -281,7 +298,10 @@ const PainCard = ({ image, thought, stressLevel, stressLabel, delay, className =
       alt="Interview Pain Point"
       width={600}
       height={800}
+      loading={priority ? "eager" : "lazy"}
       decoding="async"
+      fetchPriority={priority ? "high" : "auto"}
+      sizes="(max-width: 640px) 88vw, (max-width: 1024px) 42vw, 320px"
       className="absolute inset-0 w-full h-full object-cover grayscale-[0.2] hover:grayscale-0 transition-all duration-700"
     />
     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
@@ -749,6 +769,7 @@ const FAQSection = () => {
 const App = () => {
   const [showTerms, setShowTerms] = useState(false);
   const [showPrivacy, setShowPrivacy] = useState(false);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -879,12 +900,15 @@ const App = () => {
         </div>
       </Section>
 
-      <TextTicker items={[
+      <TextTicker
+        items={[
         "Why didn't they call back?",
         "Am I not good enough?",
         "I need a job now",
         "Tired of rejections"
-      ]} />
+        ]}
+        repeat={isMobile ? 2 : 4}
+      />
 
       {/* SOLUTION SECTION */}
       <Section id="solution" className="py-8 md:py-24">
@@ -988,20 +1012,22 @@ const App = () => {
         </div>
 
         <div className="reveal" style={{ transitionDelay: '200ms' }}>
-          <Marquee repeat={3} className="[--duration:30s] md:[--duration:40s] py-2 md:py-4">
+          <Marquee repeat={isMobile ? 2 : 3} className="[--duration:32s] md:[--duration:40s] py-2 md:py-4">
             {reviews.map((review, i) => (
               <TestimonialCard key={i} {...review} />
             ))}
           </Marquee>
         </div>
 
-        <div className="reveal" style={{ transitionDelay: '300ms' }}>
-          <Marquee reverse repeat={3} className="[--duration:40s] md:[--duration:50s] mt-2 md:mt-4 py-2 md:py-4">
-            {reviews.map((review, i) => (
-              <TestimonialCard key={i} {...review} />
-            ))}
-          </Marquee>
-        </div>
+        {!isMobile && (
+          <div className="reveal" style={{ transitionDelay: '300ms' }}>
+            <Marquee reverse repeat={3} className="[--duration:40s] md:[--duration:50s] mt-2 md:mt-4 py-2 md:py-4">
+              {reviews.map((review, i) => (
+                <TestimonialCard key={i} {...review} />
+              ))}
+            </Marquee>
+          </div>
+        )}
       </div>
 
       <div id="pricing" className="relative bg-neo-black py-12 md:py-32 overflow-hidden">
