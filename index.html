@@ -110,74 +110,37 @@
         theme: {
           extend: {
             fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-              display: ['Inter Tight', 'sans-serif'],
+              sans: ['SF Pro Text', 'SF Pro Icons', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
+              display: ['SF Pro Display', 'SF Pro Icons', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
             },
             colors: {
-              'neo-bg': '#F4F5FB', // Professional Light Greyish Blue
-              'neo-black': '#0F172A', // Text Main (Deep Slate)
-              'neo-orange': '#2563EB', // Primary Blue (Trust)
-              'neo-orange-hover': '#1D4ED8', // Primary Hover
-              'neo-blue': '#3B82F6', // Secondary Trust Blue
-              'neo-green': '#10B981', // Success
-              'neo-yellow': '#FACC15', // Accent Gold
-              'neo-muted': '#64748B', // Text Muted (Slate-500)
-              'neo-border-soft': '#E2E8F0', // Soft Border (Slate-200)
-            },
-            boxShadow: {
-              'neo': '0 4px 6px -1px rgba(15, 23, 42, 0.05), 0 2px 4px -1px rgba(15, 23, 42, 0.03)', // Soft subtle shadow
-              'neo-hover': '0 20px 25px -5px rgba(15, 23, 42, 0.1), 0 8px 10px -6px rgba(15, 23, 42, 0.05)', // Floating lift
-              'neo-sm': '0 1px 2px 0 rgba(15, 23, 42, 0.05)',
-              'neo-xl': '0 25px 50px -12px rgba(15, 23, 42, 0.25)', // Deep shadow for pricing
+              'apple-bg': '#F5F5F7', // Apple Light Gray background
+              'apple-card': '#FFFFFF', // Pure White for cards
+              'apple-text': '#1D1D1F', // Nearly Black text
+              'apple-gray': '#86868B', // Secondary text
+              'apple-blue': '#0066CC', // Apple Blue links/buttons
+              'apple-blue-hover': '#004499',
+              'apple-border': '#D2D2D7', // Light border
             },
             animation: {
-              marquee: 'marquee var(--duration) linear infinite',
-              'marquee-vertical': 'marquee-vertical var(--duration) linear infinite',
-              'pulse-soft': 'pulse-soft 3s infinite',
-              scroll: 'scroll 2s ease-in-out infinite',
-              shine: 'shine var(--duration) infinite linear',
-              shake: 'shake 2.5s ease-in-out infinite',
-              'gradient-flow': 'gradient-flow 4s ease-in-out infinite',
+              'fade-in': 'fadeIn 1s ease-out forwards',
+              'scale-up': 'scaleUp 0.5s ease-out forwards',
+              'slide-up': 'slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+              'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
             },
             keyframes: {
-              marquee: {
-                'from': { transform: 'translateX(0)' },
-                'to': { transform: 'translateX(calc(-100% - var(--gap)))' },
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
               },
-              'marquee-vertical': {
-                'from': { transform: 'translateY(0)' },
-                'to': { transform: 'translateY(calc(-100% - var(--gap)))' },
+              scaleUp: {
+                '0%': { transform: 'scale(0.95)', opacity: '0' },
+                '100%': { transform: 'scale(1)', opacity: '1' },
               },
-              'pulse-soft': {
-                '0%, 100%': { transform: 'scale(1)', boxShadow: '0 0 0 0 rgba(250, 204, 21, 0.4)' },
-                '50%': { transform: 'scale(1.05)', boxShadow: '0 0 0 10px rgba(250, 204, 21, 0)' },
+              slideUp: {
+                '0%': { transform: 'translateY(20px)', opacity: '0' },
+                '100%': { transform: 'translateY(0)', opacity: '1' },
               },
-              scroll: {
-                '0%': { transform: 'translateY(0)', opacity: '1' },
-                '100%': { transform: 'translateY(10px)', opacity: '0' },
-              },
-              shine: {
-                '0%': { backgroundPosition: '0% 0%' },
-                '50%': { backgroundPosition: '100% 100%' },
-                'to': { backgroundPosition: '0% 0%' },
-              },
-              shake: {
-                '0%, 20%, 100%': { transform: 'rotate(0deg) scale(1)' },
-                '2%': { transform: 'rotate(-15deg) scale(1.1)' },
-                '4%': { transform: 'rotate(15deg) scale(1.15)' },
-                '6%': { transform: 'rotate(-15deg) scale(1.1)' },
-                '8%': { transform: 'rotate(15deg) scale(1.15)' },
-                '10%': { transform: 'rotate(-10deg) scale(1.05)' },
-                '12%': { transform: 'rotate(10deg) scale(1.05)' },
-                '14%': { transform: 'rotate(-5deg) scale(1.02)' },
-                '16%': { transform: 'rotate(5deg) scale(1.02)' },
-                '18%': { transform: 'rotate(0deg) scale(1)' }
-              },
-              'gradient-flow': {
-                '0%': { backgroundPosition: '0% 50%' },
-                '50%': { backgroundPosition: '100% 50%' },
-                '100%': { backgroundPosition: '0% 50%' }
-              }
             }
           }
         }
@@ -189,7 +152,7 @@
         -webkit-text-size-adjust: 100%;
       }
       body {
-        background-color: #F4F5FB;
+        background-color: #F5F5F7;
         color: #0F172A;
         overflow-x: hidden;
         -webkit-font-smoothing: antialiased;
