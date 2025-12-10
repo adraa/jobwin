@@ -1003,8 +1003,8 @@ const App = () => {
         </div>
       </Section>
 
-      <div className="bg-white py-10 md:py-24 overflow-hidden border-y border-gray-100">
-        <div className="text-center mb-8 md:mb-16 px-4">
+      <div className="bg-white py-12 md:py-24 overflow-hidden border-y border-gray-100">
+        <div className="text-center mb-8 md:mb-16 px-4 md:px-0">
           <h2 className="reveal text-2xl md:text-4xl font-bold font-display mb-2 md:mb-4 text-neo-black">Real Malaysians, Real Results</h2>
           <p className="reveal text-neo-muted max-w-2xl mx-auto text-sm md:text-lg" style={{ transitionDelay: '100ms' }}>
             See how the blueprint helped candidates secure their dream roles.
@@ -1012,22 +1012,27 @@ const App = () => {
         </div>
 
         <div className="reveal" style={{ transitionDelay: '200ms' }}>
-          <Marquee repeat={isMobile ? 2 : 3} className="[--duration:32s] md:[--duration:40s] py-2 md:py-4">
+          <Marquee
+            repeat={isMobile ? 2 : 3}
+            className="[--duration:32s] md:[--duration:40s] py-3 md:py-4 [--gap:1.1rem] md:[--gap:1.5rem]"
+          >
             {reviews.map((review, i) => (
               <TestimonialCard key={i} {...review} />
             ))}
           </Marquee>
         </div>
 
-        {!isMobile && (
-          <div className="reveal" style={{ transitionDelay: '300ms' }}>
-            <Marquee reverse repeat={3} className="[--duration:40s] md:[--duration:50s] mt-2 md:mt-4 py-2 md:py-4">
-              {reviews.map((review, i) => (
-                <TestimonialCard key={i} {...review} />
-              ))}
-            </Marquee>
-          </div>
-        )}
+        <div className="reveal" style={{ transitionDelay: '300ms' }}>
+          <Marquee
+            reverse
+            repeat={isMobile ? 2 : 3}
+            className="[--duration:36s] md:[--duration:50s] mt-3 md:mt-4 py-3 md:py-4 [--gap:1.1rem] md:[--gap:1.5rem]"
+          >
+            {reviews.map((review, i) => (
+              <TestimonialCard key={i} {...review} />
+            ))}
+          </Marquee>
+        </div>
       </div>
 
       <div id="pricing" className="relative bg-neo-black py-12 md:py-32 overflow-hidden">
