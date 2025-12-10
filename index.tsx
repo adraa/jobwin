@@ -11,6 +11,20 @@ import {
 } from 'lucide-react';
 import { Pricing } from '@/components/pricing';
 
+declare global {
+  interface Window {
+    turnstile?: {
+      render: (element: HTMLElement, options?: any) => string;
+      remove: (id: string) => void;
+      reset: (id?: string) => void;
+      execute: (id: string, options?: any) => void;
+    };
+  }
+}
+
+const CHECKOUT_URL = 'https://buy.stripe.com/cNi4gtbTjafu7Mwf8LafS02';
+const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY as string | undefined;
+
 // --- Utilities ---
 const sendDebugLog = (payload: any) => {
   // #region agent log
@@ -456,7 +470,17 @@ const FAQItem = ({ question, answer }: any) => {
 };
 
 // Final CTA Component
-const FinalCTA = ({ onCtaClick }: { onCtaClick?: () => void }) => {
+const FinalCTA = ({
+  onCtaClick,
+  ctaHref = '#',
+  isChecking = false,
+  statusMessage = ''
+}: {
+  onCtaClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
+  ctaHref?: string;
+  isChecking?: boolean;
+  statusMessage?: string;
+}) => {
   const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
@@ -581,13 +605,14 @@ const FinalCTA = ({ onCtaClick }: { onCtaClick?: () => void }) => {
 
           {/* CTA Button */}
           <a
-            href="https://buy.stripe.com/cNi4gtbTjafu7Mwf8LafS02"
+          href={ctaHref}
             target="_blank"
             rel="noopener noreferrer"
             onClick={onCtaClick}
-            className="block w-full bg-[#0071E3] hover:bg-[#0077ED] text-white font-medium text-base md:text-xl py-4 md:py-6 px-8 rounded-full shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98]"
+          aria-disabled={isChecking}
+          className={`block w-full bg-[#0071E3] hover:bg-[#0077ED] text-white font-medium text-base md:text-xl py-4 md:py-6 px-8 rounded-full shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] ${isChecking ? 'opacity-80 pointer-events-none' : ''}`}
           >
-            Get Instant Access →
+          {isChecking ? 'Verifying…' : 'Get Instant Access →'}
           </a>
         </div>
 
@@ -606,6 +631,12 @@ const FinalCTA = ({ onCtaClick }: { onCtaClick?: () => void }) => {
             <span>100% Satisfaction</span>
           </div>
         </div>
+
+        {statusMessage && (
+          <p className="text-xs md:text-sm text-red-200 bg-red-900/40 border border-red-600/60 rounded-lg px-3 py-2 text-center mt-4">
+            {statusMessage}
+          </p>
+        )}
       </div>
     </section>
   );
@@ -769,7 +800,13 @@ const FAQSection = () => {
 const App = () => {
   const [showTerms, setShowTerms] = useState(false);
   const [showPrivacy, setShowPrivacy] = useState(false);
+  const [isVerifyingCheckout, setIsVerifyingCheckout] = useState(false);
+  const [turnstileError, setTurnstileError] = useState('');
+  const [turnstileReady, setTurnstileReady] = useState(false);
+  const turnstileContainerRef = useRef<HTMLDivElement | null>(null);
+  const turnstileWidgetIdRef = useRef<string | null>(null);
   const isMobile = useIsMobile();
+  const isTurnstileConfigured = Boolean(TURNSTILE_SITE_KEY);
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -800,6 +837,53 @@ const App = () => {
     });
   }, []);
 
+  useEffect(() => {
+    if (!isTurnstileConfigured || !turnstileContainerRef.current) {
+      setTurnstileReady(false);
+      return;
+    }
+
+    const renderWidget = () => {
+      if (!window.turnstile || !turnstileContainerRef.current || turnstileWidgetIdRef.current) return;
+      turnstileWidgetIdRef.current = window.turnstile.render(turnstileContainerRef.current, {
+        sitekey: TURNSTILE_SITE_KEY,
+        size: 'invisible',
+        action: 'checkout',
+      });
+      setTurnstileReady(true);
+    };
+
+    if (window.turnstile) {
+      renderWidget();
+    } else {
+      const existingScript = document.querySelector('script[data-turnstile-script="true"]') as HTMLScriptElement | null;
+      if (existingScript) {
+        existingScript.addEventListener('load', renderWidget);
+      } else {
+        const script = document.createElement('script');
+        script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
+        script.async = true;
+        script.defer = true;
+        script.dataset.turnstileScript = 'true';
+        script.onload = renderWidget;
+        document.head.appendChild(script);
+      }
+    }
+
+    return () => {
+      const existingScript = document.querySelector('script[data-turnstile-script="true"]') as HTMLScriptElement | null;
+      if (existingScript) {
+        existingScript.onload = null;
+        existingScript.removeEventListener('load', renderWidget);
+      }
+      if (turnstileWidgetIdRef.current && window.turnstile) {
+        window.turnstile.remove(turnstileWidgetIdRef.current);
+      }
+      turnstileWidgetIdRef.current = null;
+      setTurnstileReady(false);
+    };
+  }, [isTurnstileConfigured]);
+
   const scrollToPricing = () => {
     const target = document.getElementById('pricing');
 
@@ -817,6 +901,82 @@ const App = () => {
     });
 
     target?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const executeTurnstile = () => new Promise<string>((resolve, reject) => {
+    if (!window.turnstile || !turnstileWidgetIdRef.current) {
+      return reject(new Error('Security check is still loading. Please try again.'));
+    }
+
+    try {
+      window.turnstile.reset(turnstileWidgetIdRef.current);
+      window.turnstile.execute(turnstileWidgetIdRef.current, {
+        action: 'checkout',
+        callback: (token: string) => resolve(token),
+        'error-callback': () => reject(new Error('Verification failed. Please retry.')),
+        'timeout-callback': () => reject(new Error('Verification timed out. Please retry.')),
+      });
+    } catch (error) {
+      reject(error instanceof Error ? error : new Error('Turnstile unavailable.'));
+    }
+  });
+
+  const verifyTurnstileToken = async () => {
+    if (!isTurnstileConfigured) {
+      throw new Error('Turnstile is not configured. Add VITE_TURNSTILE_SITE_KEY.');
+    }
+    if (!turnstileReady || !turnstileWidgetIdRef.current) {
+      throw new Error('Security check is still loading. Please try again.');
+    }
+
+    const token = await executeTurnstile();
+    const response = await fetch('/api/verify-turnstile', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token }),
+    }).catch(() => {
+      throw new Error('Unable to reach Turnstile verification endpoint.');
+    });
+
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok || !data?.success) {
+      throw new Error(data?.error || 'Verification failed. Please retry.');
+    }
+  };
+
+  const handleSecureCheckout = async () => {
+    setTurnstileError('');
+    setIsVerifyingCheckout(true);
+    try {
+      await verifyTurnstileToken();
+      window.open(CHECKOUT_URL, '_blank', 'noopener,noreferrer');
+    } catch (error: any) {
+      setTurnstileError(error?.message || 'Turnstile verification failed. Please retry.');
+    } finally {
+      if (turnstileWidgetIdRef.current && window.turnstile) {
+        window.turnstile.reset(turnstileWidgetIdRef.current);
+      }
+      setIsVerifyingCheckout(false);
+    }
+  };
+
+  const trackCheckoutIntent = () => {
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'begin_checkout', {
+        currency: 'MYR',
+        value: 79,
+        items: [{ item_name: 'Interview Success Blueprint', price: 79 }]
+      });
+    }
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'InitiateCheckout', { currency: 'MYR', value: 79 });
+    }
+  };
+
+  const handleFinalCtaClick = async (event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    trackCheckoutIntent();
+    await handleSecureCheckout();
   };
 
   const reviews = [
@@ -854,6 +1014,13 @@ const App = () => {
 
   return (
     <div className="min-h-screen bg-neo-bg text-neo-black font-sans selection:bg-neo-orange selection:text-white">
+
+      <div
+        ref={turnstileContainerRef}
+        id="turnstile-widget"
+        className="absolute w-px h-px -left-[9999px] overflow-hidden"
+        aria-hidden="true"
+      />
 
       <nav className="fixed top-0 left-0 w-full h-14 md:h-16 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200 shadow-sm transition-all duration-300">
         <div className="max-w-7xl mx-auto px-3 md:px-4 h-full flex justify-between items-center">
@@ -1055,24 +1222,14 @@ const App = () => {
             "Tough interview formats"
           ]}
           buttonText="Download Blueprint Now"
-          href="https://buy.stripe.com/cNi4gtbTjafu7Mwf8LafS02"
+          href={CHECKOUT_URL}
           badgeText="🔥 Best Value"
           lifetimeText="LIFETIME ACCESS"
           countdownComponent={<CountdownTimer />}
-          onButtonClick={() => {
-            // GA4 Event
-            if (typeof gtag !== 'undefined') {
-              gtag('event', 'begin_checkout', {
-                currency: 'MYR',
-                value: 79,
-                items: [{ item_name: 'Interview Success Blueprint', price: 79 }]
-              });
-            }
-            // Meta Pixel Event
-            if (typeof fbq !== 'undefined') {
-              fbq('track', 'InitiateCheckout', { currency: 'MYR', value: 79 });
-            }
-          }}
+          onButtonClick={trackCheckoutIntent}
+          onCheckout={handleSecureCheckout}
+          isChecking={isVerifyingCheckout}
+          statusMessage={turnstileError}
         />
       </div>
 
@@ -1081,20 +1238,10 @@ const App = () => {
 
       {/* Final CTA Section */}
       <FinalCTA
-        onCtaClick={() => {
-          // GA4 Event
-          if (typeof gtag !== 'undefined') {
-            gtag('event', 'begin_checkout', {
-              currency: 'MYR',
-              value: 79,
-              items: [{ item_name: 'Interview Success Blueprint', price: 79 }]
-            });
-          }
-          // Meta Pixel Event
-          if (typeof fbq !== 'undefined') {
-            fbq('track', 'InitiateCheckout', { currency: 'MYR', value: 79 });
-          }
-        }}
+        onCtaClick={handleFinalCtaClick}
+        ctaHref={CHECKOUT_URL}
+        isChecking={isVerifyingCheckout}
+        statusMessage={turnstileError}
       />
 
       {/* Still Have Questions */}
