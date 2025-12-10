@@ -872,7 +872,7 @@ const App = () => {
       {/* HERO SECTION */}
       <Section className="pt-[6rem] md:pt-28 pb-8 md:pb-32 flex flex-col items-center text-center relative z-10 mt-0">
         <div className="max-w-4xl mx-auto mb-4 md:mb-16 flex flex-col items-center">
-          <div className="reveal flex sm:inline-flex items-center justify-center text-center gap-2 px-4 py-2 mb-6 md:mb-10 bg-white/60 backdrop-blur-xl border border-[#D2D2D7]/50 rounded-full shadow-neo-sm text-[10px] md:text-xs font-semibold text-[#1D1D1F] uppercase tracking-widest font-display whitespace-normal sm:whitespace-nowrap w-full max-w-xs sm:w-auto sm:max-w-none mx-auto">
+          <div className="reveal flex md:inline-flex items-center justify-center w-full md:w-auto gap-2 px-3 md:px-4 py-2 mb-6 md:mb-10 bg-white/60 backdrop-blur-xl border border-[#D2D2D7]/50 rounded-full shadow-neo-sm text-[9px] sm:text-[10px] md:text-xs font-semibold text-[#1D1D1F] uppercase tracking-widest font-display whitespace-nowrap leading-none">
             🏆 Go-To Blueprint for Malaysian Job Seekers (100+ Users) 🇲🇾
           </div>
           <h1 className="reveal text-[1.75rem] sm:text-3xl md:text-7xl font-bold font-display leading-tight tracking-tight mb-4 md:mb-6 text-neo-black">
