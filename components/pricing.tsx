@@ -36,9 +36,6 @@ interface PricingProps {
   badgeText?: string;
   lifetimeText?: string;
   onButtonClick?: () => void;
-  onCheckout?: () => Promise<void> | void;
-  isChecking?: boolean;
-  statusMessage?: string;
   countdownComponent?: React.ReactNode;
 }
 
@@ -54,18 +51,11 @@ export function Pricing({
   badgeText = "🔥 Best Value",
   lifetimeText = "LIFETIME ACCESS",
   onButtonClick,
-  onCheckout,
-  isChecking = false,
-  statusMessage,
   countdownComponent,
 }: PricingProps) {
   const buttonRef = useRef<HTMLAnchorElement>(null);
 
-  const handleClick = async (event: React.MouseEvent<HTMLAnchorElement>) => {
-    if (onCheckout) {
-      event.preventDefault();
-    }
-
+  const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     if (buttonRef.current) {
       const rect = buttonRef.current.getBoundingClientRect();
       const x = rect.left + rect.width / 2;
@@ -101,10 +91,6 @@ export function Pricing({
 
     if (onButtonClick) {
       onButtonClick();
-    }
-
-    if (onCheckout) {
-      await onCheckout();
     }
   };
 
@@ -209,7 +195,6 @@ export function Pricing({
               target="_blank"
               rel="noopener noreferrer"
               onClick={handleClick}
-              aria-disabled={isChecking}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -219,29 +204,21 @@ export function Pricing({
                 "bg-[#0071E3] hover:bg-[#0077ED]",
                 "text-white font-medium text-base md:text-xl py-4 md:py-5 px-6 md:px-8",
                 "shadow-sm hover:shadow-xl transition-all duration-300",
-                "transform hover:scale-[1.02] active:scale-[0.98]",
-                isChecking ? "opacity-80 pointer-events-none" : ""
+                "transform hover:scale-[1.02] active:scale-[0.98]"
               )}
             >
               <span className="relative z-10 flex items-center justify-center gap-2">
-                {isChecking ? 'Verifying…' : buttonText}
-                {!isChecking && <span className="text-xl md:text-2xl">→</span>}
+                {buttonText}
+                <span className="text-xl md:text-2xl">→</span>
               </span>
             </motion.a>
 
             <p className="text-xs md:text-sm text-gray-500">
               🔒 Secure payment via Stripe • Instant download
             </p>
-
-            {statusMessage && (
-              <p className="text-xs md:text-sm text-red-700 bg-red-50 border border-red-100 rounded-lg px-3 py-2 text-left">
-                {statusMessage}
-              </p>
-            )}
           </div>
         </motion.div>
       </div>
     </div>
   );
 }
-

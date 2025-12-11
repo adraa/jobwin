@@ -74,16 +74,6 @@ The app will be available at `http://localhost:5173`
 
 ---
 
-## 🔐 Cloudflare Turnstile
-
-- Create a Turnstile widget in Cloudflare and copy the **Site key** and **Secret key**.
-- Add a `.env` (or `.env.local`) file with `VITE_TURNSTILE_SITE_KEY=<your_site_key>` for the frontend.
-- In Cloudflare Pages project settings, add `TURNSTILE_SECRET_KEY=<your_secret_key>` so `/api/verify-turnstile` can verify tokens server-side.
-- The verification function lives at `functions/api/verify-turnstile.ts` and is automatically picked up by Cloudflare Pages Functions. The frontend sends tokens there before opening checkout.
-- For local end-to-end testing of the function, run with Wrangler: `npx wrangler pages dev` and in another terminal `npm run dev`.
-
----
-
 ## 📁 Project Structure
 
 ```
