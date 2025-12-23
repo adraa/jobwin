@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Thank You! | Interview Success Blueprint</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="https://i.imgur.com/uvNoPCg.jpeg">
+  <link rel="apple-touch-icon" href="https://i.imgur.com/uvNoPCg.jpeg">
+
+  <!-- Google Analytics 4 - Conversion Tracking -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8KSYWX9CPE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-8KSYWX9CPE');
+
+    gtag('event', 'purchase', {
+      transaction_id: 'TXN_' + Date.now(),
+      currency: 'MYR',
+      value: 79,
+      items: [{ item_name: 'Interview Success Blueprint', price: 79, quantity: 1 }]
+    });
+  </script>
+
+  <!-- Meta Pixel - Purchase Conversion -->
+  <script>
+    !function (f, b, e, v, n, t, s) {
+      if (f.fbq) return; n = f.fbq = function () {
+        n.callMethod ?
+          n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+      };
+      if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+      n.queue = []; t = b.createElement(e); t.async = !0;
+      t.src = v; s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s)
+    }(window, document, 'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '25133233512969868');
+    fbq('track', 'Purchase', { currency: 'MYR', value: 79 });
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=25133233512969868&ev=PageView&noscript=1" /></noscript>
+
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+    rel="stylesheet">
+  <script type="module" src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Inter Tight', 'sans-serif'],
+          },
+          colors: {
+            'neo-bg': '#F5F5F7',
+            'neo-black': '#1D1D1F',
+            'neo-orange': '#0071E3',
+            'neo-orange-hover': '#0077ED',
+            'neo-blue': '#2997FF',
+            'neo-green': '#34C759',
+            'neo-yellow': '#FFCC00',
+            'neo-muted': '#86868B',
+            'neo-border-soft': '#D2D2D7',
+          },
+          boxShadow: {
+            'neo': '0 2px 12px rgba(0, 0, 0, 0.04)',
+            'neo-hover': '0 12px 24px rgba(0, 0, 0, 0.08)',
+            'neo-sm': '0 1px 2px rgba(0, 0, 0, 0.04)',
+            'neo-xl': '0 20px 40px rgba(0, 0, 0, 0.1)',
+          },
+          borderRadius: {
+            '3xl': '24px',
+            '4xl': '32px',
+          },
+          animation: {
+            marquee: 'marquee var(--duration) linear infinite',
+            'marquee-vertical': 'marquee-vertical var(--duration) linear infinite',
+            'pulse-soft': 'pulse-soft 3s infinite',
+            'float': 'float 6s ease-in-out infinite',
+            scroll: 'scroll 2s ease-in-out infinite',
+            shine: 'shine var(--duration) infinite linear',
+            shake: 'shake 2.5s ease-in-out infinite',
+            'gradient-flow': 'gradient-flow 4s ease-in-out infinite',
+          },
+          keyframes: {
+            marquee: {
+              'from': { transform: 'translateX(0)' },
+              'to': { transform: 'translateX(calc(-100% - var(--gap)))' },
+            },
+            'marquee-vertical': {
+              'from': { transform: 'translateY(0)' },
+              'to': { transform: 'translateY(calc(-100% - var(--gap)))' },
+            },
+            'pulse-soft': {
+              '0%, 100%': { transform: 'scale(1)', boxShadow: '0 0 0 0 rgba(0, 113, 227, 0.4)' },
+              '50%': { transform: 'scale(1.05)', boxShadow: '0 0 0 10px rgba(0, 113, 227, 0)' },
+            },
+            'float': {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-8px)' },
+            },
+            scroll: {
+              '0%': { transform: 'translateY(0)', opacity: '1' },
+              '100%': { transform: 'translateY(10px)', opacity: '0' },
+            },
+            shine: {
+              '0%': { backgroundPosition: '0% 0%' },
+              '50%': { backgroundPosition: '100% 100%' },
+              'to': { backgroundPosition: '0% 0%' },
+            },
+            shake: {
+              '0%, 20%, 100%': { transform: 'rotate(0deg) scale(1)' },
+              '2%': { transform: 'rotate(-15deg) scale(1.1)' },
+              '4%': { transform: 'rotate(15deg) scale(1.15)' },
+              '6%': { transform: 'rotate(-15deg) scale(1.1)' },
+              '8%': { transform: 'rotate(15deg) scale(1.15)' },
+              '10%': { transform: 'rotate(-10deg) scale(1.05)' },
+              '12%': { transform: 'rotate(10deg) scale(1.05)' },
+              '14%': { transform: 'rotate(-5deg) scale(1.02)' },
+              '16%': { transform: 'rotate(5deg) scale(1.02)' },
+              '18%': { transform: 'rotate(0deg) scale(1)' }
+            },
+            'gradient-flow': {
+              '0%': { backgroundPosition: '0% 50%' },
+              '50%': { backgroundPosition: '100% 50%' },
+              '100%': { backgroundPosition: '0% 50%' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      background-color: #F4F5FB;
+      color: #0F172A;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    @media (max-width: 768px) {
+      button, a, [role="button"] {
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .touch-target {
+        min-height: 44px;
+        min-width: 44px;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    }
+
+    @supports (padding: max(0px)) {
+      body {
+        padding-left: max(0px, env(safe-area-inset-left));
+        padding-right: max(0px, env(safe-area-inset-right));
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px) scale(0.98);
+      transition: opacity 1.0s cubic-bezier(0.16, 1, 0.3, 1), transform 1.0s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      top: -20px;
+      animation: confetti 4s ease-out forwards;
+      z-index: 100;
+      pointer-events: none;
+    }
+
+    @keyframes confetti {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body class="min-h-screen bg-neo-bg text-neo-black font-sans selection:bg-neo-orange selection:text-white">
+  <!-- Ambient gradients -->
+  <div class="pointer-events-none fixed inset-0 overflow-hidden" aria-hidden="true">
+    <div class="absolute -top-32 -left-20 w-80 h-80 bg-gradient-to-br from-[#E0ECFF] to-[#FDF2E9] blur-3xl opacity-70"></div>
+    <div class="absolute top-10 right-0 w-72 h-72 bg-gradient-to-bl from-[#E8F7FF] via-[#F5F5F7] to-[#FFF3D6] blur-3xl opacity-60"></div>
+  </div>
+
+  <!-- Confetti Container -->
+  <div id="confetti-container"></div>
+
+  <!-- Navigation aligned to landing page -->
+  <nav class="fixed top-0 left-0 w-full h-14 md:h-16 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200 shadow-sm transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-3 md:px-4 h-full flex justify-between items-center">
+      <a href="/" class="font-bold font-display text-base md:text-xl tracking-tight flex items-center gap-1.5 md:gap-2 text-neo-black">
+        pushupmode <span class="text-base md:text-xl">🇲🇾</span>
+      </a>
+      <a href="/" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0071E3] text-white text-xs md:text-sm font-display font-medium shadow-sm hover:bg-[#0077ED] transition-all">
+        <span>Return to site</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="px-5 sm:px-7 py-[72px] sm:py-20 md:py-28 max-w-5xl mx-auto relative pt-24 md:pt-32">
+    <section class="reveal text-center mb-10 sm:mb-12 md:mb-16">
+      <div class="inline-flex items-center gap-2 px-3.5 sm:px-4 py-2 mb-6 sm:mb-8 bg-white/80 backdrop-blur-xl border border-[#D2D2D7]/60 rounded-full text-neo-black text-[10px] md:text-xs font-bold uppercase tracking-[0.25em] shadow-neo-sm">
+        <span class="w-2 h-2 rounded-full bg-neo-green animate-pulse"></span>
+        Payment confirmed
+      </div>
+
+      <div class="flex justify-center mb-8">
+        <div class="relative w-28 h-28 md:w-32 md:h-32 rounded-full bg-[#FFFBF2] shadow-neo border border-[#F4D38A] flex items-center justify-center overflow-hidden animate-float">
+          <div class="absolute inset-0 bg-[#FFF3D6] animate-pulse-soft rounded-full"></div>
+          <svg class="relative z-10 w-12 h-12 md:w-14 md:h-14 text-neo-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10" class="opacity-30"></circle>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M7 13l3 3 7-7"></path>
+          </svg>
+        </div>
+      </div>
+
+      <h1 class="text-[2rem] sm:text-4xl md:text-6xl font-bold font-display leading-tight tracking-tight mb-4 md:mb-6 text-neo-black">
+        You are in. Thank you.
+      </h1>
+      <p class="text-neo-muted text-base md:text-xl max-w-2xl mx-auto leading-relaxed">
+        Your Interview Success Blueprint and receipt are being sent to your inbox. Give it a minute, and check spam or promotions if you do not see it.
+      </p>
+    </section>
+
+    <section class="reveal grid gap-6 md:gap-8">
+      <div class="bg-white rounded-3xl shadow-neo hover:shadow-neo-hover border border-[#D2D2D7]/30 p-5 sm:p-6 md:p-8 transition-all duration-300">
+        <div class="flex flex-col items-start text-center md:text-left md:flex-row md:items-center md:justify-between gap-5 md:gap-6 mb-6">
+          <div class="text-left w-full">
+            <p class="text-xs md:text-sm text-neo-muted uppercase tracking-[0.2em] font-semibold mb-2">Next steps</p>
+            <h2 class="font-bold font-display text-xl md:text-2xl text-neo-black">What happens right now</h2>
+            <p class="text-sm md:text-base text-neo-muted">Familiar, minimal, and in the same rhythm as the landing page layout.</p>
+          </div>
+          <div class="flex items-center gap-4 px-4 py-4 w-full md:w-auto rounded-2xl bg-neo-black text-white shadow-neo-sm">
+            <div class="w-11 h-11 rounded-xl bg-white/10 flex items-center justify-center">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l2.5 2.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div class="text-left">
+              <p class="text-xs uppercase tracking-[0.18em] text-white/70 font-semibold">Delivery ETA</p>
+              <p class="text-sm md:text-base font-semibold">Under 5 minutes</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-5 md:gap-6">
+          <div class="flex items-start gap-4 p-5 rounded-2xl border border-[#D2D2D7]/50 bg-[#F8F9FB]">
+            <div class="shrink-0 w-10 h-10 rounded-xl bg-neo-green/15 flex items-center justify-center">
+              <svg class="w-5 h-5 text-neo-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-neo-black">Check your inbox</p>
+              <p class="text-xs text-neo-muted leading-relaxed">Look for an email from hello@pushupmode.com with your PDF and receipt.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4 p-5 rounded-2xl border border-[#D2D2D7]/50 bg-[#F8F9FB]">
+            <div class="shrink-0 w-10 h-10 rounded-xl bg-neo-blue/15 flex items-center justify-center">
+              <svg class="w-5 h-5 text-neo-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-neo-black">Save the blueprint</p>
+              <p class="text-xs text-neo-muted leading-relaxed">Download it to your laptop or phone so you can study before your next interview.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4 p-5 rounded-2xl border border-[#D2D2D7]/50 bg-[#F8F9FB]">
+            <div class="shrink-0 w-10 h-10 rounded-xl bg-neo-yellow/20 flex items-center justify-center">
+              <svg class="w-5 h-5 text-neo-yellow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l2 2m6-2a8 8 0 10-16 0 8 8 0 0016 0z"></path>
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-neo-black">Free lifetime updates</p>
+              <p class="text-xs text-neo-muted leading-relaxed">You get every new template we add. We will email you when fresh versions drop.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal bg-white rounded-3xl shadow-neo border border-[#D2D2D7]/30 p-5 sm:p-6 md:p-8 text-center transition-all duration-300" style="transition-delay: 200ms">
+        <div class="inline-flex items-center justify-center px-3 py-1 mb-4 rounded-full bg-[#F5F5F7] border border-[#D2D2D7]/70 text-[10px] md:text-xs font-semibold uppercase tracking-[0.2em] text-neo-muted">
+          Need anything?
+        </div>
+        <p class="text-neo-muted mb-4 text-sm md:text-base">We answer every email. If you need a different format, have payment issues, or want help preparing, reach out.</p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+          <a href="mailto:hello@pushupmode.com" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-neo-black text-white text-sm md:text-base font-display font-semibold shadow-neo-sm hover:shadow-neo transition-all">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+            </svg>
+            hello@pushupmode.com
+          </a>
+          <a href="/" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full border border-[#D2D2D7] text-sm md:text-base font-semibold text-neo-black hover:border-neo-orange hover:text-neo-orange transition-colors">
+            Explore the site again
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="text-center mt-12 reveal" style="transition-delay: 260ms">
+      <a href="/" class="text-sm font-medium text-neo-muted hover:text-neo-black transition-colors inline-flex items-center gap-2 group">
+        <span class="group-hover:-translate-x-1 transition-transform">&#8592;</span> Back to home
+      </a>
+    </div>
+  </main>
+
+  <footer class="bg-white/90 backdrop-blur-sm py-10 md:py-12 px-4 sm:px-6 border-t border-gray-100">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+      <div class="font-bold font-display text-base md:text-lg flex items-center gap-2 text-neo-black">
+        pushupmode <span class="text-lg md:text-xl">🇲🇾</span>
+      </div>
+      <div class="flex flex-col sm:flex-row items-center gap-2 text-xs md:text-sm text-neo-muted">
+        <a href="mailto:hello@pushupmode.com" class="hover:text-neo-orange transition-colors font-medium">hello@pushupmode.com</a>
+        <span class="hidden sm:inline text-[#D2D2D7]">|</span>
+        <p>© 2025 pushupmode. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, {
+      threshold: 0.15,
+      rootMargin: '0px 0px -50px 0px'
+    });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    const colors = ['#0071E3', '#34C759', '#FFCC00', '#FF3B30', '#2997FF'];
+    const container = document.getElementById('confetti-container');
+
+    for (let i = 0; i < 50; i++) {
+      setTimeout(() => {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+
+        const type = Math.random();
+        if (type > 0.6) {
+          confetti.style.borderRadius = '50%';
+        } else if (type > 0.3) {
+          confetti.style.width = '14px';
+          confetti.style.height = '7px';
+          confetti.style.borderRadius = '2px';
+        }
+
+        confetti.style.animationDuration = (Math.random() * 2 + 3) + 's';
+        confetti.style.animationDelay = (Math.random() * 0.5) + 's';
+        container.appendChild(confetti);
+
+        setTimeout(() => confetti.remove(), 6000);
+      }, i * 50);
+    }
+  </script>
+</body>
+
+</html>
