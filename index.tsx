@@ -12,7 +12,7 @@ import {
 import { Pricing } from '@/components/pricing';
 import { ScrollOrderBumpPopup } from '@/components/scroll-order-bump-popup';
 
-const CHECKOUT_URL = 'https://buy.stripe.com/cNi4gtbTjafu7Mwf8LafS02';
+const CHECKOUT_URL = 'https://buy.stripe.com/bJefZbaPf1IYfeYf8LafS03';
 const DISCOUNT_CODE = 'JOBWIN10';
 const SCROLL_TRIGGER_PERCENT = 60; // Show popup at 60% scroll depth
 
