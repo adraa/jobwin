@@ -1,8 +1,8 @@
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import { Check, Star, Tag, X } from "lucide-react";
-import React, { useRef, useState } from "react";
+import { Check, Star } from "lucide-react";
+import React, { useRef } from "react";
 import confetti from "canvas-confetti";
 
 const sendDebugLog = (payload: any) => {
@@ -54,49 +54,9 @@ export function Pricing({
   countdownComponent,
 }: PricingProps) {
   const buttonRef = useRef<HTMLAnchorElement>(null);
-  const [discountCode, setDiscountCode] = useState("");
-  const [isDiscountApplied, setIsDiscountApplied] = useState(false);
-  
-  const DISCOUNT_CODE = "JOBWIN10";
-  const DISCOUNT_PERCENT = 10;
-  
-  const handleDiscountCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const code = e.target.value.toUpperCase().trim();
-    setDiscountCode(code);
-    
-    if (code === DISCOUNT_CODE) {
-      setIsDiscountApplied(true);
-    } else if (code === "") {
-      setIsDiscountApplied(false);
-    } else {
-      setIsDiscountApplied(false);
-    }
-  };
-  
-  const handleApplyDiscount = () => {
-    if (discountCode.toUpperCase().trim() === DISCOUNT_CODE) {
-      setIsDiscountApplied(true);
-    }
-  };
-  
-  const handleRemoveDiscount = () => {
-    setDiscountCode("");
-    setIsDiscountApplied(false);
-  };
-  
-  // Calculate discounted price
-  const discountedPrice = isDiscountApplied 
-    ? Math.round(price * (1 - DISCOUNT_PERCENT / 100) * 100) / 100
-    : price;
-  
-  // Build checkout URL with promo code if discount is applied
-  const checkoutUrl = isDiscountApplied 
-    ? `${href}?promo_code=${DISCOUNT_CODE}`
-    : href;
-  
-  const displayPrice = discountedPrice;
-  const savings = originalPrice - displayPrice;
-  const savingsPercent = Math.round((savings / originalPrice) * 100);
+
+  const savings = originalPrice - price;
+  const savingsPercent = 30; // Display 30% savings
 
   const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     if (buttonRef.current) {
@@ -188,76 +148,12 @@ export function Pricing({
             </span>
             <div className="flex items-baseline gap-2">
               <span className="text-5xl md:text-8xl font-bold font-display text-[#1D1D1F] tracking-tighter">
-                {currency} {displayPrice.toFixed(2)}
+                {currency} {price}
               </span>
             </div>
             <span className="inline-flex items-center gap-1 bg-[#F2F2F7] text-[#34C759] px-3 py-1 rounded-full text-xs md:text-sm font-bold mt-2">
               💸 SAVE {savingsPercent}%
             </span>
-            {isDiscountApplied && (
-              <span className="inline-flex items-center gap-1 bg-[#34C759] text-white px-3 py-1 rounded-full text-xs md:text-sm font-bold mt-1 animate-pulse">
-                ✓ 10% Discount Applied!
-              </span>
-            )}
-          </div>
-          
-          {/* Discount Code Section */}
-          <div className="mb-6 md:mb-8 max-w-md mx-auto">
-            {!isDiscountApplied ? (
-              <div className="flex flex-col gap-2">
-                <label htmlFor="discount-code" className="text-sm font-medium text-[#86868B] text-center">
-                  Have a discount code?
-                </label>
-                <div className="flex gap-2">
-                  <div className="relative flex-1">
-                    <Tag className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#86868B]" />
-                    <input
-                      id="discount-code"
-                      type="text"
-                      value={discountCode}
-                      onChange={handleDiscountCodeChange}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter') {
-                          handleApplyDiscount();
-                        }
-                      }}
-                      placeholder="Enter code (e.g., JOBWIN10)"
-                      className="w-full pl-10 pr-4 py-3 border border-[#D2D2D7] rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-[#0071E3] focus:border-transparent"
-                    />
-                  </div>
-                  <button
-                    onClick={handleApplyDiscount}
-                    disabled={!discountCode.trim()}
-                    className={cn(
-                      "px-6 py-3 bg-[#0071E3] text-white rounded-full font-medium text-sm",
-                      "hover:bg-[#0077ED] transition-colors",
-                      "disabled:opacity-50 disabled:cursor-not-allowed",
-                      "focus:outline-none focus:ring-2 focus:ring-[#0071E3] focus:ring-offset-2"
-                    )}
-                  >
-                    Apply
-                  </button>
-                </div>
-                {discountCode && discountCode.toUpperCase().trim() !== DISCOUNT_CODE && discountCode.trim() !== "" && (
-                  <p className="text-xs text-red-500 text-center mt-1">
-                    Invalid code. Please try again.
-                  </p>
-                )}
-              </div>
-            ) : (
-              <div className="flex items-center justify-center gap-2 bg-green-50 border border-green-200 rounded-full px-4 py-3">
-                <span className="text-sm font-medium text-green-700">
-                  ✓ Discount code <strong>{DISCOUNT_CODE}</strong> applied
-                </span>
-                <button
-                  onClick={handleRemoveDiscount}
-                  className="text-green-700 hover:text-green-900 transition-colors"
-                  aria-label="Remove discount"
-                >
-                  <X className="w-4 h-4" />
-                </button>
-              </div>
-            )}
           </div>
 
           {/* Countdown Timer */}
@@ -296,7 +192,7 @@ export function Pricing({
           <div className="w-full flex flex-col gap-4 md:gap-6">
             <motion.a
               ref={buttonRef}
-              href={checkoutUrl}
+              href={href}
               target="_blank"
               rel="noopener noreferrer"
               onClick={handleClick}
