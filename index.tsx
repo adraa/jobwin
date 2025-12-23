@@ -10,8 +10,11 @@ import {
   Trophy
 } from 'lucide-react';
 import { Pricing } from '@/components/pricing';
+import { ScrollOrderBumpPopup } from '@/components/scroll-order-bump-popup';
 
 const CHECKOUT_URL = 'https://buy.stripe.com/cNi4gtbTjafu7Mwf8LafS02';
+const DISCOUNT_CODE = 'JOBWIN10';
+const SCROLL_TRIGGER_PERCENT = 60; // Show popup at 60% scroll depth
 
 // --- Utilities ---
 const sendDebugLog = (payload: any) => {
@@ -34,6 +37,15 @@ const sendDebugLog = (payload: any) => {
 };
 
 const cn = (...classes: any[]) => classes.filter(Boolean).join(' ');
+
+// Debounce utility for scroll events
+const debounce = (func: Function, wait: number) => {
+  let timeout: NodeJS.Timeout | null = null;
+  return (...args: any[]) => {
+    if (timeout) clearTimeout(timeout);
+    timeout = setTimeout(() => func(...args), wait);
+  };
+};
 
 // --- Data ---
 const PAIN_POINTS = [
@@ -777,6 +789,7 @@ const FAQSection = () => {
 const App = () => {
   const [showTerms, setShowTerms] = useState(false);
   const [showPrivacy, setShowPrivacy] = useState(false);
+  const [isOrderBumpPopupVisible, setIsOrderBumpPopupVisible] = useState(false);
   const isMobile = useIsMobile();
 
   useEffect(() => {
@@ -807,6 +820,51 @@ const App = () => {
       }
     });
   }, []);
+
+  // Scroll tracking for order bump popup
+  useEffect(() => {
+    const handleScroll = debounce(() => {
+      // Don't show if already visible or conditions not met
+      if (isOrderBumpPopupVisible) return;
+
+      // Calculate scroll percentage
+      const scrollPercent = (window.scrollY / 
+        (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+      
+      // Check conditions before showing popup
+      const emailSubmitted = localStorage.getItem('orderBumpEmailSubmitted');
+      const dismissed = sessionStorage.getItem('orderBumpDismissed');
+      
+      // Show popup if:
+      // - Scroll depth reached 60%
+      // - Email not already submitted
+      // - Not dismissed in this session
+      // - Popup not already visible
+      if (scrollPercent >= SCROLL_TRIGGER_PERCENT && 
+          !emailSubmitted && 
+          !dismissed) {
+        setIsOrderBumpPopupVisible(true);
+        
+        // Track analytics
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'order_bump_popup_viewed', {
+            event_category: 'Order Bump',
+            event_label: 'Scroll Popup',
+            scroll_depth: Math.round(scrollPercent)
+          });
+        }
+        if (typeof fbq !== 'undefined') {
+          fbq('trackCustom', 'OrderBumpPopupViewed', {
+            source: 'scroll_popup',
+            scroll_depth: Math.round(scrollPercent)
+          });
+        }
+      }
+    }, 100);
+    
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isOrderBumpPopupVisible]);
 
   const scrollToPricing = () => {
     const target = document.getElementById('pricing');
@@ -1140,6 +1198,17 @@ const App = () => {
       <LegalModal isOpen={showPrivacy} onClose={() => setShowPrivacy(false)} title="Privacy Policy">
         <PrivacyContent />
       </LegalModal>
+
+      {/* Scroll-Triggered Order Bump Popup */}
+      <ScrollOrderBumpPopup
+        isOpen={isOrderBumpPopupVisible}
+        onClose={() => setIsOrderBumpPopupVisible(false)}
+        onEmailSubmitted={(email) => {
+          // Email submitted - popup will handle localStorage
+          // Could add additional tracking here if needed
+        }}
+        discountCode={DISCOUNT_CODE}
+      />
 
     </div>
   );
