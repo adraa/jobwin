@@ -232,7 +232,7 @@ const PromoBar = ({ onClick }: any) => (
     <Marquee className="py-0 [--gap:2rem] md:[--gap:3rem]" repeat={10} style={{ '--duration': '4s' } as any}>
       <div className="flex items-center gap-2 md:gap-3 font-bold font-display text-[10px] md:text-sm text-black tracking-widest uppercase">
         <span className="animate-pulse text-xs md:text-sm">✦</span>
-        <span>BUY NOW & SAVE RM33</span>
+        <span>BUY NOW & SAVE RM29</span>
       </div>
     </Marquee>
   </div>
