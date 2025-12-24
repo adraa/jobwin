@@ -42,8 +42,8 @@ interface PricingProps {
 export function Pricing({
   title = "Steal The Job",
   description = "One-time investment for career success",
-  price = 79,
-  originalPrice = 112,
+  price = 89,
+  originalPrice = 119,
   currency = "RM",
   features = [],
   buttonText = "Get Instant Access",

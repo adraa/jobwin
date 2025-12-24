@@ -570,9 +570,9 @@ const FinalCTA = ({
         <div className="bg-white rounded-2xl md:rounded-3xl p-5 md:p-8 shadow-2xl text-center max-w-lg mx-auto mb-6 md:mb-8">
           {/* Price */}
           <div className="mb-4 md:mb-6">
-            <span className="text-gray-400 line-through text-sm md:text-lg font-display">RM 112</span>
+            <span className="text-gray-400 line-through text-sm md:text-lg font-display">RM 119</span>
             <div className="text-4xl md:text-6xl font-bold font-display text-neo-black tracking-tight">
-              RM 79
+              RM 89
             </div>
             <span className="inline-flex items-center gap-1 bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold mt-2">
               💸 SAVE 30%
@@ -893,12 +893,12 @@ const App = () => {
     if (typeof gtag !== 'undefined') {
       gtag('event', 'begin_checkout', {
         currency: 'MYR',
-        value: 79,
-        items: [{ item_name: 'Interview Success Blueprint', price: 79 }]
+        value: 89,
+        items: [{ item_name: 'Interview Success Blueprint', price: 89 }]
       });
     }
     if (typeof fbq !== 'undefined') {
-      fbq('track', 'InitiateCheckout', { currency: 'MYR', value: 79 });
+      fbq('track', 'InitiateCheckout', { currency: 'MYR', value: 89 });
     }
   };
 
@@ -1129,8 +1129,8 @@ const App = () => {
         <Pricing
           title="Steal The Job"
           description="One-time investment for career success"
-          price={79}
-          originalPrice={112}
+          price={89}
+          originalPrice={119}
           currency="RM"
           features={[
             "Lifetime access & free updates",
