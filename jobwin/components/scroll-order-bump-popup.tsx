@@ -102,9 +102,9 @@ export const ScrollOrderBumpPopup = ({
       } else {
         throw new Error('Failed to send code. Please try again.');
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Failed to send discount code', err);
-      const errorMessage = err?.message || 'Could not send the code. Please try again.';
+      const errorMessage = err instanceof Error ? err.message : 'Could not send the code. Please try again.';
       setError(errorMessage);
       setStatus('error');
     }

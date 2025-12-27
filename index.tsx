@@ -17,7 +17,16 @@ const DISCOUNT_CODE = 'JOBWIN10';
 const SCROLL_TRIGGER_PERCENT = 60; // Show popup at 60% scroll depth
 
 // --- Utilities ---
-const sendDebugLog = (payload: any) => {
+interface DebugLogPayload {
+  runId?: string;
+  hypothesisId?: string;
+  location?: string;
+  message?: string;
+  data?: Record<string, unknown>;
+  [key: string]: unknown;
+}
+
+const sendDebugLog = (payload: DebugLogPayload) => {
   // #region agent log
   try {
     fetch('http://127.0.0.1:7242/ingest/b61cb6a1-9617-4038-9f66-cb919d1c5b4e', {
@@ -36,12 +45,12 @@ const sendDebugLog = (payload: any) => {
   // #endregion
 };
 
-const cn = (...classes: any[]) => classes.filter(Boolean).join(' ');
+const cn = (...classes: (string | false | null | undefined)[]) => classes.filter(Boolean).join(' ');
 
 // Debounce utility for scroll events
-const debounce = (func: Function, wait: number) => {
+const debounce = <T extends (...args: unknown[]) => void>(func: T, wait: number) => {
   let timeout: NodeJS.Timeout | null = null;
-  return (...args: any[]) => {
+  return (...args: Parameters<T>) => {
     if (timeout) clearTimeout(timeout);
     timeout = setTimeout(() => func(...args), wait);
   };
@@ -90,16 +99,24 @@ const PAIN_POINTS = [
 
 // --- Components ---
 
-const NeoButton = ({ children, onClick, variant = 'primary', className = '', style = {} }: any) => {
+interface NeoButtonProps {
+  children: React.ReactNode;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  variant?: 'primary' | 'secondary' | 'outline';
+  className?: string;
+  style?: React.CSSProperties;
+}
+
+const NeoButton = ({ children, onClick, variant = 'primary', className = '', style = {} }: NeoButtonProps) => {
   const baseStyle = "relative overflow-hidden group px-6 py-2.5 md:px-8 md:py-3.5 font-display font-medium transition-all duration-300 flex items-center justify-center tracking-tight text-sm md:text-base rounded-full transform active:scale-95 min-h-[44px] md:min-h-[52px]";
 
-  const variants: any = {
+  const variants: Record<'primary' | 'secondary' | 'outline', string> = {
     primary: "bg-[#0071E3] text-white hover:bg-[#0077ED] shadow-sm hover:shadow-md border border-transparent",
     secondary: "bg-white text-[#1D1D1F] border border-[#D2D2D7] hover:border-[#0071E3] hover:text-[#0071E3]",
     outline: "bg-transparent text-[#0071E3] border border-[#0071E3] hover:bg-[#0071E3]/5"
   };
 
-  const handleClick = (event: any) => {
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     sendDebugLog({
       runId: 'run2',
       hypothesisId: 'H1',
@@ -126,7 +143,13 @@ const NeoButton = ({ children, onClick, variant = 'primary', className = '', sty
   );
 };
 
-const Section = ({ children, className = "", id = "" }: any) => (
+interface SectionProps {
+  children: React.ReactNode;
+  className?: string;
+  id?: string;
+}
+
+const Section = ({ children, className = "", id = "" }: SectionProps) => (
   <section id={id} className={`px-6 py-20 md:py-40 max-w-[1400px] mx-auto relative ${className}`}>
     {children}
   </section>
@@ -148,6 +171,14 @@ const useIsMobile = () => {
   return isMobile;
 };
 
+interface ShineBorderProps extends React.HTMLAttributes<HTMLDivElement> {
+  borderWidth?: number;
+  duration?: number;
+  shineColor?: string | string[];
+  className?: string;
+  style?: React.CSSProperties;
+}
+
 const ShineBorder = ({
   borderWidth = 1,
   duration = 14,
@@ -155,7 +186,7 @@ const ShineBorder = ({
   className,
   style,
   ...props
-}: any) => {
+}: ShineBorderProps) => {
   return (
     <div
       style={{
@@ -170,7 +201,7 @@ const ShineBorder = ({
         maskComposite: "exclude",
         padding: "var(--border-width)",
         ...style,
-      } as any}
+      } as React.CSSProperties}
       className={cn(
         "motion-safe:animate-shine pointer-events-none absolute inset-0 size-full rounded-[inherit] will-change-[background-position] z-30",
         className
@@ -179,6 +210,16 @@ const ShineBorder = ({
     />
   );
 };
+
+interface MarqueeProps extends React.HTMLAttributes<HTMLDivElement> {
+  className?: string;
+  reverse?: boolean;
+  pauseOnHover?: boolean;
+  children: React.ReactNode;
+  vertical?: boolean;
+  repeat?: number;
+  style?: React.CSSProperties;
+}
 
 const Marquee = ({
   className,
@@ -189,7 +230,7 @@ const Marquee = ({
   repeat = 4,
   style = {},
   ...props
-}: any) => {
+}: MarqueeProps) => {
   return (
     <div
       {...props}
@@ -203,7 +244,7 @@ const Marquee = ({
         '--gap': '1rem',
         '--duration': '40s',
         ...style,
-      } as any}
+      } as React.CSSProperties}
     >
       {Array(repeat)
         .fill(0)
@@ -224,12 +265,16 @@ const Marquee = ({
   )
 }
 
-const PromoBar = ({ onClick }: any) => (
+interface PromoBarProps {
+  onClick?: () => void;
+}
+
+const PromoBar = ({ onClick }: PromoBarProps) => (
   <div
     onClick={onClick}
     className="fixed top-14 md:top-16 left-0 w-full h-7 md:h-8 bg-lime-400 z-40 flex items-center overflow-hidden cursor-pointer active:bg-lime-300 md:hover:bg-lime-300 transition-colors shadow-sm"
   >
-    <Marquee className="py-0 [--gap:2rem] md:[--gap:3rem]" repeat={10} style={{ '--duration': '4s' } as any}>
+    <Marquee className="py-0 [--gap:2rem] md:[--gap:3rem]" repeat={10} style={{ '--duration': '4s' } as React.CSSProperties}>
       <div className="flex items-center gap-2 md:gap-3 font-bold font-display text-[10px] md:text-sm text-black tracking-widest uppercase">
         <span className="animate-pulse text-xs md:text-sm">✦</span>
         <span>BUY NOW & SAVE RM29</span>
@@ -288,11 +333,16 @@ const CountdownTimer = () => {
   );
 };
 
-const TextTicker = ({ items, repeat = 4 }: any) => {
+interface TextTickerProps {
+  items: string[];
+  repeat?: number;
+}
+
+const TextTicker = ({ items, repeat = 4 }: TextTickerProps) => {
   return (
     <div className="w-full py-1.5 md:py-2 my-2 md:my-4 overflow-hidden bg-neo-black text-white select-none relative shadow-md">
       <Marquee repeat={repeat} className="py-0" style={{ '--duration': '25s', '--gap': '2rem' }}>
-        {items.map((item: any, i: number) => (
+        {items.map((item: string, i: number) => (
           <span key={i} className="flex items-center gap-4 md:gap-8 font-display font-bold text-sm md:text-lg tracking-wider opacity-90 uppercase">
             {item} <span className="w-1.5 h-1.5 md:w-2 md:h-2 bg-neo-yellow rounded-full flex-shrink-0 shadow-[0_0_8px_#FACC15]"></span>
           </span>
@@ -302,7 +352,17 @@ const TextTicker = ({ items, repeat = 4 }: any) => {
   );
 };
 
-const PainCard = ({ image, thought, stressLevel, stressLabel, delay, priority, className = "" }: any) => (
+interface PainCardProps {
+  image: string;
+  thought: string;
+  stressLevel: number;
+  stressLabel: string;
+  delay?: number;
+  priority?: boolean;
+  className?: string;
+}
+
+const PainCard = ({ image, thought, stressLevel, stressLabel, delay, priority, className = "" }: PainCardProps) => (
   <div
     className={`relative w-full aspect-[3/4] bg-white shadow-neo hover:shadow-neo-hover transition-all duration-500 hover:-translate-y-1 overflow-hidden rounded-3xl border border-[#D2D2D7]/30 ${className}`}
     style={delay ? { transitionDelay: `${delay}ms` } : {}}
@@ -343,12 +403,16 @@ const PainCard = ({ image, thought, stressLevel, stressLabel, delay, priority, c
   </div>
 );
 
-const AutoSlider = ({ items }: any) => {
+interface AutoSliderProps {
+  items: PainCardProps[];
+}
+
+const AutoSlider = ({ items }: AutoSliderProps) => {
   const [index, setIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(true);
   const [itemsPerView, setItemsPerView] = useState(1);
-  const timeoutRef = useRef(null);
-  const containerRef = useRef(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const PAUSE_DURATION = 3500;
   const TRANSITION_DURATION = 700;
 
@@ -371,7 +435,7 @@ const AutoSlider = ({ items }: any) => {
 
   useEffect(() => {
     const nextSlide = () => {
-      setIndex((prev: any) => prev + 1);
+      setIndex((prev) => prev + 1);
     };
     timeoutRef.current = setTimeout(nextSlide, PAUSE_DURATION);
     return () => {
@@ -404,7 +468,7 @@ const AutoSlider = ({ items }: any) => {
           width: `${(extendedItems.length / itemsPerView) * 100}%`
         }}
       >
-        {extendedItems.map((item: any, i: number) => (
+        {extendedItems.map((item, i: number) => (
           <div
             key={i}
             className="px-3 md:px-4"
@@ -418,7 +482,14 @@ const AutoSlider = ({ items }: any) => {
   );
 };
 
-const TestimonialCard = ({ name, quote, result, className = "" }: any) => (
+interface TestimonialCardProps {
+  name: string;
+  quote: string;
+  result: string;
+  className?: string;
+}
+
+const TestimonialCard = ({ name, quote, result, className = "" }: TestimonialCardProps) => (
   <div
     className={cn(
       "bg-white p-6 md:p-8 shadow-neo md:hover:shadow-neo-hover border border-[#D2D2D7]/30 rounded-3xl transition-all duration-300 relative flex flex-col w-[280px] md:w-[380px] shrink-0 mx-2 md:mx-4 group",
@@ -444,7 +515,12 @@ const TestimonialCard = ({ name, quote, result, className = "" }: any) => (
   </div>
 );
 
-const FAQItem = ({ question, answer }: any) => {
+interface FAQItemProps {
+  question: string;
+  answer: React.ReactNode;
+}
+
+const FAQItem = ({ question, answer }: FAQItemProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -632,7 +708,14 @@ const FinalCTA = ({
 };
 
 // Legal Modal Component
-const LegalModal = ({ isOpen, onClose, title, children }: any) => {
+interface LegalModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  title: string;
+  children: React.ReactNode;
+}
+
+const LegalModal = ({ isOpen, onClose, title, children }: LegalModalProps) => {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';

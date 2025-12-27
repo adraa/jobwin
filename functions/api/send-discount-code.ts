@@ -1,4 +1,24 @@
-type PagesFunction = (context: any) => Response | Promise<Response>;
+interface Env {
+  RESEND_API_KEY: string;
+  RESEND_FROM_EMAIL: string;
+}
+
+interface PagesContext {
+  request: Request;
+  env: Env;
+  params?: Record<string, string>;
+  waitUntil?: (promise: Promise<unknown>) => void;
+  passThroughOnException?: () => void;
+  next?: (input?: Request | string, init?: RequestInit) => Promise<Response>;
+  data?: Record<string, unknown>;
+}
+
+type PagesFunction = (context: PagesContext) => Response | Promise<Response>;
+
+interface RequestBody {
+  email?: string;
+  code?: string;
+}
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -19,7 +39,7 @@ export const onRequestPost: PagesFunction = async (context) => {
       headers: { ...corsHeaders, 'content-type': 'application/json' },
     });
 
-  let body: any;
+  let body: RequestBody;
   try {
     body = await request.json();
   } catch (err) {

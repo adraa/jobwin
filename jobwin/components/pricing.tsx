@@ -5,7 +5,16 @@ import { Check, Star } from "lucide-react";
 import React, { useRef } from "react";
 import confetti from "canvas-confetti";
 
-const sendDebugLog = (payload: any) => {
+interface DebugLogPayload {
+  runId?: string;
+  hypothesisId?: string;
+  location?: string;
+  message?: string;
+  data?: Record<string, unknown>;
+  [key: string]: unknown;
+}
+
+const sendDebugLog = (payload: DebugLogPayload) => {
   // #region agent log
   try {
     fetch('http://127.0.0.1:7242/ingest/b61cb6a1-9617-4038-9f66-cb919d1c5b4e', {
@@ -42,8 +51,8 @@ interface PricingProps {
 export function Pricing({
   title = "Steal The Job",
   description = "One-time investment for career success",
-  price = 79,
-  originalPrice = 112,
+  price = 89,
+  originalPrice = 119,
   currency = "RM",
   features = [],
   buttonText = "Get Instant Access",
@@ -54,9 +63,6 @@ export function Pricing({
   countdownComponent,
 }: PricingProps) {
   const buttonRef = useRef<HTMLAnchorElement>(null);
-
-  const savings = originalPrice - price;
-  const savingsPercent = 30; // Display 30% savings
 
   const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     if (buttonRef.current) {
@@ -97,6 +103,8 @@ export function Pricing({
     }
   };
 
+  const savings = originalPrice - price;
+  const savingsPercent = Math.round((savings / originalPrice) * 100);
 
   return (
     <div className="max-w-3xl mx-auto px-4 relative z-10">
@@ -152,7 +160,7 @@ export function Pricing({
               </span>
             </div>
             <span className="inline-flex items-center gap-1 bg-[#F2F2F7] text-[#34C759] px-3 py-1 rounded-full text-xs md:text-sm font-bold mt-2">
-              💸 SAVE {savingsPercent}%
+              💸 SAVE 30%
             </span>
           </div>
 
