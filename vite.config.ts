@@ -12,5 +12,18 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, '.'),
     }
-  }
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor-react': ['react', 'react-dom'],
+          'vendor-animation': ['framer-motion'],
+          'vendor-icons': ['lucide-react'],
+          'vendor-ui': ['canvas-confetti', '@radix-ui/react-label', '@radix-ui/react-slot', '@radix-ui/react-switch'],
+        },
+      },
+    },
+    chunkSizeWarningLimit: 200,
+  },
 });
