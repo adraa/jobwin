@@ -5,7 +5,16 @@ import { Check, Star } from "lucide-react";
 import React, { useRef } from "react";
 import confetti from "canvas-confetti";
 
-const sendDebugLog = (payload: any) => {
+interface DebugLogPayload {
+  runId?: string;
+  hypothesisId?: string;
+  location?: string;
+  message?: string;
+  data?: Record<string, unknown>;
+  [key: string]: unknown;
+}
+
+const sendDebugLog = (payload: DebugLogPayload) => {
   // #region agent log
   try {
     fetch('http://127.0.0.1:7242/ingest/b61cb6a1-9617-4038-9f66-cb919d1c5b4e', {
